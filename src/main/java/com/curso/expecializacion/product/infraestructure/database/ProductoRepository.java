@@ -2,29 +2,34 @@ package com.curso.expecializacion.product.infraestructure.database;
 
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;
+import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
+import com.curso.expecializacion.product.infraestructure.database.mapper.ProductoEntityMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Repository
+@RequiredArgsConstructor
 public class ProductoRepository implements product_repository {
 
-    private List<Product> productList;
+    private final List<ProductEntity> productList = new ArrayList<>();
 
-    public ProductoRepository() {
-        this.productList = new ArrayList<>();
-    }
+    private final ProductoEntityMapper productoEntityMapper;
+
 
     @Override
+
     public void save(Product product) {
         this.productList.add(product);
     }
 
     @Override
     public Optional<Product> findById(Integer id) {
-        return  productList.stream().filter(p -> p.getCodigo().equals(id)).findFirst();
+        return productList.stream().filter(p -> p.getCodigo().equals(id)).findFirst();
     }
 
     @Override
