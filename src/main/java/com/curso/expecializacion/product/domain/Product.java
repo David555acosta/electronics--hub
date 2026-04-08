@@ -1,4 +1,4 @@
-package com.curso.expecializacion;
+package com.curso.expecializacion.product.domain;
 
 import lombok.Builder;
 import lombok.Data;

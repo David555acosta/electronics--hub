@@ -1,6 +1,7 @@
-package com.curso.expecializacion;
+package com.curso.expecializacion.product.infraestructure.api;
 
-import org.springframework.http.ProblemDetail;
+import com.curso.expecializacion.product.domain.Product;
+import com.curso.expecializacion.product.infraestructure.database.ProductoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,24 +12,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/productos/v1")
-public class ProductController {
-    List<Product> productList;
+public class ProductController implements product_api {
 
-    public ProductController() {
-        this.productList = new ArrayList<>();
-        productList.add(Product.builder()
-                .codigo(1)
-                .nombre("Mesa")
-                .descripcion("De ping pong")
-                .precio(100.00)
-                .imagen("URLX").build());
-        productList.add(Product.builder()
-                .codigo(2)
-                .nombre("Mesa")
-                .descripcion("De ping pong")
-                .precio(100.00)
-                .imagen("URLX").build());
-    }
+    private ProductoRepository productoRepository;
 
 
     @GetMapping("/todos")
