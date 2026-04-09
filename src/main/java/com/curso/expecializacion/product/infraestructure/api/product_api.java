@@ -12,7 +12,7 @@ import java.util.List;
 public interface product_api {
     //ResponseEntity<List<Product>> todos(@RequestParam(required = false) Integer limit);
 
-    //ResponseEntity<Product> filtrarPorId(@PathVariable Integer id);
+    ResponseEntity<ProductDTO> filtrarPorId(@PathVariable Integer id);
 
     ResponseEntity<Void> save(@RequestBody ProductDTO product);
 

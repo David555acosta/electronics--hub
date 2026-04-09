@@ -4,27 +4,33 @@ import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import com.curso.expecializacion.product.infraestructure.database.mapper.ProductoEntityMapper;
-import lombok.RequiredArgsConstructor;
+
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 @Repository
-@RequiredArgsConstructor
 public class ProductoRepository implements product_repository {
 
+    public ProductoRepository(ProductoEntityMapper productoEntityMapper) {
+        this.productoEntityMapper = productoEntityMapper;
+    }
+
+
     private final List<ProductEntity> productList = new ArrayList<>();
+
 
     private final ProductoEntityMapper productoEntityMapper;
 
 
     @Override
-
     public void save(Product product) {
         ProductEntity productEntity = productoEntityMapper.mapToProductEntity(product);
+        productList.removeIf(p -> p.getCodigo().equals(productEntity.getCodigo()));
         productList.add(productEntity);
     }
 

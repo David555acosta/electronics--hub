@@ -22,6 +22,6 @@ public class GetProductByIdHandler implements RequestHandler<GetProductByIdReque
 
     @Override
     public Class<GetProductByIdRequest> getRequesType() {
-        return null;
+        return GetProductByIdRequest.class;
     }
 }

@@ -1,11 +1,13 @@
 package com.curso.expecializacion.product.infraestructure.api;
 
 import com.curso.expecializacion.product.application.command.create.ProductCreateRequest;
+import com.curso.expecializacion.product.application.query.getbyid.GetProductByIdRequest;
+import com.curso.expecializacion.product.application.query.getbyid.GetProductByIdResponse;
 import com.curso.expecializacion.product.commongMediator.Mediator;
+import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +29,15 @@ public class ProductController implements product_api {
         ProductCreateRequest request = productMapper.mapTocreateProductoRequest(product);
         mediator.dispacth(request);
         return ResponseEntity.created(URI.create("/productos/v1".concat(product.getCodigo().toString()))).build();
+    }
+
+
+    @Override
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> filtrarPorId(@PathVariable Integer id) {
+        GetProductByIdResponse response = mediator.dispacth(new GetProductByIdRequest(id));
+        ProductDTO productDto = productMapper.mapToProduct(response.getProduct());
+        return ResponseEntity.ok(productDto);
     }
 
 

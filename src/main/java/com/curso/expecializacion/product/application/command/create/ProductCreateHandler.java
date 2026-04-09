@@ -1,5 +1,6 @@
 package com.curso.expecializacion.product.application.command.create;
 
+import com.curso.expecializacion.product.application.query.getbyid.GetProductByIdResponse;
 import com.curso.expecializacion.product.commongMediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;
@@ -26,6 +27,7 @@ public class ProductCreateHandler implements RequestHandler<ProductCreateRequest
 
     @Override
     public Class<ProductCreateRequest> getRequesType() {
-        return null;
+
+        return ProductCreateRequest.class;
     }
 }
