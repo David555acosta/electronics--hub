@@ -1,6 +1,6 @@
 package com.curso.expecializacion.product.infraestructure.api.mapper;
 
-import com.curso.expecializacion.product.application.ProductCreateRequest;
+import com.curso.expecializacion.product.application.command.create.ProductCreateRequest;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

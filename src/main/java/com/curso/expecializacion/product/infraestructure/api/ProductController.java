@@ -1,24 +1,21 @@
 package com.curso.expecializacion.product.infraestructure.api;
 
-import com.curso.expecializacion.product.application.ProductCreateRequest;
+import com.curso.expecializacion.product.application.command.create.ProductCreateRequest;
 import com.curso.expecializacion.product.commongMediator.Mediator;
-import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.mapper.ProductMapper;
-import com.curso.expecializacion.product.infraestructure.database.ProductoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/productos/v1")
 public class ProductController implements product_api {
+
 
     private final Mediator mediator;
     private final ProductMapper productMapper;

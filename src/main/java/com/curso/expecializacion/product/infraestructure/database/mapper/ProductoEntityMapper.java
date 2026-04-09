@@ -1,8 +1,6 @@
 package com.curso.expecializacion.product.infraestructure.database.mapper;
 
-import com.curso.expecializacion.product.application.ProductCreateRequest;
 import com.curso.expecializacion.product.domain.Product;
-import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

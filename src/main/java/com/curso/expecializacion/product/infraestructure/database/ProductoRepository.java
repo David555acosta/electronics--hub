@@ -24,17 +24,18 @@ public class ProductoRepository implements product_repository {
     @Override
 
     public void save(Product product) {
-        this.productList.add(product);
+        ProductEntity productEntity = productoEntityMapper.mapToProductEntity(product);
+        productList.add(productEntity);
     }
 
     @Override
     public Optional<Product> findById(Integer id) {
-        return productList.stream().filter(p -> p.getCodigo().equals(id)).findFirst();
+        return productList.stream().filter(p -> p.getCodigo().equals(id)).findFirst().map(productoEntityMapper::mapToProduct);
     }
 
     @Override
     public List<Product> findAll() {
-        return productList;
+        return productList.stream().map(productoEntityMapper::mapToProduct).toList();
     }
 
     @Override
@@ -44,6 +45,7 @@ public class ProductoRepository implements product_repository {
 
     @Override
     public void delete(Integer id) {
-        productList.remove(findById(id));
+
+        productList.removeIf(p -> p.getCodigo().equals(id));
     }
 }

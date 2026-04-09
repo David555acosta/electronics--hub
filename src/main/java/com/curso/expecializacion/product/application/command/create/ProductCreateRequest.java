@@ -1,4 +1,4 @@
-package com.curso.expecializacion.product.application;
+package com.curso.expecializacion.product.application.command.create;
 
 import com.curso.expecializacion.product.commongMediator.Request;
 import lombok.Data;
