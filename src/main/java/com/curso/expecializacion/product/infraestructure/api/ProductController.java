@@ -8,7 +8,6 @@ import com.curso.expecializacion.product.application.query.getById.GetProductByI
 import com.curso.expecializacion.product.application.query.getById.GetProductByIdResponse;
 import com.curso.expecializacion.product.application.query.getAll.allGetProductResponse;
 import com.curso.expecializacion.product.commongMediator.Mediator;
-import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,7 @@ public class ProductController implements product_api {
 
 
     @Override
-    @PostMapping()
+    @PostMapping("")
     public ResponseEntity<Void> save(ProductDTO product) {
         ProductCreateRequest request = productMapper.mapTocreateProductoRequest(product);
         mediator.dispacth(request);
@@ -37,15 +36,16 @@ public class ProductController implements product_api {
     }
 
     @Override
-    @PutMapping()
-    public ResponseEntity<Product> update(@RequestBody ProductDTO productDTO) {
+    @PutMapping("")
+    public ResponseEntity<Void> update(@RequestBody ProductDTO productDTO) {
         UpdateProductCreateRequest request = productMapper.mapToUpdateProductRequest(productDTO);
         mediator.dispacth(request);
-        return  ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<Void> delete(Integer id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@RequestBody Integer id) {
         mediator.dispacth(new DeleteProductRequest(id));
         return ResponseEntity.noContent().build();
     }
@@ -60,7 +60,7 @@ public class ProductController implements product_api {
     }
 
     @Override
-    @GetMapping()
+    @GetMapping("")
     public ResponseEntity<List<ProductDTO>> findAll() {
         allGetProductResponse response = mediator.dispacth(new AllGetProductRequest());
         List<ProductDTO> productDTOS = response.getProduct().stream().map(productMapper::mapToProduct).toList();
