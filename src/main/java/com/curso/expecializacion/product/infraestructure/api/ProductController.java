@@ -4,7 +4,6 @@ import com.curso.expecializacion.product.application.command.create.ProductCreat
 import com.curso.expecializacion.product.application.query.getbyid.GetProductByIdRequest;
 import com.curso.expecializacion.product.application.query.getbyid.GetProductByIdResponse;
 import com.curso.expecializacion.product.commongMediator.Mediator;
-import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;

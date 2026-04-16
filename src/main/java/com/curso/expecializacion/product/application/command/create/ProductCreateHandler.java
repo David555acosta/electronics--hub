@@ -1,6 +1,6 @@
 package com.curso.expecializacion.product.application.command.create;
 
-import com.curso.expecializacion.product.application.query.getbyid.GetProductByIdResponse;
+
 import com.curso.expecializacion.product.commongMediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;
@@ -16,7 +16,7 @@ public class ProductCreateHandler implements RequestHandler<ProductCreateRequest
     @Override
     public Void handle(ProductCreateRequest request) {
         Product product = Product.builder()
-                .codigo(1)
+                .codigo(request.getCodigo())
                 .nombre(request.getNombre())
                 .descripcion(request.getDescripcion())
                 .precio(request.getPrecio())

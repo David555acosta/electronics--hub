@@ -19,7 +19,11 @@ public class Mediator {
         requestHandlerMap = requestHandlers.stream().collect(Collectors.toMap(RequestHandler::getRequesType, Function.identity()));
     }
 
+    //El tipo del metodo es de un tipo t que extienda de request con un valor de tipo R
+    // el valor ingresado por parametro es del tipo de la funcion que extiende
+
     public <R, T extends Request<R>> R dispacth(T request) {
+
         RequestHandler<T, R> handler = (RequestHandler<T, R>) requestHandlerMap.get(request.getClass());
         if (handler == null) {
             throw new RuntimeException("No handler for request " + request.getClass());
