@@ -16,7 +16,9 @@ public interface product_api {
 
     ResponseEntity<Void> save(@RequestBody ProductDTO product);
 
-    //ResponseEntity<Product> update(@RequestBody Product product);
+    ResponseEntity<Product> update(@RequestBody ProductDTO productDTO);
 
-    //ResponseEntity<Void> delete(@PathVariable Integer id);
+    ResponseEntity<Void> delete(@PathVariable Integer id);
+
+    ResponseEntity<List<ProductDTO>> findAll();
 }

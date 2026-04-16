@@ -1,9 +1,14 @@
 package com.curso.expecializacion.product.infraestructure.api;
 
 import com.curso.expecializacion.product.application.command.create.ProductCreateRequest;
-import com.curso.expecializacion.product.application.query.getbyid.GetProductByIdRequest;
-import com.curso.expecializacion.product.application.query.getbyid.GetProductByIdResponse;
+import com.curso.expecializacion.product.application.command.delete.DeleteProductRequest;
+import com.curso.expecializacion.product.application.command.update.UpdateProductCreateRequest;
+import com.curso.expecializacion.product.application.query.getAll.AllGetProductRequest;
+import com.curso.expecializacion.product.application.query.getById.GetProductByIdRequest;
+import com.curso.expecializacion.product.application.query.getById.GetProductByIdResponse;
+import com.curso.expecializacion.product.application.query.getAll.allGetProductResponse;
 import com.curso.expecializacion.product.commongMediator.Mediator;
+import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +36,20 @@ public class ProductController implements product_api {
         return ResponseEntity.created(URI.create("/productos/v1".concat(product.getCodigo().toString()))).build();
     }
 
+    @Override
+    @PutMapping()
+    public ResponseEntity<Product> update(@RequestBody ProductDTO productDTO) {
+        UpdateProductCreateRequest request = productMapper.mapToUpdateProductRequest(productDTO);
+        mediator.dispacth(request);
+        return  ResponseEntity.notFound().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> delete(Integer id) {
+        mediator.dispacth(new DeleteProductRequest(id));
+        return ResponseEntity.noContent().build();
+    }
+
 
     @Override
     @GetMapping("/{id}")
@@ -39,37 +59,13 @@ public class ProductController implements product_api {
         return ResponseEntity.ok(productDto);
     }
 
-
-   /*
-   *  @GetMapping("/todos")
-    public ResponseEntity<List<Product>> todos(@RequestParam(required = false) Integer limit) {
-        return ResponseEntity.ok(productList);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Product> filtrarPorId(@PathVariable Integer id) {
-        Optional<Product> productOptional = productList.stream().filter(p -> p.getCodigo().equals(id)).findFirst();
-        return productOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-
+    @Override
+    @GetMapping()
+    public ResponseEntity<List<ProductDTO>> findAll() {
+        allGetProductResponse response = mediator.dispacth(new AllGetProductRequest());
+        List<ProductDTO> productDTOS = response.getProduct().stream().map(productMapper::mapToProduct).toList();
+        return ResponseEntity.ok(productDTOS);
     }
 
 
-    @PutMapping()
-    public ResponseEntity<Product> update(@RequestBody Product product) {
-        Product productoSelecionado = productList.stream().filter(p -> p.getCodigo().equals(product.getCodigo())).findFirst().orElseThrow(() -> new RuntimeException("No se encontro producto con el id" + product.getCodigo()));
-
-        productoSelecionado.setNombre(product.getNombre());
-        productoSelecionado.setDescripcion(product.getDescripcion());
-        productoSelecionado.setPrecio(product.getPrecio());
-
-        return ResponseEntity.ok(productoSelecionado);
-
-
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        productList.removeIf(p -> p.getCodigo().equals(id));
-        return ResponseEntity.noContent().build();
-    }*/
 }

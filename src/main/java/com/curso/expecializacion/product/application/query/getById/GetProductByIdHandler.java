@@ -1,4 +1,4 @@
-package com.curso.expecializacion.product.application.query.getbyid;
+package com.curso.expecializacion.product.application.query.getById;
 
 import com.curso.expecializacion.product.commongMediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;
