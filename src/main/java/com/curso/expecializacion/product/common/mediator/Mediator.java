@@ -1,4 +1,4 @@
-package com.curso.expecializacion.product.commongMediator;
+package com.curso.expecializacion.product.common.mediator;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

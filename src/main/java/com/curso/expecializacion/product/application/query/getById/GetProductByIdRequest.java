@@ -1,6 +1,6 @@
 package com.curso.expecializacion.product.application.query.getById;
 
-import com.curso.expecializacion.product.commongMediator.Request;
+import com.curso.expecializacion.product.common.mediator.Request;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

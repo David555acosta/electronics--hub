@@ -1,8 +1,7 @@
 package com.curso.expecializacion.product.application.command.update;
 
 
-import com.curso.expecializacion.product.application.command.create.ProductCreateRequest;
-import com.curso.expecializacion.product.commongMediator.RequestHandler;
+import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;
 import lombok.RequiredArgsConstructor;

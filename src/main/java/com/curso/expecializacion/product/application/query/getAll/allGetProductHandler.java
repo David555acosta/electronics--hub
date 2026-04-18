@@ -1,8 +1,7 @@
-package com.curso.expecializacion.product.application.query.getAll;
+package com.curso.expecializacion.product.application.query.getall;
 
-import com.curso.expecializacion.product.application.query.getById.GetProductByIdRequest;
-import com.curso.expecializacion.product.application.query.getById.GetProductByIdResponse;
-import com.curso.expecializacion.product.commongMediator.RequestHandler;
+
+import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;
 import lombok.RequiredArgsConstructor;
@@ -12,16 +11,16 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class allGetProductHandler implements RequestHandler<AllGetProductRequest, allGetProductResponse> {
+public class AllGetProductHandler implements RequestHandler<AllGetProductRequest, AllGetProductResponse> {
 
     private final product_repository repository;
 
 
     @Override
-    public allGetProductResponse handle(AllGetProductRequest request) {
+    public AllGetProductResponse handle(AllGetProductRequest request) {
         List<Product> product = repository.findAll();
 
-        return new allGetProductResponse(product);
+        return new AllGetProductResponse(product);
     }
 
     @Override

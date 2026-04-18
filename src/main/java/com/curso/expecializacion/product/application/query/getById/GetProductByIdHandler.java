@@ -1,7 +1,8 @@
 package com.curso.expecializacion.product.application.query.getById;
 
-import com.curso.expecializacion.product.commongMediator.RequestHandler;
+import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;
+import com.curso.expecializacion.product.domain.ProductNotFoundException;
 import com.curso.expecializacion.product.domain.product_repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class GetProductByIdHandler implements RequestHandler<GetProductByIdReque
 
     @Override
     public GetProductByIdResponse handle(GetProductByIdRequest request) {
-        Product product = repository.findById(request.getCodigo()).orElseThrow(() -> new RuntimeException("No existe el producto con el id: " + request.getCodigo()));
+        Product product = repository.findById(request.getCodigo()).orElseThrow(() -> new ProductNotFoundException(request.getCodigo()));
 
         return new GetProductByIdResponse(product);
     }
