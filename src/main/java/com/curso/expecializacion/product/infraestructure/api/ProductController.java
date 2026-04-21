@@ -30,7 +30,7 @@ public class ProductController implements product_api {
 
     @Override
     @PostMapping("")
-    public ResponseEntity<Void> save(ProductDTO product) {
+    public ResponseEntity<Void> save(@RequestBody @Valid ProductDTO product) {
         ProductCreateRequest request = productMapper.mapTocreateProductoRequest(product);
         mediator.dispacth(request);
         return ResponseEntity.created(URI.create("/productos/v1".concat(product.getCodigo().toString()))).build();
@@ -46,7 +46,7 @@ public class ProductController implements product_api {
 
     @Override
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@RequestBody @Valid Integer id) {
+    public ResponseEntity<Void> delete(@RequestBody Integer id) {
         mediator.dispacth(new DeleteProductRequest(id));
         return ResponseEntity.noContent().build();
     }

@@ -14,10 +14,10 @@ public class ProductDTO {
     private Integer codigo;
     @NotBlank
     private String nombre;
-    @Length(min = 2, max = 100 , message = "No se puede ingresar un valor menor a 2 caracteres o mayor a 100")
+    @Length(min = 2, max = 100, message = "No se puede ingresar un valor menor a 2 caracteres o mayor a 100")
     private String descripcion;
-    @DecimalMin(value = "0.00" , inclusive = false)
-    @DecimalMax(value = "10000.00" , inclusive = false)
+    @DecimalMin(value = "0.00", inclusive = false, message = "No podes ingresar un numero menor a 0.00 crack")
+    @DecimalMax(value = "10000.00", inclusive = false, message = " no se puede ingresar un numero mayor a 10000.0")
     private Double precio;
     private String imagen;
 }

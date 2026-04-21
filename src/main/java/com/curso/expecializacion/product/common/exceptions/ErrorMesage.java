@@ -1,8 +1,11 @@
 package com.curso.expecializacion.product.common.exceptions;
 
+import lombok.Data;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Data
 public class ErrorMesage {
     private String message;
     private String exception;
