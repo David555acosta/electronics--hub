@@ -1,5 +1,4 @@
-package com.curso.expecializacion.product.application.query.getall;
-
+package com.curso.expecializacion.product.application.query.getAll;
 
 import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;

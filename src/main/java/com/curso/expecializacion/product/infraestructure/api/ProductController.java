@@ -3,12 +3,14 @@ package com.curso.expecializacion.product.infraestructure.api;
 import com.curso.expecializacion.product.application.command.create.ProductCreateRequest;
 import com.curso.expecializacion.product.application.command.delete.DeleteProductRequest;
 import com.curso.expecializacion.product.application.command.update.UpdateProductCreateRequest;
+import com.curso.expecializacion.product.application.query.getAll.AllGetProductRequest;
+import com.curso.expecializacion.product.application.query.getAll.AllGetProductResponse;
 import com.curso.expecializacion.product.application.query.getById.GetProductByIdRequest;
 import com.curso.expecializacion.product.application.query.getById.GetProductByIdResponse;
-import com.curso.expecializacion.product.application.query.getall.AllGetProductRequest;
-import com.curso.expecializacion.product.application.query.getall.AllGetProductResponse;
 import com.curso.expecializacion.product.common.mediator.Mediator;
+import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
+import com.curso.expecializacion.product.infraestructure.api.dto.UpdateProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.mapper.ProductMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +32,7 @@ public class ProductController implements product_api {
 
     @Override
     @PostMapping("")
-    public ResponseEntity<Void> save(@RequestBody @Valid ProductDTO product) {
+    public ResponseEntity<Void> save(@RequestBody @Valid CreateProductDTO product) {
         ProductCreateRequest request = productMapper.mapTocreateProductoRequest(product);
         mediator.dispacth(request);
         return ResponseEntity.created(URI.create("/productos/v1".concat(product.getCodigo().toString()))).build();
@@ -38,7 +40,7 @@ public class ProductController implements product_api {
 
     @Override
     @PutMapping("")
-    public ResponseEntity<Void> update(@RequestBody @Valid ProductDTO productDTO) {
+    public ResponseEntity<Void> update(@RequestBody @Valid UpdateProductDTO productDTO) {
         UpdateProductCreateRequest request = productMapper.mapToUpdateProductRequest(productDTO);
         mediator.dispacth(request);
         return ResponseEntity.noContent().build();
