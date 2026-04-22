@@ -32,7 +32,7 @@ public class ProductController implements product_api {
 
     @Override
     @PostMapping("")
-    public ResponseEntity<Void> save(@RequestBody @Valid CreateProductDTO product) {
+    public ResponseEntity<Void> save(@ModelAttribute @Valid CreateProductDTO product) {
         ProductCreateRequest request = productMapper.mapTocreateProductoRequest(product);
         mediator.dispacth(request);
         return ResponseEntity.created(URI.create("/productos/v1".concat(product.getCodigo().toString()))).build();
@@ -40,7 +40,7 @@ public class ProductController implements product_api {
 
     @Override
     @PutMapping("")
-    public ResponseEntity<Void> update(@RequestBody @Valid UpdateProductDTO productDTO) {
+    public ResponseEntity<Void> update(@ModelAttribute @Valid UpdateProductDTO productDTO) {
         UpdateProductCreateRequest request = productMapper.mapToUpdateProductRequest(productDTO);
         mediator.dispacth(request);
         return ResponseEntity.noContent().build();

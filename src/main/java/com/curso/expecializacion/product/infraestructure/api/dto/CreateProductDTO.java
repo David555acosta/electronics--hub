@@ -2,7 +2,6 @@ package com.curso.expecializacion.product.infraestructure.api.dto;
 
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -20,6 +19,5 @@ public class CreateProductDTO {
     @DecimalMin(value = "0.00", inclusive = false, message = "No podes ingresar un numero menor a 0.00 crack")
     @DecimalMax(value = "10000.00", inclusive = false, message = " no se puede ingresar un numero mayor a 10000.0")
     private Double precio;
-    @Size(max = 1024000)
     private MultipartFile file;
 }
