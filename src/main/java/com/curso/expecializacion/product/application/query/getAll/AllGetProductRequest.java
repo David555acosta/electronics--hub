@@ -1,7 +1,7 @@
-package com.curso.expecializacion.product.application.query.getall;
+package com.curso.expecializacion.product.application.query.getAll;
 
 import com.curso.expecializacion.product.common.mediator.Request;
-import com.curso.expecializacion.product.application.query.getall.AllGetProductResponse;
+import com.curso.expecializacion.product.application.query.getAll.AllGetProductResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
