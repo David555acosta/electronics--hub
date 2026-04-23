@@ -5,14 +5,16 @@ import com.curso.expecializacion.product.domain.product_repository;
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import com.curso.expecializacion.product.infraestructure.database.mapper.ProductoEntityMapper;
 
-import lombok.AllArgsConstructor;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+@Slf4j
 @Repository
 public class ProductoRepository implements product_repository {
 
@@ -34,8 +36,10 @@ public class ProductoRepository implements product_repository {
         productList.add(productEntity);
     }
 
+    @Cacheable(value = "products", key = "#id")
     @Override
     public Optional<Product> findById(Integer id) {
+        log.info("Cacheable , PRODUCT FIND HANDLER , Codigo:{}", id);
         return productList.stream().filter(p -> p.getCodigo().equals(id)).findFirst().map(productoEntityMapper::mapToProduct);
     }
 
