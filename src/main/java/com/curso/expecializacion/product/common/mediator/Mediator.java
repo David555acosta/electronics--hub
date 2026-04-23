@@ -1,6 +1,7 @@
 package com.curso.expecializacion.product.common.mediator;
 
 import lombok.Data;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -30,5 +31,11 @@ public class Mediator {
         }
 
         return handler.handle(request);
+    }
+
+    @Async
+    public <R, T extends Request<R>> void dispacthAsync(T request) {
+        this.dispacth(request);
+        
     }
 }

@@ -14,7 +14,16 @@ public class DeleteCreateHandler implements RequestHandler<DeleteProductRequest,
 
     @Override
     public Void handle(DeleteProductRequest request) {
+        System.out.println("Iniciando proceso de delete");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+
+            throw new RuntimeException(e);
+        }
+
         repository.delete(request.getCodigo());
+        System.out.println("Proceso finalizado" + "Id: " + request.getCodigo());
         return null;
     }
 
