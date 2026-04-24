@@ -13,9 +13,9 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface ProductMapper {
     ProductCreateRequest mapTocreateProductoRequest(CreateProductDTO createProductDTO);
-    
+
     UpdateProductCreateRequest mapToUpdateProductRequest(UpdateProductDTO updateProductDTO);
 
-    ProductDTO mapToProduct(Product product);
+    ProductDTO mapToProductDto(Product product);
 
 }

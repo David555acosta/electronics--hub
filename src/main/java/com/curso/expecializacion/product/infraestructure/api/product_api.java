@@ -5,6 +5,7 @@ import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDT
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.UpdateProductDTO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,5 +23,6 @@ public interface product_api {
 
     ResponseEntity<Void> delete(@PathVariable Integer id);
 
-    ResponseEntity<List<ProductDTO>> findAll();
+    @GetMapping("")
+    ResponseEntity<List<ProductDTO>> findAll(@RequestParam(required = false) String pageSize);
 }

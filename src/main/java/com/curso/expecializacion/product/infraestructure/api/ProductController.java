@@ -32,6 +32,7 @@ public class ProductController implements product_api {
     private final ProductMapper productMapper;
 
 
+
     @Override
     @PostMapping("")
     public ResponseEntity<Void> save(@ModelAttribute @Valid CreateProductDTO product) {
@@ -65,17 +66,17 @@ public class ProductController implements product_api {
     public ResponseEntity<ProductDTO> filtrarPorId(@PathVariable Integer id) {
         log.info("Capa Controller , obteniendo producto  con Id:{}", id);
         GetProductByIdResponse response = mediator.dispacth(new GetProductByIdRequest(id));
-        ProductDTO productDto = productMapper.mapToProduct(response.getProduct());
+        ProductDTO productDto = productMapper.mapToProductDto(response.getProduct());
         log.info("Capa Controller , OBTENIDO producto con Id:{}", id);
         return ResponseEntity.ok(productDto);
     }
 
-    @Override
     @GetMapping("")
-    public ResponseEntity<List<ProductDTO>> findAll() {
+    @Override
+    public ResponseEntity<List<ProductDTO>> findAll(@RequestParam(required = false) String pageSize) {
         log.info("Capa Controller , TRAYENDO TODOS");
         AllGetProductResponse response = mediator.dispacth(new AllGetProductRequest());
-        List<ProductDTO> productDTOS = response.getProduct().stream().map(productMapper::mapToProduct).toList();
+        List<ProductDTO> productDTOS = response.getProduct().stream().map(productMapper::mapToProductDto).toList();
         log.info("Capa Controller , TODOS , CANTIDAD: {}", productDTOS.size());
         return ResponseEntity.ok(productDTOS);
     }

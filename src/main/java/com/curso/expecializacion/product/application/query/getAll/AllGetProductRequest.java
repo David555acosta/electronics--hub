@@ -5,8 +5,8 @@ import com.curso.expecializacion.product.application.query.getAll.AllGetProductR
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
 @AllArgsConstructor
+@Data
 public class AllGetProductRequest implements Request<AllGetProductResponse> {
 
 }
