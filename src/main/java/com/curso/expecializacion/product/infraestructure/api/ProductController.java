@@ -80,6 +80,4 @@ public class ProductController implements product_api {
         log.info("Capa Controller , TODOS , CANTIDAD: {}", productDTOS.size());
         return ResponseEntity.ok(productDTOS);
     }
-
-
 }

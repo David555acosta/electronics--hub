@@ -33,13 +33,13 @@ class ProductControllerTest {
     @Test
     public void getAllProducts() {
 
-        AllGetProductResponse productResponse = new AllGetProductResponse(List.of(
+        AllGetProductResponse allproductResponse = new AllGetProductResponse(List.of(
                 Product.builder().codigo(1).build(),
                 Product.builder().codigo(2).build()
         ));
 
 
-        when(mediator.dispacth(new AllGetProductRequest())).thenReturn(productResponse);
+        when(mediator.dispacth(new AllGetProductRequest())).thenReturn(allproductResponse);
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setCodigo(1);
