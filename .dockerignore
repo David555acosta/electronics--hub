@@ -1,0 +1,62 @@
+# Archivos de control de versiones
+.git
+.gitignore
+.gitattributes
+
+# Archivos de Docker
+Dockerfile
+.dockerignore
+
+# Dependencias
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Archivos de build
+dist
+build
+target
+out
+
+# Archivos temporales
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# IDEs y editores
+.vscode
+.idea
+*.iml
+
+# Configs locales
+.env
+.env.*
+*.local
+
+# Archivos de test (opcional)
+coverage
+test
+tests
+
+# Archivos binarios innecesarios
+*.jar
+*.war
+*.ear
+
+# Archivos de sistema Java
+*.class
+
+# Logs
+logs
+
+# Archivos comprimidos
+*.zip
+*.tar
+*.gz
+*.rar
