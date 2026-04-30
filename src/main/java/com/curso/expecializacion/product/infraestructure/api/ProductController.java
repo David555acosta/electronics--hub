@@ -12,6 +12,8 @@ import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDT
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.UpdateProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.mapper.ProductMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@Tag(name = "Productos "  , description = "Product API")
 @RequiredArgsConstructor
 @RequestMapping("/productos/v1")
 @Slf4j
@@ -34,6 +37,7 @@ public class ProductController implements product_api {
 
 
     @Override
+    @Operation(summary = "Guardar producto" ,description = "Guardar producto")
     @PostMapping("")
     public ResponseEntity<Void> save(@ModelAttribute @Valid CreateProductDTO product) {
         ProductCreateRequest request = productMapper.mapTocreateProductoRequest(product);
@@ -42,6 +46,7 @@ public class ProductController implements product_api {
     }
 
     @Override
+    @Operation(summary = "Actualizar producto" ,description = "Actualizar producto")
     @PutMapping("")
     public ResponseEntity<Void> update(@ModelAttribute @Valid UpdateProductDTO productDTO) {
         log.info("Capa Controller , actualizando producto  con Id:{}", productDTO.getCodigo());
@@ -52,6 +57,7 @@ public class ProductController implements product_api {
     }
 
     @Override
+    @Operation(summary = "Eliminar producto" ,description = "Eliminar producto")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@RequestBody Integer id) {
         log.info("Capa Controller , eliminando producto  con Id:{}", id);
@@ -62,6 +68,7 @@ public class ProductController implements product_api {
 
 
     @Override
+    @Operation(summary = "Filtrar por ID" ,description = "Filtrar por ID")
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> filtrarPorId(@PathVariable Integer id) {
         log.info("Capa Controller , obteniendo producto  con Id:{}", id);
@@ -71,6 +78,7 @@ public class ProductController implements product_api {
         return ResponseEntity.ok(productDto);
     }
 
+    @Operation(summary = "Traer todos" ,description = "Traer todos")
     @GetMapping("")
     @Override
     public ResponseEntity<List<ProductDTO>> findAll(@RequestParam(required = false) String pageSize) {
