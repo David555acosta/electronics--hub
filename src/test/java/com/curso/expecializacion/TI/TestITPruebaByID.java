@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
@@ -26,9 +27,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @Slf4j
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class TestITPruebaByID {
+    @LocalServerPort
+    private int port;
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -54,7 +57,10 @@ public class TestITPruebaByID {
     @Test
     void existGetProductByID() {
         log.info("Iniciando Test ITPruebaByID");
-        ResponseEntity<ProductDTO> response = restTemplate.getForEntity("http://localhost:9526/productos/v1/1", ProductDTO.class);
+        String url = "http://localhost:" + port + "/productos/v1/1";
+
+        ResponseEntity<ProductDTO> response =
+                restTemplate.getForEntity(url, ProductDTO.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertNotNull(response.getBody());
         assertEquals(1, response.getBody().getCodigo());
