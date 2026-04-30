@@ -60,7 +60,7 @@ public class TestITPruebaByID {
         assertEquals(1, response.getBody().getCodigo());
         assertEquals("Martillo", response.getBody().getNombre());
         assertEquals("con wifi", response.getBody().getDescripcion());
-        Assertions.assertNotNull(response.getBody());
+        log.info("Finalizando Test ITPruebaByID");
     }
 
 
