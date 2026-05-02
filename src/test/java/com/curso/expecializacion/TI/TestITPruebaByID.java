@@ -27,11 +27,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @Slf4j
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 public class TestITPruebaByID {
-    @LocalServerPort
-    private int port;
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -57,10 +55,7 @@ public class TestITPruebaByID {
     @Test
     void existGetProductByID() {
         log.info("Iniciando Test ITPruebaByID");
-        String url = "http://localhost:" + port + "/productos/v1/1";
-
-        ResponseEntity<ProductDTO> response =
-                restTemplate.getForEntity(url, ProductDTO.class);
+        ResponseEntity<ProductDTO> response = restTemplate.getForEntity("/productos/v1/1", ProductDTO.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertNotNull(response.getBody());
         assertEquals(1, response.getBody().getCodigo());
