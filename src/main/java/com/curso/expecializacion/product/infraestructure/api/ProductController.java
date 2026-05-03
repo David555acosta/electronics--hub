@@ -1,6 +1,7 @@
 package com.curso.expecializacion.product.infraestructure.api;
 
 import com.curso.expecializacion.product.application.command.create.ProductCreateRequest;
+import com.curso.expecializacion.product.application.command.create.ProductCreateResponse;
 import com.curso.expecializacion.product.application.command.delete.DeleteProductRequest;
 import com.curso.expecializacion.product.application.command.update.UpdateProductCreateRequest;
 import com.curso.expecializacion.product.application.query.getAll.AllGetProductRequest;
@@ -8,6 +9,7 @@ import com.curso.expecializacion.product.application.query.getAll.AllGetProductR
 import com.curso.expecializacion.product.application.query.getById.GetProductByIdRequest;
 import com.curso.expecializacion.product.application.query.getById.GetProductByIdResponse;
 import com.curso.expecializacion.product.common.mediator.Mediator;
+import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.UpdateProductDTO;
@@ -24,7 +26,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@Tag(name = "Productos "  , description = "Product API")
+@Tag(name = "Productos ", description = "Product API")
 @RequiredArgsConstructor
 @RequestMapping("/productos/v1")
 @Slf4j
@@ -35,18 +37,18 @@ public class ProductController implements product_api {
     private final ProductMapper productMapper;
 
 
-
     @Override
-    @Operation(summary = "Guardar producto" ,description = "Guardar producto")
+    @Operation(summary = "Guardar producto", description = "Guardar producto")
     @PostMapping("")
     public ResponseEntity<Void> save(@ModelAttribute @Valid CreateProductDTO product) {
         ProductCreateRequest request = productMapper.mapTocreateProductoRequest(product);
-        mediator.dispacth(request);
+        ProductCreateResponse response = mediator.dispacth(request);
+        Product productX = response.getProduct();
         return ResponseEntity.created(URI.create("/productos/v1".concat(product.getCodigo().toString()))).build();
     }
 
     @Override
-    @Operation(summary = "Actualizar producto" ,description = "Actualizar producto")
+    @Operation(summary = "Actualizar producto", description = "Actualizar producto")
     @PutMapping("")
     public ResponseEntity<Void> update(@ModelAttribute @Valid UpdateProductDTO productDTO) {
         log.info("Capa Controller , actualizando producto  con Id:{}", productDTO.getCodigo());
@@ -57,7 +59,7 @@ public class ProductController implements product_api {
     }
 
     @Override
-    @Operation(summary = "Eliminar producto" ,description = "Eliminar producto")
+    @Operation(summary = "Eliminar producto", description = "Eliminar producto")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@RequestBody Integer id) {
         log.info("Capa Controller , eliminando producto  con Id:{}", id);
@@ -68,7 +70,7 @@ public class ProductController implements product_api {
 
 
     @Override
-    @Operation(summary = "Filtrar por ID" ,description = "Filtrar por ID")
+    @Operation(summary = "Filtrar por ID", description = "Filtrar por ID")
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> filtrarPorId(@PathVariable Integer id) {
         log.info("Capa Controller , obteniendo producto  con Id:{}", id);
@@ -78,7 +80,7 @@ public class ProductController implements product_api {
         return ResponseEntity.ok(productDto);
     }
 
-    @Operation(summary = "Traer todos" ,description = "Traer todos")
+    @Operation(summary = "Traer todos", description = "Traer todos")
     @GetMapping("")
     @Override
     public ResponseEntity<List<ProductDTO>> findAll(@RequestParam(required = false) String pageSize) {

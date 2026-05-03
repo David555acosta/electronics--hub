@@ -6,8 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 @Data
-public class ProductCreateRequest implements Request<Void> {
-    private Integer codigo;
+public class ProductCreateRequest implements Request<ProductCreateResponse> {
     private String nombre;
     private String descripcion;
     private Double precio;

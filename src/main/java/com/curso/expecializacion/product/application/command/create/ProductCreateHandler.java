@@ -14,29 +14,31 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ProductCreateHandler implements RequestHandler<ProductCreateRequest, Void> {
+public class ProductCreateHandler implements RequestHandler<ProductCreateRequest, ProductCreateResponse> {
 
     private final product_repository repository;
     private final FileUtilService fileUtilService;
 
 
     @Override
-    public Void handle(ProductCreateRequest request) {
+    public ProductCreateResponse handle(ProductCreateRequest request) {
 
-        log.info("Creando producto , PRODUCT CREATE HANDLER , Codigo:{}", request.getCodigo());
+        log.info("Creando producto , PRODUCT CREATE HANDLER");
 
         String uniqueFileName = fileUtilService.SaveProduct(request.getFile());
 
         Product product = Product.builder()
-                .codigo(request.getCodigo())
                 .nombre(request.getNombre())
                 .descripcion(request.getDescripcion())
                 .precio(request.getPrecio())
                 .imagen(uniqueFileName).build();
+
+        Product storageProduct = repository.save(product);
+
         repository.save(product);
 
-        log.info("Producto CREADO , PRODUCT CREATE HANDLER , Codigo:{}", request.getCodigo());
-        return null;
+        log.info("Producto CREADO , PRODUCT CREATE HANDLER , Codigo:{}", storageProduct.getCodigo());
+        return new ProductCreateResponse(storageProduct);
     }
 
     @Override

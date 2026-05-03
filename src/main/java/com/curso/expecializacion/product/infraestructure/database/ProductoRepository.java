@@ -6,6 +6,8 @@ import com.curso.expecializacion.product.infraestructure.database.entity.Product
 import com.curso.expecializacion.product.infraestructure.database.mapper.ProductoEntityMapper;
 
 
+import com.curso.expecializacion.product.infraestructure.database.repositoryDBProducts.QueryProductsRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
@@ -16,46 +18,43 @@ import java.util.Optional;
 
 @Slf4j
 @Repository
+@RequiredArgsConstructor
 public class ProductoRepository implements product_repository {
-
-    public ProductoRepository(ProductoEntityMapper productoEntityMapper) {
-        this.productoEntityMapper = productoEntityMapper;
-    }
-
-
-    private final List<ProductEntity> productList = new ArrayList<>();
 
 
     private final ProductoEntityMapper productoEntityMapper;
 
+    private final QueryProductsRepository repository;
+
 
     @Override
-    public void save(Product product) {
+    public Product save(Product product) {
+        log.info("Guardando producto REPOSITORY");
         ProductEntity productEntity = productoEntityMapper.mapToProductEntity(product);
-        productList.removeIf(p -> p.getCodigo().equals(productEntity.getCodigo()));
-        productList.add(productEntity);
+        ProductEntity guardado = repository.save(productEntity);
+        return productoEntityMapper.mapToProduct(guardado);
     }
 
     @Cacheable(value = "products", key = "#id")
     @Override
     public Optional<Product> findById(Integer id) {
-        log.info("Cacheable , PRODUCT FIND HANDLER , Codigo:{}", id);
-        return productList.stream().filter(p -> p.getCodigo().equals(id)).findFirst().map(productoEntityMapper::mapToProduct);
+        log.info("Cacheable , PRODUCT FIND HANDLER REPOSITORIO , Codigo:{}", id);
+        return repository.findById(id).map(productoEntityMapper::mapToProduct);
     }
 
     @Override
     public List<Product> findAll() {
-        return productList.stream().map(productoEntityMapper::mapToProduct).toList();
+        log.info("OBTENIENDO TODOS REPOSITORIO");
+        return repository.findAll().stream().map(productoEntityMapper::mapToProduct).toList();
     }
 
     @Override
-    public void update(Product product) {
-
+    public Product update(Product product) {
+        return product;
     }
 
     @Override
     public void delete(Integer id) {
-
-        productList.removeIf(p -> p.getCodigo().equals(id));
+        repository.deleteById(id);
     }
 }
