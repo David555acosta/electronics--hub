@@ -1,15 +1,11 @@
 package com.curso.expecializacion.product.infraestructure.database.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 
-@Data
-@Getter
+@Entity
 @Table(name = "productos")
+@Data
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

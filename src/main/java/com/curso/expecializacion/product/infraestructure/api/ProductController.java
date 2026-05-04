@@ -44,17 +44,17 @@ public class ProductController implements product_api {
         ProductCreateRequest request = productMapper.mapTocreateProductoRequest(product);
         ProductCreateResponse response = mediator.dispacth(request);
         Product productX = response.getProduct();
-        return ResponseEntity.created(URI.create("/productos/v1".concat(product.getCodigo().toString()))).build();
+        return ResponseEntity.created(URI.create("/productos/v1".concat(productX.getCodigo().toString()))).build();
     }
 
     @Override
     @Operation(summary = "Actualizar producto", description = "Actualizar producto")
     @PutMapping("")
     public ResponseEntity<Void> update(@ModelAttribute @Valid UpdateProductDTO productDTO) {
-        log.info("Capa Controller , actualizando producto  con Id:{}", productDTO.getCodigo());
+        log.info("Capa Controller , actualizando producto");
         UpdateProductCreateRequest request = productMapper.mapToUpdateProductRequest(productDTO);
         mediator.dispacth(request);
-        log.info("Capa Controller , ACTUALIZADO producto con Id:{}", productDTO.getCodigo());
+        log.info("Capa Controller , ACTUALIZADO producto con Nombre:{}", productDTO.getNombre());
         return ResponseEntity.noContent().build();
     }
 

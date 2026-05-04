@@ -11,9 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
-@Service
 @RequiredArgsConstructor
 @Slf4j
+@Service
 public class ProductCreateHandler implements RequestHandler<ProductCreateRequest, ProductCreateResponse> {
 
     private final product_repository repository;
@@ -34,9 +34,6 @@ public class ProductCreateHandler implements RequestHandler<ProductCreateRequest
                 .imagen(uniqueFileName).build();
 
         Product storageProduct = repository.save(product);
-
-        repository.save(product);
-
         log.info("Producto CREADO , PRODUCT CREATE HANDLER , Codigo:{}", storageProduct.getCodigo());
         return new ProductCreateResponse(storageProduct);
     }

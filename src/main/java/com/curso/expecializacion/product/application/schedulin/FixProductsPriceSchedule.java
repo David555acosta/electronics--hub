@@ -1,3 +1,4 @@
+/*
 package com.curso.expecializacion.product.application.schedulin;
 
 import com.curso.expecializacion.product.domain.product_repository;
@@ -24,3 +25,4 @@ public class FixProductsPriceSchedule {
     }
 
 }
+* */

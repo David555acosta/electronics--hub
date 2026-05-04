@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @RequiredArgsConstructor
 public class CreateProductDTO {
-    private Integer codigo;
     @NotBlank
     private String nombre;
     @Length(min = 2, max = 100, message = "No se puede ingresar un valor menor a 2 caracteres o mayor a 100")
