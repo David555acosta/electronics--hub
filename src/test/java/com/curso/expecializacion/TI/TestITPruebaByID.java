@@ -1,5 +1,4 @@
-/*
-* package com.curso.expecializacion.TI;
+package com.curso.expecializacion.TI;
 
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
@@ -84,4 +83,4 @@ public class TestITPruebaByID {
                 )
                 .andExpect(status().isCreated());
     }
-}*/
+}
