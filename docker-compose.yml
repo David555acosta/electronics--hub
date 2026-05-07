@@ -1,30 +1,38 @@
+
 services:
   #spring-boot:
-  #build: ./
-  #ports:
-  # - "9526:9526"
-  # environment:
-  #  SPRING_PROFILES_ACTIVE: dev
-  #healthcheck:
-  # test: ["CMD", "curl", "-f", "http://localhost:9526/actuator/health"]
-  # interval: 30s
-  #timeout: 10s
-  #retries: 5
+    #build: ./
+    #mem_reservation: 512M
+    #ports:
+      #- "9526:9526"
+    #depends_on:
+     # postgres:
+      #  condition: service_healthy
+    #healthcheck:
+     # test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+     # interval: 30s
+     # timeout: 10s
+     # retries: 5
+    #environment:
+     # PROFILE: prod
+
 
   postgres:
-    image: postgres:15
+    image: pgvector/pgvector:pg17
     environment:
-      POSTGRES_USER: user
+      POSTGRES_USER: root
       POSTGRES_PASSWORD: password
+      POSTGRES_DB: spring
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./docker-config/database/initDB.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./docker-config/database/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U user -d mi_db" ]
+      test: [ "CMD-SHELL", "pg_isready -U root -d spring" ]
       interval: 10s
       timeout: 10s
       retries: 3
+
 volumes:
   postgres_data:

@@ -1,5 +1,5 @@
 spring:
   application:
-    name: specialization
+    name: spring-data-jpa-cero-a-experto
   profiles:
     active: dev

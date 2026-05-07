@@ -1,38 +1,38 @@
 [
   {
-    "name": "Notebook Lenovo",
-    "description": "Notebook 16GB RAM, SSD 512GB",
-    "image": "lenovo.jpg",
-    "price": 1200.50
+    "nombre": "Notebook Lenovo",
+    "descripcion": "Notebook 16GB RAM, SSD 512GB",
+    "imagen": "lenovo.jpg",
+    "precio": 1200.50
   },
   {
-    "name": "Mouse Logitech",
-    "description": "Mouse inalámbrico ergonómico",
-    "image": "mouse.jpg",
-    "price": 25.99
+    "nombre": "Mouse Logitech",
+    "descripcion": "Mouse inalámbrico ergonómico",
+    "imagen": "mouse.jpgpp",
+    "precio": 25.99
   },
   {
-    "name": "Teclado Redragon",
-    "description": "Teclado mecánico RGB",
-    "image": "teclado.jpg",
-    "price": 75.00
+    "nombre": "Teclado Redragon",
+    "descripcion": "Teclado mecánico RGB",
+    "imagen": "teclado.jpg",
+    "precio": 75.00
   },
   {
-    "name": "Monitor Samsung",
-    "description": "Monitor 24 pulgadas Full HD",
-    "image": "monitor.jpg",
-    "price": 210.75
+    "nombre": "Monitor Samsung",
+    "descripcion": "Monitor 24 pulgadas Full HD",
+    "imagen": "monitor.jpg",
+    "precio": 210.75
   },
   {
-    "name": "Auriculares Sony",
-    "description": "Auriculares con cancelación de ruido",
-    "image": "sony.jpg",
-    "price": 150.00
+    "nombre": "Auriculares Sony",
+    "descripcion": "Auriculares con cancelación de ruido",
+    "imagen": "sony.jpg",
+    "precio": 150.00
   },
   {
-    "name": "Celular Xiaomi",
-    "description": "128GB, 6GB RAM",
-    "image": "xiaomi.jpg",
-    "price": 300.00
+    "nombre": "Celular Xiaomi",
+    "descripcion": "128GB, 6GB RAM",
+    "imagen": "xiaomi.jpg",
+    "precio": 300.00
   }
 ]
