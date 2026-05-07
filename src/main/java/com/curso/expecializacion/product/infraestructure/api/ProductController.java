@@ -8,6 +8,8 @@ import com.curso.expecializacion.product.application.query.getAll.AllGetProductR
 import com.curso.expecializacion.product.application.query.getAll.AllGetProductResponse;
 import com.curso.expecializacion.product.application.query.getById.GetProductByIdRequest;
 import com.curso.expecializacion.product.application.query.getById.GetProductByIdResponse;
+import com.curso.expecializacion.product.common.domain.PaginationQuery;
+import com.curso.expecializacion.product.common.domain.PaginationResult;
 import com.curso.expecializacion.product.common.mediator.Mediator;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDTO;
@@ -83,11 +85,22 @@ public class ProductController implements product_api {
     @Operation(summary = "Traer todos", description = "Traer todos")
     @GetMapping("")
     @Override
-    public ResponseEntity<List<ProductDTO>> findAll(@RequestParam(required = false) String pageSize) {
+    public ResponseEntity<PaginationResult<ProductDTO>> findAll
+            (@RequestParam(defaultValue = "0") int pageSize ,
+             @RequestParam(defaultValue = "5") int pageNumber ) {
         log.info("Capa Controller , TRAYENDO TODOS");
-        AllGetProductResponse response = mediator.dispacth(new AllGetProductRequest());
-        List<ProductDTO> productDTOS = response.getProduct().stream().map(productMapper::mapToProductDto).toList();
-        log.info("Capa Controller , TODOS , CANTIDAD: {}", productDTOS.size());
-        return ResponseEntity.ok(productDTOS);
+        AllGetProductResponse response = mediator.dispacth(new AllGetProductRequest(
+                new PaginationQuery(pageNumber , pageSize)));
+        PaginationResult<Product> productsPage = response.getProductsPage();
+
+        PaginationResult<ProductDTO> productDTOPaginationResult = new PaginationResult<>(
+                productsPage.getContent().stream().map(productMapper::mapToProductDto).toList(),
+                productsPage.getPage(),
+                productsPage.getSize(),
+                productsPage.getTotalPages(),
+                productsPage.getTotalElements()
+        );
+        log.info("Capa Controller , TODOS , CANTIDAD: {}", productsPage.getSize());
+        return ResponseEntity.ok(productDTOPaginationResult);
     }
 }

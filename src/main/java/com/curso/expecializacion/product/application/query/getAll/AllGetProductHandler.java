@@ -1,5 +1,7 @@
 package com.curso.expecializacion.product.application.query.getAll;
 
+import com.curso.expecializacion.product.common.domain.PaginationQuery;
+import com.curso.expecializacion.product.common.domain.PaginationResult;
 import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;
@@ -20,9 +22,7 @@ public class AllGetProductHandler implements RequestHandler<AllGetProductRequest
     @Override
     public AllGetProductResponse handle(AllGetProductRequest request) {
         log.info("OBTENIENDO TODOS , PRODUCT ALL HANDLER");
-        List<Product> product = repository.findAll();
-        log.info("TODOS OBTENIDO , PRODUCT ALL HANDLER , TAMAÑO:{}", product.size());
-
+        PaginationResult<Product> product = repository.findAll(request.paginationQuery);
         return new AllGetProductResponse(product);
     }
 

@@ -1,5 +1,6 @@
 package com.curso.expecializacion.product.application.query.getAll;
 
+import com.curso.expecializacion.product.common.domain.PaginationResult;
 import com.curso.expecializacion.product.domain.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class AllGetProductResponse {
 
-    private List<Product> product;
+    private PaginationResult<Product> productsPage;
 }
 
 

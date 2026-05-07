@@ -2,37 +2,40 @@
   {
     "nombre": "Notebook Lenovo",
     "descripcion": "Notebook 16GB RAM, SSD 512GB",
-    "imagen": "lenovo.jpg",
-    "precio": 1200.50
+    "precio": 1200.50,
+    "imagen": "lenovo.jpg"
+
   },
   {
     "nombre": "Mouse Logitech",
     "descripcion": "Mouse inalámbrico ergonómico",
-    "imagen": "mouse.jpgpp",
-    "precio": 25.99
+    "precio": 25.99,
+    "imagen": "mouse.jpgpp"
+
   },
   {
     "nombre": "Teclado Redragon",
     "descripcion": "Teclado mecánico RGB",
-    "imagen": "teclado.jpg",
-    "precio": 75.00
+    "precio": 75.00,
+    "imagen": "teclado.jpg"
+
   },
   {
     "nombre": "Monitor Samsung",
     "descripcion": "Monitor 24 pulgadas Full HD",
-    "imagen": "monitor.jpg",
-    "precio": 210.75
+    "precio": 210.75,
+    "imagen": "monitor.jpg"
   },
   {
     "nombre": "Auriculares Sony",
     "descripcion": "Auriculares con cancelación de ruido",
-    "imagen": "sony.jpg",
-    "precio": 150.00
+    "precio": 150.00,
+    "imagen": "sony.jpg"
   },
   {
     "nombre": "Celular Xiaomi",
     "descripcion": "128GB, 6GB RAM",
-    "imagen": "xiaomi.jpg",
-    "precio": 300.00
+    "precio": 300.00,
+    "imagen": "xiaomi.jpg"
   }
 ]

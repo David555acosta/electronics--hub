@@ -1,17 +1,18 @@
 package com.curso.expecializacion.product.infraestructure.database;
-
+import com.curso.expecializacion.product.common.domain.PaginationQuery;
+import com.curso.expecializacion.product.common.domain.PaginationResult;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import com.curso.expecializacion.product.infraestructure.database.mapper.ProductoEntityMapper;
-
-
 import com.curso.expecializacion.product.infraestructure.database.repositoryDBProducts.QueryProductsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
-import java.util.List;
+
 import java.util.Optional;
 
 @Slf4j
@@ -41,9 +42,16 @@ public class ProductoRepository implements product_repository {
     }
 
     @Override
-    public List<Product> findAll() {
-        log.info("OBTENIENDO TODOS REPOSITORIO");
-        return repository.findAll().stream().map(productoEntityMapper::mapToProduct).toList();
+    public PaginationResult<Product> findAll(PaginationQuery paginationQuery) {
+        PageRequest pageRequest = PageRequest.of(paginationQuery.getPage(), paginationQuery.getSize());
+        Page<ProductEntity> page = repository.findAll(pageRequest);
+        return new PaginationResult<>(
+                page.getContent().stream().map(productoEntityMapper::mapToProduct).toList(),
+                page.getNumber(),
+                page.getSize(),
+                page.getTotalPages(),
+                (int) page.getTotalPages()
+        );
     }
 
     @Override

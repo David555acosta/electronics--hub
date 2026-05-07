@@ -1,5 +1,6 @@
 package com.curso.expecializacion.product.infraestructure.api;
 
+import com.curso.expecializacion.product.common.domain.PaginationResult;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
@@ -23,6 +24,5 @@ public interface product_api {
 
     ResponseEntity<Void> delete(@PathVariable Integer id);
 
-    @GetMapping("")
-    ResponseEntity<List<ProductDTO>> findAll(@RequestParam(required = false) String pageSize);
+    ResponseEntity<PaginationResult<ProductDTO>> findAll(int pageSize, int pageNumber);
 }
