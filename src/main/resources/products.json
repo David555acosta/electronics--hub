@@ -4,21 +4,18 @@
     "descripcion": "Notebook 16GB RAM, SSD 512GB",
     "precio": 1200.50,
     "imagen": "lenovo.jpg"
-
   },
   {
     "nombre": "Mouse Logitech",
     "descripcion": "Mouse inalámbrico ergonómico",
     "precio": 25.99,
-    "imagen": "mouse.jpgpp"
-
+    "imagen": "mouse.jpg"
   },
   {
     "nombre": "Teclado Redragon",
     "descripcion": "Teclado mecánico RGB",
     "precio": 75.00,
     "imagen": "teclado.jpg"
-
   },
   {
     "nombre": "Monitor Samsung",
@@ -37,11 +34,89 @@
     "descripcion": "128GB, 6GB RAM",
     "precio": 300.00,
     "imagen": "xiaomi.jpg"
-  } ,
+  },
   {
     "nombre": "Celular Alcatel",
     "descripcion": "128GB, 6GB RAM",
     "precio": 350.00,
     "imagen": "alcatel.jpg"
+  },
+  {
+    "nombre": "Tablet Samsung",
+    "descripcion": "Tablet 10.5 pulgadas, 64GB",
+    "precio": 250.00,
+    "imagen": "tablet_samsung.jpg"
+  },
+  {
+    "nombre": "Disco SSD Kingston",
+    "descripcion": "SSD 1TB NVMe",
+    "precio": 95.99,
+    "imagen": "ssd_kingston.jpg"
+  },
+  {
+    "nombre": "Memoria RAM Corsair",
+    "descripcion": "16GB DDR4 3200MHz",
+    "precio": 89.99,
+    "imagen": "ram_corsair.jpg"
+  },
+  {
+    "nombre": "Webcam Logitech",
+    "descripcion": "Webcam Full HD 1080p",
+    "precio": 65.50,
+    "imagen": "webcam.jpg"
+  },
+  {
+    "nombre": "Parlante JBL",
+    "descripcion": "Parlante Bluetooth portátil",
+    "precio": 120.00,
+    "imagen": "jbl.jpg"
+  },
+  {
+    "nombre": "Router TP-Link",
+    "descripcion": "Router WiFi 6 doble banda",
+    "precio": 180.00,
+    "imagen": "router.jpg"
+  },
+  {
+    "nombre": "Mousepad Razer",
+    "descripcion": "Mousepad grande antideslizante",
+    "precio": 35.00,
+    "imagen": "mousepad.jpg"
+  },
+  {
+    "nombre": "Microfono Blue Yeti",
+    "descripcion": "Micrófono USB para streaming",
+    "precio": 130.00,
+    "imagen": "microfono.jpg"
+  },
+  {
+    "nombre": "Notebook HP",
+    "descripcion": "8GB RAM, SSD 256GB",
+    "precio": 850.00,
+    "imagen": "hp.jpg"
+  },
+  {
+    "nombre": "Smartwatch Apple",
+    "descripcion": "Apple Watch Series 8",
+    "precio": 450.00,
+    "imagen": "apple_watch.jpg"
+  },
+  {
+    "nombre": "Cargador Anker",
+    "descripcion": "Cargador USB-C 65W GaN",
+    "precio": 45.00,
+    "imagen": "cargador.jpg"
+  },
+  {
+    "nombre": "Silla Gamer",
+    "descripcion": "Silla ergonómica reclinable",
+    "precio": 320.00,
+    "imagen": "silla_gamer.jpg"
+  },
+  {
+    "nombre": "Lámpara LED",
+    "descripcion": "Tira LED RGB control remoto",
+    "precio": 28.99,
+    "imagen": "led.jpg"
   }
 ]

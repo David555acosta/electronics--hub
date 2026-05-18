@@ -88,7 +88,7 @@ public class ProductController implements product_api {
     public ResponseEntity<PaginationResult<ProductDTO>> findAll
             (@RequestParam(defaultValue = "0") int pageSize,
              @RequestParam(defaultValue = "5") int pageNumber,
-             @RequestParam(defaultValue = "codigo") String sortby,
+             @RequestParam(defaultValue = "precio") String sortby,
              @RequestParam(defaultValue = "desc") String direction) {
         log.info("Capa Controller , TRAYENDO TODOS");
         PaginationQuery paginationQuery = new PaginationQuery(pageSize, pageNumber, sortby, direction);
