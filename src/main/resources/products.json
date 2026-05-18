@@ -37,5 +37,11 @@
     "descripcion": "128GB, 6GB RAM",
     "precio": 300.00,
     "imagen": "xiaomi.jpg"
+  } ,
+  {
+    "nombre": "Celular Alcatel",
+    "descripcion": "128GB, 6GB RAM",
+    "precio": 350.00,
+    "imagen": "alcatel.jpg"
   }
 ]

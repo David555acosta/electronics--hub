@@ -86,11 +86,11 @@ public class ProductController implements product_api {
     @GetMapping("")
     @Override
     public ResponseEntity<PaginationResult<ProductDTO>> findAll
-            (@RequestParam(defaultValue = "0") int pageSize ,
-             @RequestParam(defaultValue = "5") int pageNumber ) {
+            (@RequestParam(defaultValue = "0") int pageSize,
+             @RequestParam(defaultValue = "1") int pageNumber) {
         log.info("Capa Controller , TRAYENDO TODOS");
         AllGetProductResponse response = mediator.dispacth(new AllGetProductRequest(
-                new PaginationQuery(pageNumber , pageSize)));
+                new PaginationQuery(pageSize, pageNumber)));
         PaginationResult<Product> productsPage = response.getProductsPage();
 
         PaginationResult<ProductDTO> productDTOPaginationResult = new PaginationResult<>(
