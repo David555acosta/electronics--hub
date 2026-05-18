@@ -93,8 +93,8 @@ public class ProductController implements product_api {
              @RequestParam(defaultValue = "asc") String direction,
              @RequestParam(required = false) String name,
              @RequestParam(required = false) String description,
-             @RequestParam(required = false) String priceMin,
-             @RequestParam(required = false) String priceMax
+             @RequestParam(required = false) Double priceMin,
+             @RequestParam(required = false) Double priceMax
             ) {
         log.info("Capa Controller , TRAYENDO TODOS");
         PaginationQuery paginationQuery = new PaginationQuery(pageSize, pageNumber, sortby, direction);

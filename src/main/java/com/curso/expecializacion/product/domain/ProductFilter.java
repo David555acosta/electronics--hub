@@ -8,6 +8,6 @@ import lombok.Data;
 public class ProductFilter {
     private String name;
     private String description;
-    private String priceMin;
-    private String priceMax;
+    private Double priceMin;
+    private Double priceMax;
 }

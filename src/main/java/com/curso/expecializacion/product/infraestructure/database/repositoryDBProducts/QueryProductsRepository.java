@@ -2,12 +2,14 @@ package com.curso.expecializacion.product.infraestructure.database.repositoryDBP
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface QueryProductsRepository extends JpaRepository<ProductEntity, Integer> {
-    Page<ProductEntity> findAll(Pageable pageable);
+public interface QueryProductsRepository extends JpaRepository<ProductEntity, Integer> , JpaSpecificationExecutor<ProductEntity> {
+    Page<ProductEntity> findAll(Specification<ProductEntity> specification , Pageable pageable);
 }

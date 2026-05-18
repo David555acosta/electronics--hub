@@ -1,17 +1,13 @@
 package com.curso.expecializacion.product.infraestructure.api;
 
 import com.curso.expecializacion.product.common.domain.PaginationResult;
-import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.UpdateProductDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 
 public interface product_api {
     //ResponseEntity<List<Product>> todos(@RequestParam(required = false) Integer limit);
@@ -24,5 +20,5 @@ public interface product_api {
 
     ResponseEntity<Void> delete(@PathVariable Integer id);
 
-    ResponseEntity<PaginationResult<ProductDTO>> findAll(int pageSize, int pageNumber, String sortby, String direction, String name, String description, String priceMin, String priceMax);
+    ResponseEntity<PaginationResult<ProductDTO>> findAll(int pageSize, int pageNumber, String sortby, String direction, String name, String description, Double priceMin, Double priceMax);
 }
