@@ -12,6 +12,7 @@ import com.curso.expecializacion.product.common.domain.PaginationQuery;
 import com.curso.expecializacion.product.common.domain.PaginationResult;
 import com.curso.expecializacion.product.common.mediator.Mediator;
 import com.curso.expecializacion.product.domain.Product;
+import com.curso.expecializacion.product.domain.ProductFilter;
 import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.UpdateProductDTO;
@@ -88,12 +89,18 @@ public class ProductController implements product_api {
     public ResponseEntity<PaginationResult<ProductDTO>> findAll
             (@RequestParam(defaultValue = "0") int pageSize,
              @RequestParam(defaultValue = "5") int pageNumber,
-             @RequestParam(defaultValue = "precio") String sortby,
-             @RequestParam(defaultValue = "desc") String direction) {
+             @RequestParam(defaultValue = "codigo") String sortby,
+             @RequestParam(defaultValue = "asc") String direction,
+             @RequestParam(required = false) String name,
+             @RequestParam(required = false) String description,
+             @RequestParam(required = false) String priceMin,
+             @RequestParam(required = false) String priceMax
+            ) {
         log.info("Capa Controller , TRAYENDO TODOS");
         PaginationQuery paginationQuery = new PaginationQuery(pageSize, pageNumber, sortby, direction);
-        AllGetProductResponse response = mediator.dispacth(new AllGetProductRequest(
-                paginationQuery));
+        ProductFilter productFilter = new ProductFilter(name, description, priceMin, priceMax);
+        AllGetProductRequest  allgetRequest = new AllGetProductRequest(paginationQuery, productFilter);
+        AllGetProductResponse response = mediator.dispacth(allgetRequest);
         PaginationResult<Product> productsPage = response.getProductsPage();
 
         PaginationResult<ProductDTO> productDTOPaginationResult = new PaginationResult<>(

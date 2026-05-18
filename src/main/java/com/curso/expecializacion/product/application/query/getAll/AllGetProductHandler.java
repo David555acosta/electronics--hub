@@ -22,7 +22,7 @@ public class AllGetProductHandler implements RequestHandler<AllGetProductRequest
     @Override
     public AllGetProductResponse handle(AllGetProductRequest request) {
         log.info("OBTENIENDO TODOS , PRODUCT ALL HANDLER");
-        PaginationResult<Product> product = repository.findAll(request.paginationQuery);
+        PaginationResult<Product> product = repository.findAll(request.paginationQuery, request.productFilter);
         return new AllGetProductResponse(product);
     }
 

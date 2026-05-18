@@ -11,7 +11,7 @@ public interface product_repository {
 
     Optional<Product> findById(Integer id);
 
-    PaginationResult<Product> findAll(PaginationQuery paginationQuery );
+    PaginationResult<Product> findAll(PaginationQuery paginationQuery, ProductFilter productFilter);
 
     Product update(Product product);
 
