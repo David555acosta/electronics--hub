@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -43,7 +44,12 @@ public class ProductoRepository implements product_repository {
 
     @Override
     public PaginationResult<Product> findAll(PaginationQuery paginationQuery) {
-        PageRequest pageRequest = PageRequest.of(paginationQuery.getPage(), paginationQuery.getSize());
+        PageRequest pageRequest = PageRequest.of(
+                paginationQuery.getPage(),
+                paginationQuery.getSize(),
+                Sort.by(Sort.Direction.fromString(paginationQuery.getDirection()),
+                paginationQuery.getSortby())
+        );
         Page<ProductEntity> page = repository.findAll(pageRequest);
         return new PaginationResult<>(
                 page.getContent().stream().map(productoEntityMapper::mapToProduct).toList(),

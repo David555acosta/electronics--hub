@@ -24,5 +24,5 @@ public interface product_api {
 
     ResponseEntity<Void> delete(@PathVariable Integer id);
 
-    ResponseEntity<PaginationResult<ProductDTO>> findAll(int pageSize, int pageNumber);
+    ResponseEntity<PaginationResult<ProductDTO>> findAll(int pageSize, int pageNumber, String sortby, String direction);
 }
