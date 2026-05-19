@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProductFilter {
-    private String name;
-    private String description;
+    private String nombre;
+    private String descripcion;
     private Double priceMin;
     private Double priceMax;
 }

@@ -91,14 +91,14 @@ public class ProductController implements product_api {
              @RequestParam(defaultValue = "5") int pageNumber,
              @RequestParam(defaultValue = "codigo") String sortby,
              @RequestParam(defaultValue = "asc") String direction,
-             @RequestParam(required = false) String name,
-             @RequestParam(required = false) String description,
+             @RequestParam(required = false) String nombre,
+             @RequestParam(required = false) String descripcion,
              @RequestParam(required = false) Double priceMin,
              @RequestParam(required = false) Double priceMax
             ) {
         log.info("Capa Controller , TRAYENDO TODOS");
         PaginationQuery paginationQuery = new PaginationQuery(pageSize, pageNumber, sortby, direction);
-        ProductFilter productFilter = new ProductFilter(name, description, priceMin, priceMax);
+        ProductFilter productFilter = new ProductFilter(nombre, descripcion, priceMin, priceMax);
         AllGetProductRequest  allgetRequest = new AllGetProductRequest(paginationQuery, productFilter);
         AllGetProductResponse response = mediator.dispacth(allgetRequest);
         PaginationResult<Product> productsPage = response.getProductsPage();

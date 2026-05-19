@@ -47,6 +47,7 @@ public class ProductoRepository implements product_repository {
 
     @Override
     public PaginationResult<Product> findAll(PaginationQuery paginationQuery , ProductFilter productFilter) {
+        log.info("ESTOY EN CAPA REPOSITORI TRAYENDO TODOS INICIANDO");
         PageRequest pageRequest = PageRequest.of(
                 paginationQuery.getPage(),
                 paginationQuery.getSize(),
@@ -54,12 +55,17 @@ public class ProductoRepository implements product_repository {
                 paginationQuery.getSortby())
         );
 
+        log.info("ESTOY EN CAPA REPOSITORI TRAYENDO TODOS CREADO PAGE REQUEST");
+
         Specification<ProductEntity> specification = Specification.allOf(
-                ProductSpecificationEntity.byName(productFilter.getName())
-                        .and(ProductSpecificationEntity.byDescription(productFilter.getDescription()))
+                ProductSpecificationEntity.byName(productFilter.getNombre())
+                        .and(ProductSpecificationEntity.byDescription(productFilter.getDescripcion()))
                         .and(ProductSpecificationEntity.byPrecio(productFilter.getPriceMin(),productFilter.getPriceMax()))
         );
+
+        log.info("ESTOY EN CAPA REPOSITORI TRAYENDO TODOS CREADA SPECIFICACION");
         Page<ProductEntity> page = repository.findAll(specification , pageRequest);
+
         return new PaginationResult<>(
                 page.getContent().stream().map(productoEntityMapper::mapToProduct).toList(),
                 page.getNumber(),
