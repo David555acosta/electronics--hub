@@ -1,5 +1,6 @@
 package com.curso.expecializacion.product.infraestructure.database.entity;
 
+import com.curso.expecializacion.producDetail.infraestructure.ProductDetailEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,4 +15,8 @@ public class ProductEntity {
     private String descripcion;
     private Double precio;
     private String imagen;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_details_id")
+    ProductDetailEntity productDetailEntity;
 }

@@ -1,0 +1,102 @@
+[
+  {
+    "specifications": "Procesador Intel Core i7, 16GB RAM DDR4, SSD NVMe 512GB, pantalla 15.6\" Full HD",
+    "warranty": "24 meses",
+    "provider": "Lenovo Argentina"
+  },
+  {
+    "specifications": "Conectividad inalámbrica 2.4GHz, sensor óptico 1600 DPI, batería AA",
+    "warranty": "12 meses",
+    "provider": "Logitech"
+  },
+  {
+    "specifications": "Switches mecánicos Red, iluminación RGB, conexión USB",
+    "warranty": "12 meses",
+    "provider": "Redragon"
+  },
+  {
+    "specifications": "24 pulgadas, resolución 1920x1080, panel IPS, 75Hz",
+    "warranty": "24 meses",
+    "provider": "Samsung"
+  },
+  {
+    "specifications": "Bluetooth 5.2, cancelación activa de ruido, autonomía de 30 horas",
+    "warranty": "12 meses",
+    "provider": "Sony"
+  },
+  {
+    "specifications": "Pantalla AMOLED 6.67\", 128GB almacenamiento, 6GB RAM, batería 5000mAh",
+    "warranty": "12 meses",
+    "provider": "Xiaomi"
+  },
+  {
+    "specifications": "Pantalla HD+ 6.5\", 128GB almacenamiento, 6GB RAM, batería 5000mAh",
+    "warranty": "12 meses",
+    "provider": "Alcatel"
+  },
+  {
+    "specifications": "Pantalla 10.5\", 64GB almacenamiento, 4GB RAM, WiFi",
+    "warranty": "12 meses",
+    "provider": "Samsung"
+  },
+  {
+    "specifications": "Capacidad 1TB, interfaz NVMe PCIe 4.0, lectura hasta 3500 MB/s",
+    "warranty": "36 meses",
+    "provider": "Kingston"
+  },
+  {
+    "specifications": "16GB DDR4, frecuencia 3200MHz, CL16",
+    "warranty": "Garantía de por vida",
+    "provider": "Corsair"
+  },
+  {
+    "specifications": "Resolución Full HD 1080p, micrófono integrado, conexión USB",
+    "warranty": "24 meses",
+    "provider": "Logitech"
+  },
+  {
+    "specifications": "Bluetooth 5.1, resistencia IP67, autonomía de 12 horas",
+    "warranty": "12 meses",
+    "provider": "JBL"
+  },
+  {
+    "specifications": "WiFi 6 AX1800, doble banda, 4 antenas, puertos Gigabit",
+    "warranty": "36 meses",
+    "provider": "TP-Link"
+  },
+  {
+    "specifications": "Superficie microtexturizada, base de goma antideslizante, tamaño XL",
+    "warranty": "6 meses",
+    "provider": "Razer"
+  },
+  {
+    "specifications": "Micrófono USB, cuatro patrones polares, calidad 48kHz",
+    "warranty": "24 meses",
+    "provider": "Blue Microphones"
+  },
+  {
+    "specifications": "Procesador Intel Core i5, 8GB RAM, SSD 256GB, pantalla 15.6\"",
+    "warranty": "24 meses",
+    "provider": "HP"
+  },
+  {
+    "specifications": "GPS, pantalla Retina Always-On, resistencia al agua, monitoreo cardíaco",
+    "warranty": "12 meses",
+    "provider": "Apple"
+  },
+  {
+    "specifications": "Potencia 65W, tecnología GaN, dos puertos USB-C",
+    "warranty": "18 meses",
+    "provider": "Anker"
+  },
+  {
+    "specifications": "Reclinación 180°, apoyabrazos 4D, soporte lumbar y cervical",
+    "warranty": "24 meses",
+    "provider": "DXRacer"
+  },
+  {
+    "specifications": "5 metros, RGB, control remoto, alimentación USB",
+    "warranty": "6 meses",
+    "provider": "Philips"
+  }
+]
