@@ -17,5 +17,5 @@ public class ProductDetailEntity {
     private String provider;
 
     @OneToOne(mappedBy = "productDetailEntity")
-    private ProductEntity productEntity;
+    private ProductEntity product;
 }
