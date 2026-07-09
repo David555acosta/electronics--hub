@@ -27,7 +27,7 @@ public class ProductDetailSeeder implements CommandLineRunner {
         long count = productDetailRepository.count();
 
         if (count == 0) {
-            Resource resource = resourceLoader.getResource("classpath:products.json");
+            Resource resource = resourceLoader.getResource("classpath:products_details.json");
 
             List<ProductDetailEntity> productDetailEntities = objectMapper.readValue(
                     resource.getInputStream(),
