@@ -8,35 +8,31 @@ spring:
       auto-commit: false
       maximum-pool-size: 20
       minimum-idle: 5
-      idle-timeout: 300000    # 5 min
-      max-lifetime: 1800000   # 30 min
-      connection-timeout: 30000 # 30 s
-      leak-detection-threshold: 2000  # 2 s
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      leak-detection-threshold: 2000
   flyway:
     enabled: false
   jpa:
+    show-sql: true
+    open-in-view: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop # Limpia tablas corruptas y permite al Seeder actuar de cero
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    open-in-view: false
     properties:
       hibernate:
         jdbc:
           time_zone: UTC
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        show_sql: true
         format_sql: true
   servlet:
     multipart:
       max-request-size: 10MB
       max-file-size: 1MB
   cache:
-    type: simple
-#  sql:
-#    init:
-#      mode: always
-#      data-locations: classpath:data.sql
+    type: none # Apaga la caché para evitar congelamiento de datos nulos en Postman
 
 springdoc:
   swagger-ui:
@@ -55,3 +51,6 @@ management:
       percentiles-histogram:
         http.server:
           requests: true
+
+server:
+  port: 9526

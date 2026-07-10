@@ -10,7 +10,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
-
 import java.util.List;
 
 @Component
@@ -19,7 +18,6 @@ public class ProductSeeder implements CommandLineRunner {
     private final QueryProductsRepository queryProductsRepository;
     private final ResourceLoader resourceLoader;
     private final ObjectMapper objectMapper;
-
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,6 +34,5 @@ public class ProductSeeder implements CommandLineRunner {
 
             queryProductsRepository.saveAll(products);
         }
-
     }
 }

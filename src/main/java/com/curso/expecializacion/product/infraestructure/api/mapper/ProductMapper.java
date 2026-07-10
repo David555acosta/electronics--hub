@@ -17,7 +17,7 @@ public interface ProductMapper {
 
     UpdateProductCreateRequest mapToUpdateProductRequest(UpdateProductDTO updateProductDTO);
 
-    @Mapping(target = "provider" , source = "product.productDetail.provider")
+    @Mapping(target = "provider" , source = "productDetail.provider")
     ProductDTO mapToProductDto(Product product);
 
 }

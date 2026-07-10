@@ -2,121 +2,144 @@
   {
     "nombre": "Notebook Lenovo",
     "descripcion": "Notebook 16GB RAM, SSD 512GB",
-    "precio": 1200.50,
-    "imagen": "lenovo.jpg"
+    "precio": 1200.5,
+    "imagen": "lenovo.jpg",
+    "productDetailEntity": {
+      "specifications": "16GB RAM, 512GB SSD, Intel i5",
+      "warranty": "12 Months",
+      "provider": "Lenovo Corp"
+    }
   },
   {
     "nombre": "Mouse Logitech",
     "descripcion": "Mouse inalámbrico ergonómico",
     "precio": 25.99,
-    "imagen": "mouse.jpg"
+    "imagen": "mouse.jpg",
+    "productDetailEntity": {
+      "specifications": "Wireless, 16000 DPI, RGB",
+      "warranty": "6 Months",
+      "provider": "Logitech Latam"
+    }
   },
   {
     "nombre": "Teclado Redragon",
     "descripcion": "Teclado mecánico RGB",
-    "precio": 75.00,
-    "imagen": "teclado.jpg"
+    "precio": 75.0,
+    "imagen": "teclado.jpg",
+    "productDetailEntity": {
+      "specifications": "Mechanical Switches Blue, RGB, USB-C",
+      "warranty": "12 Months",
+      "provider": "Redragon Official"
+    }
   },
   {
     "nombre": "Monitor Samsung",
     "descripcion": "Monitor 24 pulgadas Full HD",
     "precio": 210.75,
-    "imagen": "monitor.jpg"
+    "imagen": "monitor.jpg",
+    "productDetailEntity": {
+      "specifications": "24 Inch, IPS, 75Hz, 1080p",
+      "warranty": "24 Months",
+      "provider": "Samsung Electronics"
+    }
   },
   {
     "nombre": "Auriculares Sony",
     "descripcion": "Auriculares con cancelación de ruido",
-    "precio": 150.00,
-    "imagen": "sony.jpg"
+    "precio": 150.0,
+    "imagen": "sony.jpg",
+    "productDetailEntity": {
+      "specifications": "Over-Ear, Bluetooth, ANC, 30h Battery",
+      "warranty": "12 Months",
+      "provider": "Sony Global"
+    }
   },
   {
     "nombre": "Celular Xiaomi",
     "descripcion": "128GB, 6GB RAM",
-    "precio": 300.00,
-    "imagen": "xiaomi.jpg"
+    "precio": 300.0,
+    "imagen": "xiaomi.jpg",
+    "productDetailEntity": {
+      "specifications": "AMOLED 6.5'', 108MP Camera, 5000mAh",
+      "warranty": "12 Months",
+      "provider": "Xiaomi Tech"
+    }
   },
   {
     "nombre": "Celular Alcatel",
     "descripcion": "128GB, 6GB RAM",
-    "precio": 350.00,
-    "imagen": "alcatel.jpg"
+    "precio": 350.0,
+    "imagen": "alcatel.jpg",
+    "productDetailEntity": {
+      "specifications": "6.2'' Display, Dual SIM, 4G LTE",
+      "warranty": "12 Months",
+      "provider": "Alcatel Mobile"
+    }
   },
   {
     "nombre": "Tablet Samsung",
-    "descripcion": "Tablet 10.5 pulgadas, 64GB",
-    "precio": 250.00,
-    "imagen": "tablet_samsung.jpg"
+    "descripcion": "Tablet 10.5 pulgadas Wi-Fi",
+    "precio": 250.0,
+    "imagen": "tablet_samsung.jpg",
+    "productDetailEntity": {
+      "specifications": "10.5 Inch, 64GB Storage, Android 13",
+      "warranty": "12 Months",
+      "provider": "Samsung Electronics"
+    }
   },
   {
     "nombre": "Disco SSD Kingston",
     "descripcion": "SSD 1TB NVMe",
     "precio": 95.99,
-    "imagen": "ssd_kingston.jpg"
+    "imagen": "ssd_kingston.jpg",
+    "productDetailEntity": {
+      "specifications": "M.2 NVMe, Read 3500MB/s, Write 2100MB/s",
+      "warranty": "36 Months",
+      "provider": "Kingston Tech"
+    }
   },
   {
     "nombre": "Memoria RAM Corsair",
     "descripcion": "16GB DDR4 3200MHz",
     "precio": 89.99,
-    "imagen": "ram_corsair.jpg"
+    "imagen": "ram_corsair.jpg",
+    "productDetailEntity": {
+      "specifications": "2x8GB, DDR4, Vengeance LPX, C16",
+      "warranty": "Lifetime",
+      "provider": "Corsair Components"
+    }
   },
   {
     "nombre": "Webcam Logitech",
     "descripcion": "Webcam Full HD 1080p",
-    "precio": 65.50,
-    "imagen": "webcam.jpg"
+    "precio": 65.5,
+    "imagen": "webcam.jpg",
+    "productDetailEntity": {
+      "specifications": "1080p 30fps, Autofocus, Dual Stereo Mics",
+      "warranty": "12 Months",
+      "provider": "Logitech Latam"
+    }
   },
   {
     "nombre": "Parlante JBL",
-    "descripcion": "Parlante Bluetooth portátil",
-    "precio": 120.00,
-    "imagen": "jbl.jpg"
+    "descripcion": "Parlante Bluetooth resistente al agua",
+    "precio": 120.0,
+    "imagen": "jbl.jpg",
+    "productDetailEntity": {
+      "specifications": "IPX7 Waterproof, 20h Playtime, PartyBoost",
+      "warranty": "12 Months",
+      "provider": "Harman International"
+    }
   },
   {
     "nombre": "Router TP-Link",
     "descripcion": "Router WiFi 6 doble banda",
-    "precio": 180.00,
-    "imagen": "router.jpg"
-  },
-  {
-    "nombre": "Mousepad Razer",
-    "descripcion": "Mousepad grande antideslizante",
-    "precio": 35.00,
-    "imagen": "mousepad.jpg"
-  },
-  {
-    "nombre": "Microfono Blue Yeti",
-    "descripcion": "Micrófono USB para streaming",
-    "precio": 130.00,
-    "imagen": "microfono.jpg"
-  },
-  {
-    "nombre": "Notebook HP",
-    "descripcion": "8GB RAM, SSD 256GB",
-    "precio": 850.00,
-    "imagen": "hp.jpg"
-  },
-  {
-    "nombre": "Smartwatch Apple",
-    "descripcion": "Apple Watch Series 8",
-    "precio": 450.00,
-    "imagen": "apple_watch.jpg"
-  },
-  {
-    "nombre": "Cargador Anker",
-    "descripcion": "Cargador USB-C 65W GaN",
-    "precio": 45.00,
-    "imagen": "cargador.jpg"
-  },
-  {
-    "nombre": "Silla Gamer",
-    "descripcion": "Silla ergonómica reclinable",
-    "precio": 320.00,
-    "imagen": "silla_gamer.jpg"
-  },
-  {
-    "nombre": "Lámpara LED",
-    "descripcion": "Tira LED RGB control remoto",
-    "precio": 28.99,
-    "imagen": "led.jpg"
+    "precio": 180.0,
+    "imagen": "router.jpg",
+    "productDetailEntity": {
+      "specifications": "AX3000, Gigabit Ports, 4 Antennas",
+      "warranty": "24 Months",
+      "provider": "TP-Link Corp"
+    }
   }
 ]
