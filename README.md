@@ -76,7 +76,7 @@ electronics--hub [expecializacion]
 ├── pom.xml
 └── README.md
 
-🛠️ Stack Tecnológico y Versiones Relacionadas
+# Stack Tecnológico y Versiones Relacionadas
 Java 21: JDK base aprovechando las últimas mejoras de rendimiento de la JVM.
 
 Spring Boot 3.3.2: Core del framework base corporativo.
@@ -95,7 +95,7 @@ Springdoc OpenAPI UI 2.5.0: Motor automatizado de generación de documentación 
 
 Spring Boot Actuator: Monitorización de métricas de salud del sistema expuestas en endpoints locales.
 
-🚀 Guía de Uso y Despliegue Local
+# Guía de Uso y Despliegue Local
 Prerrequisitos
 Asegúrate de tener instalados los siguientes componentes en tu entorno local:
 
