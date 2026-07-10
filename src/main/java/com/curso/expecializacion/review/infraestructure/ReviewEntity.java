@@ -1,0 +1,23 @@
+package com.curso.expecializacion.review.infraestructure;
+
+
+import com.curso.expecializacion.product.domain.Product;
+import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "reviews")
+public class ReviewEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String comment;
+    private Integer source;
+
+    @ManyToOne
+    @JoinColumn(name = "productos_codigo")
+    private ProductEntity productEntity;
+}

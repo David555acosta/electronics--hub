@@ -1,0 +1,93 @@
+[
+  {
+    "comment": "Excelente producto, superó mis expectativas de rendimiento.",
+    "source": 5,
+    "productEntity": {
+      "id": 1
+    }
+  },
+  {
+    "comment": "La batería dura bastante, pero la pantalla podría tener mejor brillo.",
+    "source": 4,
+    "productEntity": {
+      "id": 1
+    }
+  },
+  {
+    "comment": "Calidad precio imbatible, llegó super rápido y bien empaquetado.",
+    "source": 5,
+    "productEntity": {
+      "id": 2
+    }
+  },
+  {
+    "comment": "No me gustó la calidad de los materiales, se siente muy de plástico.",
+    "source": 2,
+    "productEntity": {
+      "id": 2
+    }
+  },
+  {
+    "comment": "Cumple con lo que promete, ideal para el uso diario en la oficina.",
+    "source": 4,
+    "productEntity": {
+      "id": 3
+    }
+  },
+  {
+    "comment": "Se calienta un poco cuando se usa por más de dos horas seguidas.",
+    "source": 3,
+    "productEntity": {
+      "id": 3
+    }
+  },
+  {
+    "comment": "Simplemente perfecto, el mejor diseño y potencia del mercado actual.",
+    "source": 5,
+    "productEntity": {
+      "id": 4
+    }
+  },
+  {
+    "comment": "Vino defectuoso de fábrica, el puerto de carga no funciona correctamente.",
+    "source": 1,
+    "productEntity": {
+      "id": 4
+    }
+  },
+  {
+    "comment": "Un producto decente por el costo, aunque el software es un poco lento.",
+    "source": 3,
+    "productEntity": {
+      "id": 5
+    }
+  },
+  {
+    "comment": "Muy recomendado para estudiantes, ligero y muy fácil de transportar.",
+    "source": 5,
+    "productEntity": {
+      "id": 5
+    }
+  },
+  {
+    "comment": "El sonido es espectacular, pero el cable es un poco corto.",
+    "source": 4,
+    "productEntity": {
+      "id": 1
+    }
+  },
+  {
+    "comment": "Mala experiencia, el empaque llegó roto y el producto rayado.",
+    "source": 1,
+    "productEntity": {
+      "id": 2
+    }
+  },
+  {
+    "comment": "Excelente relación componentes-precio, corre todo de forma fluida.",
+    "source": 5,
+    "productEntity": {
+      "id": 3
+    }
+  }
+]

@@ -1,9 +1,12 @@
 package com.curso.expecializacion.product.infraestructure.database.mapper;
 
 import com.curso.expecializacion.product.domain.Product;
+import com.curso.expecializacion.product.infraestructure.api.dto.ReviewDTO;
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 
 
+import com.curso.expecializacion.review.domain.Review;
+import com.curso.expecializacion.review.infraestructure.ReviewEntity;
 import org.mapstruct.*;
 
 
@@ -20,4 +23,11 @@ public interface ProductoEntityMapper {
     @Mapping(target = "productDetail", source = "productDetailEntity")
     @Mapping(target = "productDetail.product", ignore = true) // Evita ciclo infinito
     Product mapToProduct(ProductEntity productEntity);
+
+
+    @Mapping(target = "product", ignore = true)
+    Review mapToReviewDTO(ReviewEntity reviewEntity);
+
+    @Mapping(target = "productEntity", ignore = true)
+    ReviewEntity mapToReviewEntity(Review review);
 }

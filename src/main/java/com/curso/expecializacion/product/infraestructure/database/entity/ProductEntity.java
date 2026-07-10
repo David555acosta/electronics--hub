@@ -1,8 +1,12 @@
 package com.curso.expecializacion.product.infraestructure.database.entity;
 
 import com.curso.expecializacion.producDetail.infraestructure.ProductDetailEntity;
+import com.curso.expecializacion.review.infraestructure.ReviewEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "productos")
@@ -18,5 +22,11 @@ public class ProductEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_details_id")
-    ProductDetailEntity productDetailEntity;
+    private ProductDetailEntity productDetailEntity;
+
+
+    @OneToMany(mappedBy = "productEntity")
+    private List<ReviewEntity> reviews = new ArrayList<>();
+
+
 }
