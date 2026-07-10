@@ -1,94 +1,145 @@
+# Electronics Hub - Product Microservice
 
-# Electronics Hub
+Este proyecto es un microservicio modular desarrollado en **Java 21** y **Spring Boot 3** enfocado en la gestión avanzada de productos y sus detalles técnicos. La arquitectura del sistema sigue los principios de **Arquitectura Hexagonal (Ports & Adapters)** y **DDD (Domain-Driven Design)**, garantizando un desacoplamiento absoluto entre la lógica de negocio, los contratos de la API y los mecanismos de persistencia.
 
-Backend REST API desarrollada con Java y Spring Boot para la gestión de productos electrónicos. El proyecto sigue una arquitectura por capas, aplicando principios de Clean Architecture y Domain-Driven Design (DDD), con persistencia mediante Spring Data JPA y Hibernate.
+---
 
-## Características
+## 📂 Estructura del Proyecto (Árbol de Directorios)
 
-- CRUD completo de productos.
-- Arquitectura basada en capas.
-- Separación entre dominio e infraestructura.
-- Spring Data JPA + Hibernate.
-- Mapeo con MapStruct.
-- Validaciones.
-- Manejo centralizado de excepciones.
-- Cache con Spring Cache.
-- Base de datos PostgreSQL.
-- Seeders para carga inicial de datos.
-- Relación One-to-One entre Producto y Detalle del Producto.
+```text
+electronics--hub [expecializacion]
+├── .idea/
+├── .mvn/
+├── docker-config/
+├── src/
+│   └── main/
+│       ├── java/
+│       │   └── com/curso/expecializacion/
+│       │       ├── producDetail/
+│       │       │   ├── domain/
+│       │       │   │   └── ProductDetail.java
+│       │       │   └── infraestructure/
+│       │       │       └── ProductDetailEntity.java
+│       │       └── product/
+│       │           ├── application/
+│       │           │   └── command/
+│       │           │       ├── config/
+│       │           │       │   ├── ApplicationConfig.java
+│       │           │       │   └── OpenApiConfig.java
+│       │           │       ├── create/
+│       │           │       │   ├── ProductCreateHandler.java
+│       │           │       │   ├── ProductCreateRequest.java
+│       │           │       │   └── ProductCreateResponse.java
+│       │           │       ├── delete/
+│       │           │       │   ├── DeleteCreateHandler.java
+│       │           │       │   └── DeleteProductRequest.java
+│       │           │       └── update/
+│       │           │           ├── UpdateProductCreateHandler.java
+│       │           │           └── UpdateProductCreateRequest.java
+│       │           ├── domain/
+│       │           │   ├── Product.java
+│       │           │   ├── ProductFilter.java
+│       │           │   └── product_repository.java
+│       │           └── infraestructure/
+│       │               ├── api/
+│       │               │   ├── dto/
+│       │               │   │   ├── CreateProductDTO.java
+│       │               │   │   ├── ProductDTO.java
+│       │               │   │   └── UpdateProductDTO.java
+│       │               │   ├── mapper/
+│       │               │   │   └── ProductMapper.java
+│       │               │   ├── product_api.java
+│       │               │   └── ProductController.java
+│       │               └── database/
+│       │                   ├── entity/
+│       │                   │   ├── ProductEntity.java
+│       │                   │   ├── ProductEntityRepository.java
+│       │                   │   └── ProductSpecificationEntity.java
+│       │                   ├── mapper/
+│       │                   │   └── ProductoEntityMapper.java
+│       │                   ├── repositoryDBProducts/
+│       │                   │   └── QueryProductsRepository.java
+│       │                   ├── seeder/
+│       │                   │   └── ProductSeeder.java
+│       │                   └── ProductoRepository.java
+│       └── resources/
+│           ├── products.json
+│           └── application.yml
+├── .dockerignore
+├── .gitattributes
+├── .gitignore
+├── docker-compose.yml
+├── Dockerfile
+├── expecializacion.iml
+├── mvnw
+├── mvenw.cmd
+├── pom.xml
+└── README.md
 
-## Tecnologías
+🛠️ Stack Tecnológico y Versiones Relacionadas
+Java 21: JDK base aprovechando las últimas mejoras de rendimiento de la JVM.
 
-- Java 21
-- Spring Boot
-- Spring Data JPA
-- Hibernate
-- PostgreSQL
-- MapStruct
-- Lombok
-- Maven
-- Docker (en proceso)
+Spring Boot 3.3.2: Core del framework base corporativo.
 
-## Arquitectura
+Spring Data JPA & Hibernate (Spring Boot Starter): Abstracción de datos ORM encargada de traducir el grafo de objetos hacia el modelo relacional de forma asincrónica o perezosa.
 
-```
-Controller
-    │
-Application
-    │
-Domain
-    │
-Infrastructure
-    │
-PostgreSQL
-```
+PostgreSQL 17 (pgvector/pgvector:pg17): Motor de base de datos relacional nativo con soporte de vectores integrado.
 
-## Modelo de datos
+Jackson (ObjectMapper): Motor core de serialización/deserialización encargado de parsear estructuras JSON complejas al arrancar el contexto de Spring.
 
-Producto
+MapStruct 1.5.5.Final: Framework de mapeo de tipos fuertemente tipado en tiempo de compilación. Procesa las conversiones aislando las entidades de base de datos (ProductEntity) del Dominio Puro (Product) y la API (ProductDTO) mediante su procesador de anotaciones acoplado a Lombok.
 
-- Código
-- Nombre
-- Descripción
-- Precio
-- Imagen
+Lombok 1.18.34: Librería de automatización de código boilerplate (Getters, Setters, Builders).
 
-Detalle del producto
+Springdoc OpenAPI UI 2.5.0: Motor automatizado de generación de documentación OpenAPI / Swagger.
 
-- Especificaciones
-- Garantía
-- Proveedor
+Spring Boot Actuator: Monitorización de métricas de salud del sistema expuestas en endpoints locales.
 
-Relación:
+🚀 Guía de Uso y Despliegue Local
+Prerrequisitos
+Asegúrate de tener instalados los siguientes componentes en tu entorno local:
 
-```
-Product
-    │
-    └────── 1 : 1 ────── ProductDetail
-```
+Docker Desktop
 
-## Próximas funcionalidades
+Java 21 (JDK instalado y configurado en el PATH)
 
-- Categorías
-- Reviews de productos
-- Autenticación JWT
-- Docker Compose
-- Tests unitarios
-- Tests de integración
-- Documentación con Swagger/OpenAPI
-- Redis para cache
-- CI/CD con GitHub Actions
+Maven 3.x o utilizar el wrapper integrado (./mvnw)
 
-## Cómo ejecutar
+Paso 1: Levantar la Infraestructura (Base de Datos)
+El proyecto orquesta una imagen optimizada de PostgreSQL. Ejecuta el siguiente comando en la raíz del proyecto para iniciar la base de datos en segundo plano:
 
-```bash
-git clone https://github.com/David555acosta/electronics--hub.git
+Bash
+docker-compose up -d
+Nota: Esto aprovisionará un volumen persistente llamado postgres_data y ejecutará scripts iniciales desde ./docker-config/database/init.sql si existiesen.
 
-cd electronics--hub
+Paso 2: Configuración del Entorno (application.yml)
+El archivo de propiedades está configurado para desarrollo continuo:
 
+spring.jpa.hibernate.ddl-auto: create-drop limpia, destruye y aprovisiona las tablas automáticamente en cada ciclo de arranque/parada.
+
+El componente ProductSeeder mapeará automáticamente el archivo products.json al inicializar el contexto mediante Jackson, inyectando los datos semilla relacionales (OneToOne) de forma limpia en disco.
+
+spring.cache.type: none desactiva la caché en memoria en caliente para garantizar respuestas HTTP no cacheadas.
+
+Nota técnica de seguridad: Asegúrate de borrar o vaciar por completo cualquier archivo application.properties huérfano para evitar colisiones en la precedencia de configuraciones de Spring Boot.
+
+Paso 3: Compilar y Ejecutar el Microservicio
+Limpia los artefactos de compilación anteriores (obligatorio para que el plugin de Maven regenere los mappers implícitos de MapStruct generados en la carpeta /target) y arranca la aplicación:
+
+Bash
+# Limpieza de empaquetado anterior
+./mvnw clean
+
+# Ejecución del servidor de Spring Boot
 ./mvnw spring-boot:run
-```
+El servidor levantará en el puerto configurado: 9526.
 
-## Estado del proyecto
+Paso 4: Consumir la API
+Puedes verificar el correcto funcionamiento del pipeline, la paginación, los filtros dinámicos basados en JPA Specifications y la correcta hidratación relacional del campo provider consumiendo el endpoint principal desde Postman o cURL:
 
-🚧 En desarrollo.
+HTTP
+GET http://localhost:9526/api/products
+Para validar y probar interactivamente el contrato de los DTOs y los esquemas expuestos por los controladores, accede a la consola de Swagger UI:
+
+HTTP
+http://localhost:9526/swagger-ui.html
