@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Configuration;
         servers = {
                 @Server(
                         description = "Environment local",
-                        url = "http://localhost:8080"
+                        url = "http://localhost:9526"
                 )
         },
         tags = {
