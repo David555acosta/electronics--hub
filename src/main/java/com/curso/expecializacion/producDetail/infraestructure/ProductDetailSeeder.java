@@ -6,6 +6,7 @@ import com.curso.expecializacion.product.infraestructure.database.repositoryDBPr
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Order(2)
 public class ProductDetailSeeder implements CommandLineRunner {
     private final ProductDetailRepository productDetailRepository;
     private final ResourceLoader resourceLoader;

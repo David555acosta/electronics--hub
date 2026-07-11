@@ -1,7 +1,6 @@
 package com.curso.expecializacion.product.infraestructure.database.mapper;
 
 import com.curso.expecializacion.product.domain.Product;
-import com.curso.expecializacion.product.infraestructure.api.dto.ReviewDTO;
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 
 
