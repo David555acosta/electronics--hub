@@ -1,5 +1,6 @@
 package com.curso.expecializacion.product.infraestructure.database.entity;
 
+import com.curso.expecializacion.category.infraestructure.CategoryEntity;
 import com.curso.expecializacion.producDetail.infraestructure.ProductDetailEntity;
 import com.curso.expecializacion.review.infraestructure.ReviewEntity;
 import jakarta.persistence.*;
@@ -27,6 +28,15 @@ public class ProductEntity {
 
     @OneToMany(mappedBy = "productEntity")
     private List<ReviewEntity> reviews = new ArrayList<>();
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "productos_categorias",
+            joinColumns = @JoinColumn(name = "products_id"),       //  CORREGIDO
+            inverseJoinColumns = @JoinColumn(name = "category_id") //  CORREGIDO
+    )
+    List<CategoryEntity> categoryEntities = new ArrayList<>();
 
 
 }
