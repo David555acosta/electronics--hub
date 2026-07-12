@@ -1,5 +1,7 @@
 package com.curso.expecializacion.product.infraestructure.api.mapper;
 
+import com.curso.expecializacion.category.domain.Category;
+import com.curso.expecializacion.category.infraestructure.CategoryEntity;
 import com.curso.expecializacion.product.application.command.create.ProductCreateRequest;
 import com.curso.expecializacion.product.application.command.update.UpdateProductCreateRequest;
 import com.curso.expecializacion.product.domain.Product;
@@ -11,6 +13,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface ProductMapper {
     ProductCreateRequest mapTocreateProductoRequest(CreateProductDTO createProductDTO);
@@ -19,5 +24,10 @@ public interface ProductMapper {
 
     @Mapping(target = "provider" , source = "productDetail.provider")
     ProductDTO mapToProductDto(Product product);
+
+    default List<String> mapToCategoryName(List<Category> categories) {
+
+        return  categories.stream().map(Category::getName).toList();
+    }
 
 }

@@ -14,4 +14,5 @@ public class ProductDTO {
     private String imagen;
     private String provider;
     private List<ReviewDTO> reviews;
+    private List<String> categories;
 }
