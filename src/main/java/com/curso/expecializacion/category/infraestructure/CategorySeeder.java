@@ -16,7 +16,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-@Order(4)
+@Order(1)
 public class CategorySeeder implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final ResourceLoader resourceLoader;

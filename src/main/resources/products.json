@@ -8,7 +8,10 @@
       "specifications": "16GB RAM, 512GB SSD, Intel i5",
       "warranty": "12 Months",
       "provider": "Lenovo Corp"
-    }
+    },
+    "categoryEntities": [
+      { "id": 2 }
+    ]
   },
   {
     "nombre": "Mouse Logitech",
@@ -19,7 +22,10 @@
       "specifications": "Wireless, 16000 DPI, RGB",
       "warranty": "6 Months",
       "provider": "Logitech Latam"
-    }
+    },
+    "categoryEntities": [
+      { "id": 5 }
+    ]
   },
   {
     "nombre": "Teclado Redragon",
@@ -30,7 +36,10 @@
       "specifications": "Mechanical Switches Blue, RGB, USB-C",
       "warranty": "12 Months",
       "provider": "Redragon Official"
-    }
+    },
+    "categoryEntities": [
+      { "id": 5 }
+    ]
   },
   {
     "nombre": "Monitor Samsung",
@@ -41,7 +50,10 @@
       "specifications": "24 Inch, IPS, 75Hz, 1080p",
       "warranty": "24 Months",
       "provider": "Samsung Electronics"
-    }
+    },
+    "categoryEntities": [
+      { "id": 3 }
+    ]
   },
   {
     "nombre": "Auriculares Sony",
@@ -52,7 +64,10 @@
       "specifications": "Over-Ear, Bluetooth, ANC, 30h Battery",
       "warranty": "12 Months",
       "provider": "Sony Global"
-    }
+    },
+    "categoryEntities": [
+      { "id": 3 }
+    ]
   },
   {
     "nombre": "Celular Xiaomi",
@@ -63,7 +78,10 @@
       "specifications": "AMOLED 6.5'', 108MP Camera, 5000mAh",
       "warranty": "12 Months",
       "provider": "Xiaomi Tech"
-    }
+    },
+    "categoryEntities": [
+      { "id": 1 }
+    ]
   },
   {
     "nombre": "Celular Alcatel",
@@ -74,7 +92,10 @@
       "specifications": "6.2'' Display, Dual SIM, 4G LTE",
       "warranty": "12 Months",
       "provider": "Alcatel Mobile"
-    }
+    },
+    "categoryEntities": [
+      { "id": 1 }
+    ]
   },
   {
     "nombre": "Tablet Samsung",
@@ -85,7 +106,10 @@
       "specifications": "10.5 Inch, 64GB Storage, Android 13",
       "warranty": "12 Months",
       "provider": "Samsung Electronics"
-    }
+    },
+    "categoryEntities": [
+      { "id": 1 }
+    ]
   },
   {
     "nombre": "Disco SSD Kingston",
@@ -96,7 +120,11 @@
       "specifications": "M.2 NVMe, Read 3500MB/s, Write 2100MB/s",
       "warranty": "36 Months",
       "provider": "Kingston Tech"
-    }
+    },
+    "categoryEntities": [
+      { "id": 4 },
+      { "id": 2 }
+    ]
   },
   {
     "nombre": "Memoria RAM Corsair",
@@ -107,7 +135,11 @@
       "specifications": "2x8GB, DDR4, Vengeance LPX, C16",
       "warranty": "Lifetime",
       "provider": "Corsair Components"
-    }
+    },
+    "categoryEntities": [
+      { "id": 4 },
+      { "id": 2 }
+    ]
   },
   {
     "nombre": "Webcam Logitech",
@@ -118,7 +150,10 @@
       "specifications": "1080p 30fps, Autofocus, Dual Stereo Mics",
       "warranty": "12 Months",
       "provider": "Logitech Latam"
-    }
+    },
+    "categoryEntities": [
+      { "id": 5 }
+    ]
   },
   {
     "nombre": "Parlante JBL",
@@ -129,7 +164,10 @@
       "specifications": "IPX7 Waterproof, 20h Playtime, PartyBoost",
       "warranty": "12 Months",
       "provider": "Harman International"
-    }
+    },
+    "categoryEntities": [
+      { "id": 3 }
+    ]
   },
   {
     "nombre": "Router TP-Link",
@@ -140,6 +178,9 @@
       "specifications": "AX3000, Gigabit Ports, 4 Antennas",
       "warranty": "24 Months",
       "provider": "TP-Link Corp"
-    }
+    },
+    "categoryEntities": [
+      { "id": 5 }
+    ]
   }
 ]

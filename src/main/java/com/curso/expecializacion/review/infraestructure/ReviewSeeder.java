@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 @Component
 @RequiredArgsConstructor
-@Order(3)
+@Order(4)
 public class ReviewSeeder implements CommandLineRunner {
 
     private final QueryReviewRepository queryReviewRepository;

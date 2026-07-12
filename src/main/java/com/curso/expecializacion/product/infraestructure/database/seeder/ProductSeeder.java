@@ -15,7 +15,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-@Order(1)
+@Order(3)
 public class ProductSeeder implements CommandLineRunner {
     private final QueryProductsRepository queryProductsRepository;
     private final ResourceLoader resourceLoader;
