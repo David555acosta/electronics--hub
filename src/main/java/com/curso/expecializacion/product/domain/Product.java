@@ -1,7 +1,9 @@
 package com.curso.expecializacion.product.domain;
 
+import com.curso.expecializacion.category.domain.Category;
 import com.curso.expecializacion.category.infraestructure.CategoryEntity;
 import com.curso.expecializacion.producDetail.domain.ProductDetail;
+import com.curso.expecializacion.review.domain.Review;
 import com.curso.expecializacion.review.infraestructure.ReviewEntity;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +20,6 @@ public class Product {
     private String imagen;
 
     private ProductDetail productDetail;
-    private List<ReviewEntity> reviews;
-    private List<CategoryEntity> category;
+    private List<Review> reviews;
+    private List<Category> category;
 }

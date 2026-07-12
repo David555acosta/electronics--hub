@@ -37,6 +37,4 @@ public class ProductEntity {
             inverseJoinColumns = @JoinColumn(name = "category_id") //  CORREGIDO
     )
     List<CategoryEntity> categoryEntities = new ArrayList<>();
-
-
 }

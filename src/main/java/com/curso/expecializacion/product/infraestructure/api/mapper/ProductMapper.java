@@ -23,6 +23,7 @@ public interface ProductMapper {
     UpdateProductCreateRequest mapToUpdateProductRequest(UpdateProductDTO updateProductDTO);
 
     @Mapping(target = "provider" , source = "productDetail.provider")
+    @Mapping(target = "categories", source = "category")
     ProductDTO mapToProductDto(Product product);
 
     default List<String> mapToCategoryName(List<Category> categories) {

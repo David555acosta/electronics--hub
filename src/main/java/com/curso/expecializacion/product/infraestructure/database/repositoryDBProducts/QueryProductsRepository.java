@@ -13,9 +13,9 @@ import java.util.Optional;
 @Repository
 public interface QueryProductsRepository extends JpaRepository<ProductEntity, Integer> , JpaSpecificationExecutor<ProductEntity> {
 
-    @EntityGraph(attributePaths = {"productDetailEntity", "reviews"})
+    @EntityGraph(attributePaths = {"productDetailEntity", "reviews" , "categoryEntities"})
     Page<ProductEntity> findAll(Specification<ProductEntity> specification , Pageable pageable);
 
-    @EntityGraph(attributePaths = {"productDetailEntity", "reviews"})
+    @EntityGraph(attributePaths = {"productDetailEntity", "reviews" , "categoryEntities"})
     Optional<ProductEntity> findById(Integer id);
 }
