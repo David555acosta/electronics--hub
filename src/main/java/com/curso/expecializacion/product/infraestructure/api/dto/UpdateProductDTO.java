@@ -3,7 +3,6 @@ package com.curso.expecializacion.product.infraestructure.api.dto;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @RequiredArgsConstructor
@@ -13,6 +12,5 @@ public class UpdateProductDTO {
     private String descripcion;
     private Double precio;
     private String provider;
-    private ReviewDTO review;
     private Integer categoryId;
 }

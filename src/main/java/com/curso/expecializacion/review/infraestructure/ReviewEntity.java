@@ -1,7 +1,4 @@
 package com.curso.expecializacion.review.infraestructure;
-
-
-import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import jakarta.persistence.*;
 import lombok.Data;

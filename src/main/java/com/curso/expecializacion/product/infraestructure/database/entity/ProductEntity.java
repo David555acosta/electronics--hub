@@ -7,7 +7,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "productos")
@@ -36,5 +38,5 @@ public class ProductEntity {
             joinColumns = @JoinColumn(name = "products_id"),       //  CORREGIDO
             inverseJoinColumns = @JoinColumn(name = "category_id") //  CORREGIDO
     )
-    List<CategoryEntity> categoryEntities = new ArrayList<>();
+    Set<CategoryEntity> categoryEntities = new HashSet<>();
 }

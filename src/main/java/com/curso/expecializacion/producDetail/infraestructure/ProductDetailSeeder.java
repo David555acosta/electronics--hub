@@ -1,8 +1,6 @@
 package com.curso.expecializacion.producDetail.infraestructure;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
-import com.curso.expecializacion.product.infraestructure.database.repositoryDBProducts.QueryProductsRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;

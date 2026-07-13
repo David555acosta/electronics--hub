@@ -2,7 +2,9 @@ package com.curso.expecializacion.product.infraestructure.api.dto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @RequiredArgsConstructor
@@ -14,5 +16,5 @@ public class ProductDTO {
     private String imagen;
     private String provider;
     private List<ReviewDTO> reviews;
-    private List<String> categories;
+    private Set<String> categories = new HashSet<>();
 }

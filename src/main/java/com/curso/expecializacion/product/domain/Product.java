@@ -1,14 +1,14 @@
 package com.curso.expecializacion.product.domain;
 
 import com.curso.expecializacion.category.domain.Category;
-import com.curso.expecializacion.category.infraestructure.CategoryEntity;
 import com.curso.expecializacion.producDetail.domain.ProductDetail;
 import com.curso.expecializacion.review.domain.Review;
-import com.curso.expecializacion.review.infraestructure.ReviewEntity;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -21,5 +21,5 @@ public class Product {
 
     private ProductDetail productDetail;
     private List<Review> reviews;
-    private List<Category> category;
+    private Set<Category> category = new HashSet<>();
 }

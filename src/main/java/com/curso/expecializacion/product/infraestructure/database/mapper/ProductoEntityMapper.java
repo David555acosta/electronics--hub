@@ -38,4 +38,5 @@ public interface ProductoEntityMapper {
 
     @Mapping(target = "products", ignore = true)
     CategoryEntity mapToCategoryEntity(Category category);
+
 }

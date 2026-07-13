@@ -2,8 +2,10 @@ package com.curso.expecializacion.category.infraestructure;
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -16,6 +18,8 @@ public class CategoryEntity {
 
 
     @ManyToMany(mappedBy = "categoryEntities")
-    List<ProductEntity> products;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    Set<ProductEntity> products = new HashSet<>();
 
 }

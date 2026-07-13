@@ -5,7 +5,7 @@ import com.curso.expecializacion.product.application.query.getAll.AllGetProductR
 import com.curso.expecializacion.product.common.mediator.Mediator;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
-import com.curso.expecializacion.product.infraestructure.api.mapper.ProductMapper;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

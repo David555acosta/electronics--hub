@@ -6,7 +6,6 @@ import com.curso.expecializacion.category.infraestructure.CategoryEntityMapper;
 import com.curso.expecializacion.category.infraestructure.CategoryRepository;
 import com.curso.expecializacion.producDetail.domain.ProductDetail;
 import com.curso.expecializacion.product.common.mediator.RequestHandler;
-import com.curso.expecializacion.product.common.util.FileUtilService;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +32,6 @@ public class UpdateProductCreateHandler implements RequestHandler<UpdateProductC
         ProductDetail productDetail = product.getProductDetail();
         productDetail.setProvider(request.getProvider());
 
-        product.getReviews().add(request.getReview());
-
 
         Category category = categoryRepository.findById(request.getCategoryId()).
                 map(categoryEntityMapper::mapToCategory).orElseThrow(() ->
@@ -42,7 +39,7 @@ public class UpdateProductCreateHandler implements RequestHandler<UpdateProductC
 
         product.getCategory().add(category);
 
-        repository.save(null);
+        repository.save(product);
         log.info("producto , PRODUCT UPDATE HANDLER , Codigo:{}", request.getCodigo());
         return null;
     }

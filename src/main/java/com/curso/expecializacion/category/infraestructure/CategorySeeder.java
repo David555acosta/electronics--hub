@@ -1,8 +1,4 @@
 package com.curso.expecializacion.category.infraestructure;
-
-
-import com.curso.expecializacion.producDetail.infraestructure.ProductDetailEntity;
-import com.curso.expecializacion.producDetail.infraestructure.ProductDetailRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

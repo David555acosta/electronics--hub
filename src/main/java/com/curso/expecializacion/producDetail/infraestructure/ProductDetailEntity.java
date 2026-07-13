@@ -1,9 +1,10 @@
 package com.curso.expecializacion.producDetail.infraestructure;
 
-import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -17,5 +18,7 @@ public class ProductDetailEntity {
     private String provider;
 
     @OneToOne(mappedBy = "productDetailEntity")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private ProductEntity product;
 }
