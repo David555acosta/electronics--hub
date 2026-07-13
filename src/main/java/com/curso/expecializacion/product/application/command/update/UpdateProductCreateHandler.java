@@ -29,17 +29,7 @@ public class UpdateProductCreateHandler implements RequestHandler<UpdateProductC
         Product product = repository.findById(request.getCodigo())
                 .orElseThrow(() -> new RuntimeException("No se encontró el producto."));
 
-        ProductDetail productDetail = product.getProductDetail();
-        productDetail.setProvider(request.getProvider());
-
-
-        Category category = categoryRepository.findById(request.getCategoryId()).
-                map(categoryEntityMapper::mapToCategory).orElseThrow(() ->
-                            new RuntimeException("Categoria no encontrada"));
-
-        product.getCategory().add(category);
-
-        repository.save(product);
+        repository.update(product , request) ;
         log.info("producto , PRODUCT UPDATE HANDLER , Codigo:{}", request.getCodigo());
         return null;
     }

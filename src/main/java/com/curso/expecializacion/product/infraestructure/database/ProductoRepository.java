@@ -1,4 +1,9 @@
 package com.curso.expecializacion.product.infraestructure.database;
+import com.curso.expecializacion.category.domain.Category;
+import com.curso.expecializacion.category.infraestructure.CategoryEntityMapper;
+import com.curso.expecializacion.category.infraestructure.CategoryRepository;
+import com.curso.expecializacion.producDetail.domain.ProductDetail;
+import com.curso.expecializacion.product.application.command.update.UpdateProductCreateRequest;
 import com.curso.expecializacion.product.common.domain.PaginationQuery;
 import com.curso.expecializacion.product.common.domain.PaginationResult;
 import com.curso.expecializacion.product.domain.Product;
@@ -26,8 +31,11 @@ public class ProductoRepository implements product_repository {
 
 
     private final ProductoEntityMapper productoEntityMapper;
+    private final CategoryEntityMapper categoryEntityMapper;
 
     private final QueryProductsRepository repository;
+    private final CategoryRepository categoryRepository;
+
 
 
     @Override
@@ -76,8 +84,25 @@ public class ProductoRepository implements product_repository {
     }
 
     @Override
-    public Product update(Product product) {
-        return product;
+    public void update(Product product , UpdateProductCreateRequest request) {
+        ProductDetail productDetail = product.getProductDetail();
+        productDetail.setProvider(request.getProvider());
+
+
+
+        Category category = categoryRepository.findById(request.getCategoryId()).
+                map(categoryEntityMapper::mapToCategory).orElseThrow(() ->
+                        new RuntimeException("Categoria no encontrada"));
+
+
+        product.getCategory().add(category);
+
+        Product actualizado = Product.builder()
+                .nombre(request.getNombre())
+                .descripcion(request.getDescripcion())
+                .precio(request.getPrecio()).build();
+
+        repository.save(productoEntityMapper.mapToProductEntity(actualizado));
     }
 
     @Override
