@@ -21,6 +21,7 @@ public interface ProductoEntityMapper {
 
     @Mapping(target = "productDetail", source = "productDetailEntity")
     @Mapping(target = "productDetail.product", ignore = true)
+    @Mapping(target = "reviews", ignore = true)
     @Mapping(target = "category", source = "categoryEntities")
     Product mapToProduct(ProductEntity productEntity);
 
