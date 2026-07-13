@@ -12,5 +12,7 @@ public class UpdateProductDTO {
     private String nombre;
     private String descripcion;
     private Double precio;
-    private MultipartFile file;
+    private String provider;
+    private ReviewDTO review;
+    private Integer categoryId;
 }

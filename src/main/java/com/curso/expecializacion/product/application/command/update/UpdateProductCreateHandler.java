@@ -1,6 +1,10 @@
 package com.curso.expecializacion.product.application.command.update;
 
 
+import com.curso.expecializacion.category.domain.Category;
+import com.curso.expecializacion.category.infraestructure.CategoryEntityMapper;
+import com.curso.expecializacion.category.infraestructure.CategoryRepository;
+import com.curso.expecializacion.producDetail.domain.ProductDetail;
 import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.product.common.util.FileUtilService;
 import com.curso.expecializacion.product.domain.Product;
@@ -15,19 +19,30 @@ import org.springframework.stereotype.Service;
 public class UpdateProductCreateHandler implements RequestHandler<UpdateProductCreateRequest, Void> {
 
     private final product_repository repository;
-    private final FileUtilService fileUtilService;
+    private final CategoryRepository categoryRepository;
+    private final CategoryEntityMapper categoryEntityMapper;
+
 
     @Override
     public Void handle(UpdateProductCreateRequest request) {
         log.info("Actualizando producto , PRODUCT UPDATE HANDLER , Codigo:{}", request.getCodigo());
-        String uniqueFileName = fileUtilService.SaveProduct(request.getFile());
-        Product product = Product.builder()
-                .codigo(request.getCodigo())
-                .nombre(request.getNombre())
-                .descripcion(request.getDescripcion())
-                .precio(request.getPrecio())
-                .imagen(uniqueFileName).build();
-        repository.save(product);
+
+        Product product = repository.findById(request.getCodigo())
+                .orElseThrow(() -> new RuntimeException("No se encontró el producto."));
+
+        ProductDetail productDetail = product.getProductDetail();
+        productDetail.setProvider(request.getProvider());
+
+        product.getReviews().add(request.getReview());
+
+
+        Category category = categoryRepository.findById(request.getCategoryId()).
+                map(categoryEntityMapper::mapToCategory).orElseThrow(() ->
+                            new RuntimeException("Categoria no encontrada"));
+
+        product.getCategory().add(category);
+
+        repository.save(null);
         log.info("producto , PRODUCT UPDATE HANDLER , Codigo:{}", request.getCodigo());
         return null;
     }

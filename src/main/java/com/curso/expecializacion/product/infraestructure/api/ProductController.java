@@ -52,7 +52,7 @@ public class ProductController implements product_api {
     @Override
     @Operation(summary = "Actualizar producto", description = "Actualizar producto")
     @PutMapping("")
-    public ResponseEntity<Void> update(@ModelAttribute @Valid UpdateProductDTO productDTO) {
+    public ResponseEntity<Void> update(@RequestBody @Valid UpdateProductDTO productDTO) {
         log.info("Capa Controller , actualizando producto");
         UpdateProductCreateRequest request = productMapper.mapToUpdateProductRequest(productDTO);
         mediator.dispacth(request);
