@@ -23,12 +23,13 @@ public class ProductEntity {
     private Double precio;
     private String imagen;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL , orphanRemoval = true)
     @JoinColumn(name = "product_details_id")
+    @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.CASCADE)
     private ProductDetailEntity productDetailEntity;
 
 
-    @OneToMany(mappedBy = "productEntity")
+    @OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewEntity> reviews = new ArrayList<>();
 
 

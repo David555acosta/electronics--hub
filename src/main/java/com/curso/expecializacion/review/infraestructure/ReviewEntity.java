@@ -16,5 +16,6 @@ public class ReviewEntity {
 
     @ManyToOne
     @JoinColumn(name = "productos_codigo")
+    @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.CASCADE)
     private ProductEntity productEntity;
 }
