@@ -13,21 +13,26 @@ import org.mapstruct.*;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface ProductoEntityMapper {
+    // === DOMAIN -> ENTITY ===
     @Mapping(target = "productDetailEntity", source = "productDetail")
     @Mapping(target = "productDetailEntity.product", ignore = true)
     @Mapping(target = "categoryEntities", source = "category")
+    // CORRECCIÓN 1: Mapeamos explícitamente reviews
+    @Mapping(target = "reviews", source = "reviews")
     ProductEntity mapToProductEntity(Product product);
 
 
+    // === ENTITY -> DOMAIN ===
     @Mapping(target = "productDetail", source = "productDetailEntity")
     @Mapping(target = "productDetail.product", ignore = true)
-    @Mapping(target = "reviews", ignore = true)
+    // CORRECCIÓN 2: Eliminamos el 'ignore = true' de las reviews para que se mapeen correctamente de vuelta
+    @Mapping(target = "reviews", source = "reviews")
     @Mapping(target = "category", source = "categoryEntities")
     Product mapToProduct(ProductEntity productEntity);
 
 
     @Mapping(target = "product", ignore = true)
-    Review mapToReviewDTO(ReviewEntity reviewEntity);
+    Review mapToReview(ReviewEntity reviewEntity);
 
     @Mapping(target = "productEntity", ignore = true)
     ReviewEntity mapToReviewEntity(Review review);
@@ -38,5 +43,12 @@ public interface ProductoEntityMapper {
 
     @Mapping(target = "products", ignore = true)
     CategoryEntity mapToCategoryEntity(Category category);
+
+    @AfterMapping
+    default void linkReviews(@MappingTarget ProductEntity productEntity) {
+        if (productEntity.getReviews() != null) {
+            productEntity.getReviews().forEach(r -> r.setProductEntity(productEntity));
+        }
+    }
 
 }

@@ -5,6 +5,8 @@ import com.curso.expecializacion.producDetail.infraestructure.ProductDetailEntit
 import com.curso.expecializacion.review.infraestructure.ReviewEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,7 +15,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "productos")
-@Data
+@Getter
+@Setter
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +39,8 @@ public class ProductEntity {
     @ManyToMany
     @JoinTable(
             name = "productos_categorias",
-            joinColumns = @JoinColumn(name = "products_id"),       //  CORREGIDO
-            inverseJoinColumns = @JoinColumn(name = "category_id") //  CORREGIDO
+            joinColumns = @JoinColumn(name = "products_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     Set<CategoryEntity> categoryEntities = new HashSet<>();
 }

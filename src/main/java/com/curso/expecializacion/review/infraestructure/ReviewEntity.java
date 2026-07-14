@@ -1,9 +1,11 @@
 package com.curso.expecializacion.review.infraestructure;
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "reviews")
 public class ReviewEntity {
