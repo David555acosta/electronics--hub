@@ -1,9 +1,4 @@
 package com.curso.expecializacion.product.infraestructure.database;
-import com.curso.expecializacion.category.domain.Category;
-import com.curso.expecializacion.category.infraestructure.CategoryEntityMapper;
-import com.curso.expecializacion.category.infraestructure.CategoryRepository;
-import com.curso.expecializacion.producDetail.domain.ProductDetail;
-import com.curso.expecializacion.product.application.command.update.UpdateProductCreateRequest;
 import com.curso.expecializacion.product.common.domain.PaginationQuery;
 import com.curso.expecializacion.product.common.domain.PaginationResult;
 import com.curso.expecializacion.product.domain.Product;

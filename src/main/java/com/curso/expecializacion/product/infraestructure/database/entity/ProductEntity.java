@@ -4,19 +4,20 @@ import com.curso.expecializacion.category.infraestructure.CategoryEntity;
 import com.curso.expecializacion.producDetail.infraestructure.ProductDetailEntity;
 import com.curso.expecializacion.review.infraestructure.ReviewEntity;
 import jakarta.persistence.*;
-import lombok.Data;
+
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "productos")
 @Getter
 @Setter
+@Transactional(rollbackOn =  Exception.class)
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
