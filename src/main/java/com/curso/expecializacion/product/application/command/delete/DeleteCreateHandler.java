@@ -3,6 +3,7 @@ package com.curso.expecializacion.product.application.command.delete;
 
 import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.product.domain.product_repository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public class DeleteCreateHandler implements RequestHandler<DeleteProductRequest,
     private final product_repository repository;
 
     @Override
+    @Transactional
     public Void handle(DeleteProductRequest request) {
         log.info("Eliminando producto , PRODUCT DELETE HANDLER , Codigo:{}", request.getCodigo());
         try {

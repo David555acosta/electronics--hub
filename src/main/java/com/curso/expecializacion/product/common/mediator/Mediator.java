@@ -1,5 +1,6 @@
 package com.curso.expecializacion.product.common.mediator;
 
+import jakarta.transaction.Transactional;
 import lombok.Data;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 public class Mediator {
 
     Map<? extends Class<?>, RequestHandler<?, ?>> requestHandlerMap;
+
 
     public Mediator(List<RequestHandler<?, ?>> requestHandlers) {
         requestHandlerMap = requestHandlers.stream().collect(Collectors.toMap(RequestHandler::getRequesType, Function.identity()));

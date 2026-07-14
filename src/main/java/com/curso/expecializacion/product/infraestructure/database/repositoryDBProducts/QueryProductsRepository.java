@@ -17,7 +17,8 @@ public interface QueryProductsRepository extends JpaRepository<ProductEntity, In
     Page<ProductEntity> findAll(Specification<ProductEntity> specification , Pageable pageable);
 
     @EntityGraph(attributePaths = {"productDetailEntity", "reviews" , "categoryEntities"})
-    Optional<ProductEntity> findById(Integer id);
+    Optional<ProductEntity> findById(Integer codigo);
 
-    Optional<ProductEntity> deleteByProductId(Integer id);
+
+
 }
