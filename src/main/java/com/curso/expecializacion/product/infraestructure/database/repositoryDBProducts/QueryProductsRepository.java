@@ -18,4 +18,6 @@ public interface QueryProductsRepository extends JpaRepository<ProductEntity, In
 
     @EntityGraph(attributePaths = {"productDetailEntity", "reviews" , "categoryEntities"})
     Optional<ProductEntity> findById(Integer id);
+
+    Optional<ProductEntity> deleteByProductId(Integer id);
 }

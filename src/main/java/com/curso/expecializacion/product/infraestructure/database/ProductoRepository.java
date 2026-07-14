@@ -82,7 +82,7 @@ public class ProductoRepository implements product_repository {
     }
 
     @Override
-    public void delete(Integer id) {
-        repository.deleteById(id);
+    public Optional<Product> delete(Integer id) {
+        return repository.deleteByProductId(id).map(productoEntityMapper::mapToProduct);
     }
 }

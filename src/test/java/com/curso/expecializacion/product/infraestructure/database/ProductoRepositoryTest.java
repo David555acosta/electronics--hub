@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -25,9 +26,13 @@ class ProductoRepositoryTest {
     @InjectMocks
     private ProductoRepository productoRepository;
 
+
+    //GUARDAR EXITOSAMENTE
     @Test
     void save() {
     }
+
+    //ByID
 
     @Test
     void notFoundById() {
@@ -46,15 +51,28 @@ class ProductoRepositoryTest {
     }
 
 
+    //TRAER TODOS
+
     @Test
     void findAll() {
     }
 
+
+    //Actualizar
     @Test
     void update() {
     }
 
+
+    //Eliminar
     @Test
     void delete() {
+        when(repository.findById(1)).thenReturn(Optional.of(new ProductEntity()));
+        when(productoEntityMapper.mapToProduct(any(ProductEntity.class))).
+                thenReturn(Product.builder().codigo(1).build());
+
+        Optional<Product> productEntityOptional = productoRepository.findById(1);
+        assertTrue(productEntityOptional.isPresent());
+
     }
 }
