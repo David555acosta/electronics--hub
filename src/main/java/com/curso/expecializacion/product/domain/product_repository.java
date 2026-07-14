@@ -1,6 +1,5 @@
 package com.curso.expecializacion.product.domain;
 
-import com.curso.expecializacion.product.application.command.update.UpdateProductCreateRequest;
 import com.curso.expecializacion.product.common.domain.PaginationQuery;
 import com.curso.expecializacion.product.common.domain.PaginationResult;
 
@@ -14,7 +13,7 @@ public interface product_repository {
 
     PaginationResult<Product> findAll(PaginationQuery paginationQuery, ProductFilter productFilter);
 
-    void update(Product product , UpdateProductCreateRequest request);
+    Product update(Product product);
 
     void delete(Integer id);
 }

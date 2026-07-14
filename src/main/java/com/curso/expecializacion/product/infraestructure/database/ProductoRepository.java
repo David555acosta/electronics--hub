@@ -31,10 +31,7 @@ public class ProductoRepository implements product_repository {
 
 
     private final ProductoEntityMapper productoEntityMapper;
-    private final CategoryEntityMapper categoryEntityMapper;
-
     private final QueryProductsRepository repository;
-    private final CategoryRepository categoryRepository;
 
 
 
@@ -84,25 +81,9 @@ public class ProductoRepository implements product_repository {
     }
 
     @Override
-    public void update(Product product , UpdateProductCreateRequest request) {
-        ProductDetail productDetail = product.getProductDetail();
-        productDetail.setProvider(request.getProvider());
-
-
-
-        Category category = categoryRepository.findById(request.getCategoryId()).
-                map(categoryEntityMapper::mapToCategory).orElseThrow(() ->
-                        new RuntimeException("Categoria no encontrada"));
-
-
-        product.getCategory().add(category);
-
-        Product actualizado = Product.builder()
-                .nombre(request.getNombre())
-                .descripcion(request.getDescripcion())
-                .precio(request.getPrecio()).build();
-
-        repository.save(productoEntityMapper.mapToProductEntity(actualizado));
+    public Product update(Product product) {
+        ProductEntity actualizado = repository.save(productoEntityMapper.mapToProductEntity(product));
+        return productoEntityMapper.mapToProduct(actualizado);
     }
 
     @Override
