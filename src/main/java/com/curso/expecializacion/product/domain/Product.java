@@ -5,9 +5,6 @@ import com.curso.expecializacion.producDetail.domain.ProductDetail;
 import com.curso.expecializacion.review.domain.Review;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -20,6 +17,7 @@ public class Product {
     private String imagen;
 
     private ProductDetail productDetail;
-    private List<Review> reviews;
-    private Set<Category> category = new HashSet<>();
+
+    private Set<Review> reviews;
+    private Set<Category> category;
 }

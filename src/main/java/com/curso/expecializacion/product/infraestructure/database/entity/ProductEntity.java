@@ -30,7 +30,7 @@ public class ProductEntity {
 
 
     @OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReviewEntity> reviews = new ArrayList<>();
+    private Set<ReviewEntity> reviews = new HashSet<>();
 
 
     @ManyToMany
