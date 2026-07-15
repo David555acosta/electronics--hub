@@ -1,4 +1,7 @@
 spring:
+  sql:
+    init:
+      mode: never
   servlet:
     multipart:
       max-request-size: 10MB
