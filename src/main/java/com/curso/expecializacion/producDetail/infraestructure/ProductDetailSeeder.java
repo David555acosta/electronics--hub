@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -15,6 +16,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Order(2)
+@Profile("!test")
 public class ProductDetailSeeder implements CommandLineRunner {
     private final ProductDetailRepository productDetailRepository;
     private final ResourceLoader resourceLoader;

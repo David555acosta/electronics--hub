@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -12,7 +13,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 @Component
 @RequiredArgsConstructor
-@Order(4)
+@Order(1)
+@Profile("!test")
 public class ReviewSeeder implements CommandLineRunner {
 
     private final QueryReviewRepository queryReviewRepository;

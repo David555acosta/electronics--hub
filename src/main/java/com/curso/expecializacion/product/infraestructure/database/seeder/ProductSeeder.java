@@ -6,6 +6,7 @@ import com.curso.expecializacion.product.infraestructure.database.repositoryDBPr
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -16,6 +17,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Order(3)
+@Profile("!test")
 public class ProductSeeder implements CommandLineRunner {
     private final QueryProductsRepository queryProductsRepository;
     private final ResourceLoader resourceLoader;

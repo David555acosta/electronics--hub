@@ -1,14 +1,9 @@
 package com.curso.expecializacion.TI;
-
-import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.database.ProductoRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +11,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 
@@ -38,19 +34,8 @@ public class TestITPruebaByID {
     @Autowired
     private ProductoRepository productoRepository;
 
-    @BeforeEach
-    public void setUp() {
-        log.info("Iniciando TestITPruebaByID");
-        productoRepository.save(Product.builder().codigo(1).nombre("Martillo").descripcion("con wifi").precio(150.00).build());
-    }
-
-
-    @AfterEach
-    public void tearDown() {
-        log.info("Finalizando TestITPruebaByID");
-        productoRepository.delete(1);
-    }
-
+    @Sql(value = "/TI/finByID/data.sql" , executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = "/TI/clean.sql" , executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     void existGetProductByID() {
         log.info("Iniciando Test ITPruebaByID");
@@ -58,13 +43,15 @@ public class TestITPruebaByID {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertNotNull(response.getBody());
         assertEquals(1, response.getBody().getCodigo());
-        assertEquals("Martillo", response.getBody().getNombre());
-        assertEquals("con wifi", response.getBody().getDescripcion());
+        assertEquals("pc facha", response.getBody().getNombre());
+        assertEquals("facherisima", response.getBody().getDescripcion());
+        assertEquals(100.00, response.getBody().getPrecio());
         log.info("Finalizando Test ITPruebaByID");
     }
 
 
     @Test
+    @Sql(value = "/TI/clean.sql" , executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void saveProduct() throws Exception {
         MockMultipartFile file = new MockMultipartFile(
                 "file",
