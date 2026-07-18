@@ -16,7 +16,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-@Order(3)
+@Order(2)
 @Profile("!test")
 public class ProductSeeder implements CommandLineRunner {
     private final QueryProductsRepository queryProductsRepository;

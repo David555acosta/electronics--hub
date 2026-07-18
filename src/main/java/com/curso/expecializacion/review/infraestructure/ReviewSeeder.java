@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 @Component
 @RequiredArgsConstructor
-@Order(1)
+@Order(4)
 @Profile("!test")
 public class ReviewSeeder implements CommandLineRunner {
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-@Order(2)
+@Order(4)
 @Profile("!test")
 public class ProductDetailSeeder implements CommandLineRunner {
     private final ProductDetailRepository productDetailRepository;
