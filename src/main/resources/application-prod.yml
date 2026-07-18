@@ -52,6 +52,3 @@ management:
     distribution:
       percentiles-histogram:
         http.server.requests: true
-
-server:
-  port: 9526
