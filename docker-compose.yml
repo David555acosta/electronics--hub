@@ -1,21 +1,21 @@
 
 services:
-  #spring-boot:
-    #build: ./
-    #mem_reservation: 512M
-    #ports:
-      #- "9526:9526"
-    #depends_on:
-     # postgres:
-      #  condition: service_healthy
-    #healthcheck:
-     # test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
-     # interval: 30s
-     # timeout: 10s
-     # retries: 5
-    #environment:
-     # PROFILE: prod
-
+  spring-boot:
+    build: ./
+    mem_reservation: 512M
+    ports:
+      - "9526:9526"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9526/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      PROFILE: prod
+      DB_HOST: postgres
 
   postgres:
     image: pgvector/pgvector:pg17
