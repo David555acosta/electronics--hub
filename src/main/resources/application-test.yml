@@ -56,4 +56,4 @@ management:
             requests: true
 
 server:
-  port: 9530
+  port: 9532
