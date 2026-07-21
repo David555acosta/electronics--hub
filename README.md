@@ -10,70 +10,142 @@ Este proyecto es un microservicio modular desarrollado en **Java 21** y **Spring
 electronics--hub [expecializacion]
 ├── .idea/
 ├── .mvn/
-├── docker-config/
+.
+├── docker-config/                  # Configuraciones externas de Docker (ej. scripts de BD)
 ├── src/
-│   └── main/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/curso/especializacion/
+│   │   │       ├── category/               # Módulo de Categorías
+│   │   │       │   ├── application/
+│   │   │       │   ├── domain/
+│   │   │       │   │   └── Category.java
+│   │   │       │   └── infraestructure/
+│   │   │       │       ├── CategoryEntity.java
+│   │   │       │       ├── CategoryEntityMapper.java
+│   │   │       │       ├── CategoryRepository.java
+│   │   │       │       └── CategorySeeder.java
+│   │   │       ├── producDetail/           # Módulo de Detalle de Productos
+│   │   │       │   ├── domain/
+│   │   │       │   │   └── ProductDetail.java
+│   │   │       │   └── infraestructure/
+│   │   │       │       ├── ProductDetailEntity.java
+│   │   │       │       ├── ProductDetailRepository.java
+│   │   │       │       └── ProductDetailSeeder.java
+│   │   │       ├── product/                # Módulo Principal de Productos (CQRS + Mediator)
+│   │   │       │   ├── application/
+│   │   │       │   │   ├── command/
+│   │   │       │   │   │   ├── config/
+│   │   │       │   │   │   │   ├── AplicationConfig.java
+│   │   │       │   │   │   │   └── OpenApiConfig.java
+│   │   │       │   │   │   ├── create/
+│   │   │       │   │   │   │   ├── ProductCreateHandler.java
+│   │   │       │   │   │   │   ├── ProductCreateRequest.java
+│   │   │       │   │   │   │   └── ProductCreateResponse.java
+│   │   │       │   │   │   ├── delete/
+│   │   │       │   │   │   │   ├── DeleteCreateHandler.java
+│   │   │       │   │   │   │   └── DeleteProductRequest.java
+│   │   │       │   │   │   └── update/
+│   │   │       │   │   │       ├── UpdateProductCreateHandler.java
+│   │   │       │   │   │       └── UpdateProductCreateRequest.java
+│   │   │       │   │   └── query/
+│   │   │       │   │       ├── getAll/
+│   │   │       │   │       │   ├── AllGetProductHandler.java
+│   │   │       │   │       │   ├── AllGetProductRequest.java
+│   │   │       │   │       │   └── AllGetProductResponse.java
+│   │   │       │   │       └── getById/
+│   │   │       │   │           ├── GetProductByIdHandler.java
+│   │   │       │   │           ├── GetProductByIdRequest.java
+│   │   │       │   │           └── GetProductByIdResponse.java
+│   │   │       │   ├── common/
+│   │   │       │   │   ├── domain/
+│   │   │       │   │   │   ├── PaginationQuery.java
+│   │   │       │   │   │   └── PaginationResult.java
+│   │   │       │   │   ├── exceptions/
+│   │   │       │   │   │   ├── ApiExceptionHandler.java
+│   │   │       │   │   │   └── ErrorMesage.java
+│   │   │       │   │   ├── mediator/
+│   │   │       │   │   │   ├── Mediator.java
+│   │   │       │   │   │   ├── Request.java
+│   │   │       │   │   │   └── RequestHandler.java
+│   │   │       │   │   └── util/
+│   │   │       │   │       └── FileUtilService.java
+│   │   │       │   ├── domain/
+│   │   │       │   │   ├── Product.java
+│   │   │       │   │   ├── product_repository.java
+│   │   │       │   │   ├── ProductFilter.java
+│   │   │       │   │   └── ProductNotFoundException.java
+│   │   │       │   └── infraestructure/
+│   │   │       │       ├── api/
+│   │   │       │       │   ├── dto/
+│   │   │       │       │   │   ├── CreateProductDTO.java
+│   │   │       │       │   │   ├── ProductDTO.java
+│   │   │       │       │   │   ├── ReviewDTO.java
+│   │   │       │       │   │   └── UpdateProductDTO.java
+│   │   │       │       │   ├── mapper/
+│   │   │       │       │   │   ├── ProductMapper.java
+│   │   │       │       │   │   └── product_api.java
+│   │   │       │       │   └── ProductController.java
+│   │   │       │       └── database/
+│   │   │       │           ├── entity/
+│   │   │       │           │   ├── ProductEntity.java
+│   │   │       │           │   ├── ProductEntityRepository.java
+│   │   │       │           │   └── ProductsSpecificationEntity.java
+│   │   │       │           ├── mapper/
+│   │   │       │           │   └── ProductoEntityMapper.java
+│   │   │       │           ├── repositoryDBProducts/
+│   │   │       │           │   └── QueryProductsRepository.java
+│   │   │       │           ├── seeder/
+│   │   │       │           │   └── ProductSeeder.java
+│   │   │       │           └── ProductoRepository.java
+│   │   │       ├── review/                 # Módulo de Reseñas / Reviews
+│   │   │       │   ├── application/
+│   │   │       │   ├── domain/
+│   │   │       │   │   └── Review.java
+│   │   │       │   └── infraestructure/
+│   │   │       │       ├── QueryReviewRepository.java
+│   │   │       │       ├── ReviewEntity.java
+│   │   │       │       └── ReviewSeeder.java
+│   │   │       └── EspecializacionApplication.java  # Clase principal
+│   │   │
+│   │   └── resources/
+│   │       ├── META-INF/
+│   │       ├── products/
+│   │       ├── application.yml             # Configuración base
+│   │       ├── application-dev.yml         # Perfil desarrollo
+│   │       ├── application-prod.yml        # Perfil producción
+│   │       ├── application-test.yml        # Perfil pruebas
+│   │       ├── category.json               # Seeders JSON
+│   │       ├── data.sql
+│   │       ├── products.json
+│   │       ├── products_details.json
+│   │       └── review.json
+│   │
+│   └── test/
 │       ├── java/
-│       │   └── com/curso/expecializacion/
-│       │       ├── producDetail/
-│       │       │   ├── domain/
-│       │       │   │   └── ProductDetail.java
-│       │       │   └── infraestructure/
-│       │       │       └── ProductDetailEntity.java
-│       │       └── product/
-│       │           ├── application/
-│       │           │   └── command/
-│       │           │       ├── config/
-│       │           │       │   ├── ApplicationConfig.java
-│       │           │       │   └── OpenApiConfig.java
-│       │           │       ├── create/
-│       │           │       │   ├── ProductCreateHandler.java
-│       │           │       │   ├── ProductCreateRequest.java
-│       │           │       │   └── ProductCreateResponse.java
-│       │           │       ├── delete/
-│       │           │       │   ├── DeleteCreateHandler.java
-│       │           │       │   └── DeleteProductRequest.java
-│       │           │       └── update/
-│       │           │           ├── UpdateProductCreateHandler.java
-│       │           │           └── UpdateProductCreateRequest.java
-│       │           ├── domain/
-│       │           │   ├── Product.java
-│       │           │   ├── ProductFilter.java
-│       │           │   └── product_repository.java
-│       │           └── infraestructure/
-│       │               ├── api/
-│       │               │   ├── dto/
-│       │               │   │   ├── CreateProductDTO.java
-│       │               │   │   ├── ProductDTO.java
-│       │               │   │   └── UpdateProductDTO.java
-│       │               │   ├── mapper/
-│       │               │   │   └── ProductMapper.java
-│       │               │   ├── product_api.java
-│       │               │   └── ProductController.java
-│       │               └── database/
-│       │                   ├── entity/
-│       │                   │   ├── ProductEntity.java
-│       │                   │   ├── ProductEntityRepository.java
-│       │                   │   └── ProductSpecificationEntity.java
-│       │                   ├── mapper/
-│       │                   │   └── ProductoEntityMapper.java
-│       │                   ├── repositoryDBProducts/
-│       │                   │   └── QueryProductsRepository.java
-│       │                   ├── seeder/
-│       │                   │   └── ProductSeeder.java
-│       │                   └── ProductoRepository.java
+│       │   └── com/curso/especializacion/
+│       │       ├── product.infraestructure.database/
+│       │       │   ├── ProductoRepositoryJPATest.java
+│       │       │   └── ProductoRepositoryTest.java
+│       │       └── TI/                     # Tests de Integración
+│       │           ├── ApiHelper.java
+│       │           └── TestITPruebaByID.java
+│       │
 │       └── resources/
-│           ├── products.json
-│           └── application.yml
+│           └── TI/
+│               └── finByID/
+│                   ├── data.sql
+│                   └── clean.sql
+│
 ├── .dockerignore
 ├── .gitattributes
 ├── .gitignore
-├── docker-compose.yml
-├── Dockerfile
-├── expecializacion.iml
+├── Dockerfile                              # Imagen Docker multi-stage
+├── docker-compose.yml                      # Orquestación de Spring + Postgres
+├── especializacion.iml
 ├── mvnw
-├── mvenw.cmd
-├── pom.xml
+├── mvnw.cmd
+├── pom.xml                                 # Dependencias Maven
 └── README.md
 
 # Stack Tecnológico y Versiones Relacionadas
