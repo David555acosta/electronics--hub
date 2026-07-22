@@ -112,4 +112,10 @@ public class ProductController implements product_api {
         log.info("Capa Controller , TODOS , CANTIDAD: {}", productsPage.getSize());
         return ResponseEntity.ok(productDTOPaginationResult);
     }
+
+    @GetMapping("/login")
+    public ResponseEntity<String> login() {
+        return ResponseEntity.ok("login");
+    }
+
 }
