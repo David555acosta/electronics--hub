@@ -1,8 +1,9 @@
-package com.curso.expecializacion.config;
+package com.curso.expecializacion.product.application.command.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,7 +21,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 @EnableWebSecurity
 public class SecuriryConfig {
-   /* @Bean
+    /*@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
@@ -38,20 +39,31 @@ public class SecuriryConfig {
                                 .sessionRegistry(sessionRegistry()) //rastro de los datos de sesion
                 )
                 .build();
-    }
-   * */
+    }*/
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
+                // 2. OBLIGATORIO en APIs REST: Desactivar CSRF para permitir peticiones POST
+                .csrf(csrf -> csrf.disable())
+
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/swagger-ui/index.html", "/swagger-ui/**", "/v3/api-docs/**")
-                        .permitAll()
+                        // Documentación pública
+                        .requestMatchers("/swagger-ui/index.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+
+                        // 3. OBLIGATORIO: Permitir la creación de usuarios de forma pública
+                        .requestMatchers(HttpMethod.POST, "/user/create").permitAll()
+                        .requestMatchers("/user/hello").permitAll()
+
+                        // Rutas protegidas que exigen estar autenticado
+                        .requestMatchers("/user/helloSecured").authenticated()
+
+                        // Todo lo demás exige autenticación
                         .anyRequest().authenticated()
                 )
-                .formLogin(form ->
-                        form.successHandler(authenticationSuccessHandler()).permitAll())
-                .httpBasic(Customizer.withDefaults()).build();
+                // Usamos HTTP Basic Authentication para enviar usuario/password en el Header
+                .httpBasic(Customizer.withDefaults())
+                .build();
     }
 
 

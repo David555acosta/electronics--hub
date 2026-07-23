@@ -1,4 +1,4 @@
-package com.curso.expecializacion.config;
+package com.curso.expecializacion.product.application.command.config;
 
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;

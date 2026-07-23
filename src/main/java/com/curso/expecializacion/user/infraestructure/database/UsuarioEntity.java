@@ -39,6 +39,6 @@ public class UsuarioEntity {
 
     @ManyToMany(fetch = FetchType.EAGER , targetEntity = RolEntity.class ,cascade = CascadeType.PERSIST)
     @JoinTable(name = "user_roles" ,
-            joinColumns = @JoinColumn(name = "user_id") , inverseJoinColumns = @JoinColumn(name = "role_id"))
+            joinColumns = @JoinColumn(name = "usuario_id") , inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<RolEntity> rols;
 }

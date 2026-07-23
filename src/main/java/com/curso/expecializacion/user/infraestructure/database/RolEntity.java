@@ -18,7 +18,6 @@ public class RolEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
     @Enumerated(EnumType.STRING)
     private Erol rol;
 }

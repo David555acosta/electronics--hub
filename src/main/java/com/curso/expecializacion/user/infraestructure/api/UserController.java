@@ -8,15 +8,14 @@ import com.curso.expecializacion.user.infraestructure.database.UsuarioEntity;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@RequestMapping("/user")
 @RestController
 public class UserController {
 
@@ -34,7 +33,7 @@ public class UserController {
         return "hello con seguridad";
     }
 
-    @PostMapping("")
+    @PostMapping("/create")
     public ResponseEntity<UsuarioEntity> createUser(@Valid @RequestBody CreateUserDTO createUserDTO){
 
         Set<RolEntity> roles = createUserDTO.getRole().stream()
@@ -50,6 +49,15 @@ public class UserController {
                .rols(roles)
                .build();
 
+       UsuarioEntity savedUserEntity = usuarioRepository.save(usuarioEntity);
+
        return ResponseEntity.ok(usuarioEntity);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UsuarioEntity> deleteUser(@PathVariable Integer id){
+         usuarioRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
