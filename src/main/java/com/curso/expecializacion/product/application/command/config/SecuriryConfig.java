@@ -6,6 +6,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,14 +30,27 @@ public class SecuriryConfig {
                 )
                 .formLogin(form ->
                         form.successHandler(authenticationSuccessHandler()).permitAll())
+                .sessionManagement(sessionManagement ->
+                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                                .sessionFixation().migrateSession().invalidSessionUrl("/login")
+                                .maximumSessions(1) //maximas sesiones
+                                .expiredUrl("/login") //donde va ser redirigido el usuario si expira la sesion
+                                .sessionRegistry(sessionRegistry()) //rastro de los datos de sesion
+                )
                 .build();
     }
 
-    //Lugar a donde voy a ser redirigido luego de ser autenticado en localhost//9626
 
-    public AuthenticationSuccessHandler  authenticationSuccessHandler() {
+    //bean para que spring detecte un nuevo inicio de sesion
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
+    //Lugar a donde voy a ser redirigido luego de ser autenticado en localhost//9626
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (request, response, authentication) -> {
-            response.sendRedirect("/productos/v1/login");
+            response.sendRedirect("/productos/v1/session");
         };
     }
 

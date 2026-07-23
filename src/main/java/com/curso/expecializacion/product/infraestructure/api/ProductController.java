@@ -22,9 +22,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
+
 import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -37,6 +45,8 @@ public class ProductController implements product_api {
 
     private final Mediator mediator;
     private final ProductMapper productMapper;
+    @Autowired
+    private SessionRegistry sessionRegistry;
 
 
     @Override
@@ -98,7 +108,7 @@ public class ProductController implements product_api {
         log.info("Capa Controller , TRAYENDO TODOS");
         PaginationQuery paginationQuery = new PaginationQuery(pageSize, pageNumber, sortby, direction);
         ProductFilter productFilter = new ProductFilter(nombre, descripcion, priceMin, priceMax);
-        AllGetProductRequest  allgetRequest = new AllGetProductRequest(paginationQuery, productFilter);
+        AllGetProductRequest allgetRequest = new AllGetProductRequest(paginationQuery, productFilter);
         AllGetProductResponse response = mediator.dispacth(allgetRequest);
         PaginationResult<Product> productsPage = response.getProductsPage();
 
@@ -116,6 +126,32 @@ public class ProductController implements product_api {
     @GetMapping("/login")
     public ResponseEntity<String> login() {
         return ResponseEntity.ok("login");
+    }
+
+    @GetMapping("/session")
+    ResponseEntity<?> getDetailSession() {
+        String sessionID = "";
+        User userObjet = null;
+
+        List<Object> sessions = sessionRegistry.getAllPrincipals();
+
+        for (Object session : sessions) {
+            if (session instanceof User) {
+                userObjet = (User) session;
+            }
+
+            List<SessionInformation> sessionInformations = sessionRegistry.
+                    getAllSessions(session, false);
+            for (SessionInformation sessionInformation : sessionInformations) {
+                sessionID = sessionInformation.getSessionId();
+            }
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("sessionID", sessionID);
+        response.put("userObjet", userObjet);
+
+        return ResponseEntity.ok(response);
     }
 
 }
