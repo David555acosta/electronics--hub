@@ -1,8 +1,9 @@
-package com.curso.expecializacion.product.application.command.config;
+package com.curso.expecializacion.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -19,7 +20,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 @EnableWebSecurity
 public class SecuriryConfig {
-    @Bean
+   /* @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
@@ -37,6 +38,20 @@ public class SecuriryConfig {
                                 .sessionRegistry(sessionRegistry()) //rastro de los datos de sesion
                 )
                 .build();
+    }
+   * */
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/swagger-ui/index.html", "/swagger-ui/**", "/v3/api-docs/**")
+                        .permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form ->
+                        form.successHandler(authenticationSuccessHandler()).permitAll())
+                .httpBasic(Customizer.withDefaults()).build();
     }
 
 

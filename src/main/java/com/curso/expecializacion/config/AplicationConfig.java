@@ -1,4 +1,4 @@
-package com.curso.expecializacion.product.application.command.config;
+package com.curso.expecializacion.config;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
