@@ -1,5 +1,9 @@
 package com.curso.expecializacion.command.security;
 
+import com.curso.expecializacion.command.security.filters.JWTFilterAuthentication;
+import com.curso.expecializacion.command.security.jwt.JwtUtils;
+import com.curso.expecializacion.command.security.services.UserDetailServiceIMPL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,6 +28,12 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 @EnableWebSecurity
 public class SecuriryConfig {
+
+   @Autowired
+    private JwtUtils jwtUtils;
+
+   @Autowired
+    private UserDetailServiceIMPL userDetailServiceIMPL;
     /*@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -64,6 +74,9 @@ public class SecuriryConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+
+        JWTFilterAuthentication jwtFilterAuthentication = new JWTFilterAuthentication(jwtUtils);
+
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
@@ -77,17 +90,6 @@ public class SecuriryConfig {
                 )
                 .httpBasic(Customizer.withDefaults())
                 .build();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.builder()
-                .username("user")
-                .password("password")
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(user);
     }
 
 
