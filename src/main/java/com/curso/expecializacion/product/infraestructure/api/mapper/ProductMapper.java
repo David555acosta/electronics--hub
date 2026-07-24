@@ -2,8 +2,8 @@ package com.curso.expecializacion.product.infraestructure.api.mapper;
 
 import com.curso.expecializacion.category.domain.Category;
 
-import com.curso.expecializacion.product.application.command.create.ProductCreateRequest;
-import com.curso.expecializacion.product.application.command.update.UpdateProductCreateRequest;
+import com.curso.expecializacion.command.create.ProductCreateRequest;
+import com.curso.expecializacion.command.update.UpdateProductCreateRequest;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;

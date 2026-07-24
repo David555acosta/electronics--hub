@@ -1,4 +1,4 @@
-package com.curso.expecializacion.product.application.command.update;
+package com.curso.expecializacion.command.update;
 
 
 import com.curso.expecializacion.category.domain.Category;
@@ -8,7 +8,6 @@ import com.curso.expecializacion.producDetail.domain.ProductDetail;
 import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;
-import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,9 @@
 package com.curso.expecializacion.product.infraestructure.api;
 
-import com.curso.expecializacion.product.application.command.create.ProductCreateRequest;
-import com.curso.expecializacion.product.application.command.create.ProductCreateResponse;
-import com.curso.expecializacion.product.application.command.delete.DeleteProductRequest;
-import com.curso.expecializacion.product.application.command.update.UpdateProductCreateRequest;
+import com.curso.expecializacion.command.create.ProductCreateRequest;
+import com.curso.expecializacion.command.create.ProductCreateResponse;
+import com.curso.expecializacion.command.delete.DeleteProductRequest;
+import com.curso.expecializacion.command.update.UpdateProductCreateRequest;
 import com.curso.expecializacion.product.application.query.getAll.AllGetProductRequest;
 import com.curso.expecializacion.product.application.query.getAll.AllGetProductResponse;
 import com.curso.expecializacion.product.application.query.getById.GetProductByIdRequest;

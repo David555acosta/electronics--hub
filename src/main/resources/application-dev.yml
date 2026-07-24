@@ -12,6 +12,11 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       leak-detection-threshold: 2000
+  jwt:
+    secret:
+      key: d361d69d7a07f080df82236885083386670454cf3e735b6bd8c0953dee0d8884
+    time:
+      expiration: 1800000
   flyway:
     enabled: false
   jpa:

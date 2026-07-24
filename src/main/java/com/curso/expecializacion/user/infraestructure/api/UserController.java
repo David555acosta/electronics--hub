@@ -8,6 +8,8 @@ import com.curso.expecializacion.user.infraestructure.database.UsuarioEntity;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,6 +20,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/user")
 @RestController
 public class UserController {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -42,21 +47,21 @@ public class UserController {
                         .build())
                 .collect(Collectors.toSet());
 
-       UsuarioEntity usuarioEntity = UsuarioEntity.builder()
-               .username(createUserDTO.getUsername())
-               .email(createUserDTO.getEmail())
-               .password(createUserDTO.getPassword())
-               .rols(roles)
-               .build();
+        UsuarioEntity usuarioEntity = UsuarioEntity.builder()
+                .username(createUserDTO.getUsername())
+                .email(createUserDTO.getEmail())
+                .password(passwordEncoder.encode(createUserDTO.getPassword()))
+                .rols(roles)
+                .build();
 
-       UsuarioEntity savedUserEntity = usuarioRepository.save(usuarioEntity);
+        UsuarioEntity savedUserEntity = usuarioRepository.save(usuarioEntity);
 
-       return ResponseEntity.ok(usuarioEntity);
+        return ResponseEntity.ok(usuarioEntity);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<UsuarioEntity> deleteUser(@PathVariable Integer id){
-         usuarioRepository.deleteById(id);
+        usuarioRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
