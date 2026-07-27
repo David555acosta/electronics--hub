@@ -10,9 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
@@ -29,30 +32,15 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class SecuriryConfig {
 
-   @Autowired
     private JwtUtils jwtUtils;
 
-   @Autowired
-    private UserDetailServiceIMPL userDetailServiceIMPL;
-    /*@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/swagger-ui/index.html", "/swagger-ui/**", "/v3/api-docs/**")
-                        .permitAll()
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form ->
-                        form.successHandler(authenticationSuccessHandler()).permitAll())
-                .sessionManagement(sessionManagement ->
-                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                                .sessionFixation().migrateSession().invalidSessionUrl("/login")
-                                .maximumSessions(1) //maximas sesiones
-                                .expiredUrl("/login") //donde va ser redirigido el usuario si expira la sesion
-                                .sessionRegistry(sessionRegistry()) //rastro de los datos de sesion
-                )
-                .build();
-    }*/
+    private UserDetailsService userDetailsService;
+
+
+    public SecuriryConfig (JwtUtils jwtUtils , UserDetailServiceIMPL userDetailsService) {
+        this.jwtUtils = jwtUtils;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Bean
     public SessionRegistry sessionRegistry() {
@@ -67,28 +55,38 @@ public class SecuriryConfig {
 
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(HttpSecurity httpSecurity,
+                                                       PasswordEncoder passwordEncoder) throws Exception {
+
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+
+        authenticationManagerBuilder
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder);
+
+        return authenticationManagerBuilder.build();
     }
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
+                                                   AuthenticationManager authenticationManager) throws Exception {
 
         JWTFilterAuthentication jwtFilterAuthentication = new JWTFilterAuthentication(jwtUtils);
+        jwtFilterAuthentication.setAuthenticationManager(authenticationManager);
+        jwtFilterAuthentication.setFilterProcessesUrl("/login");
 
         return httpSecurity
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/user/hello").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/create").permitAll()
-
-                        //Autenticacion para debugear
-
                         .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults())
+                .addFilter(jwtFilterAuthentication)
                 .build();
     }
 

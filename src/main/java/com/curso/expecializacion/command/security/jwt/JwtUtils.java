@@ -27,15 +27,20 @@ public class JwtUtils {
     public String generateAccessToken(String username) {
         return Jwts.builder()
                 .subject(username)
-                .issuedAt(new Date(System.currentTimeMillis()))
+                .issuedAt(new Date(System.currentTimeMillis())) //fecha cracion token
                 .expiration(new Date(System.currentTimeMillis() + Integer.parseInt(expiration)))
                 .signWith(getSignatureKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
+    //Obtener firma del token
+    private SecretKey getSignatureKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey); //se decodifica el token en un array de bytes
+        return Keys.hmacShaKeyFor(keyBytes); //
+    }
+
 
     //validar firma del token
-
     public boolean isTokenValid(String token) {
         try {
             Jwts.parser()
@@ -71,12 +76,4 @@ public class JwtUtils {
                 .parseSignedClaims(token)
                 .getPayload();
     }
-
-
-    //Obtener firma del token
-    private SecretKey getSignatureKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
-
 }
