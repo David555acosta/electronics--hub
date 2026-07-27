@@ -1,6 +1,7 @@
 package com.curso.expecializacion.command.security;
 
 import com.curso.expecializacion.command.security.filters.JWTFilterAuthentication;
+import com.curso.expecializacion.command.security.filters.JwtAutorizathionFilter;
 import com.curso.expecializacion.command.security.jwt.JwtUtils;
 import com.curso.expecializacion.command.security.services.UserDetailServiceIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -36,10 +38,15 @@ public class SecuriryConfig {
 
     private UserDetailsService userDetailsService;
 
+    private JwtAutorizathionFilter jwtAutorizathionFilter;
 
-    public SecuriryConfig (JwtUtils jwtUtils , UserDetailServiceIMPL userDetailsService) {
+
+    public SecuriryConfig (JwtUtils jwtUtils ,
+                           UserDetailServiceIMPL userDetailsService ,
+                           JwtAutorizathionFilter jwtAutorizathionFilter) {
         this.jwtUtils = jwtUtils;
         this.userDetailsService = userDetailsService;
+        this.jwtAutorizathionFilter = jwtAutorizathionFilter;
     }
 
     @Bean
@@ -87,6 +94,7 @@ public class SecuriryConfig {
                         .anyRequest().authenticated()
                 )
                 .addFilter(jwtFilterAuthentication)
+                .addFilterBefore(jwtAutorizathionFilter , UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
