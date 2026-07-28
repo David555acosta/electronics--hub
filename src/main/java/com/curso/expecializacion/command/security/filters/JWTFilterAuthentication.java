@@ -27,13 +27,15 @@ public class JWTFilterAuthentication extends UsernamePasswordAuthenticationFilte
 
 
     private JwtUtils jwtUtils;
+
     public JWTFilterAuthentication(JwtUtils jwtUtils) {
         this.jwtUtils = jwtUtils;
     }
 
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request,
+                                                HttpServletResponse response) throws AuthenticationException {
         UsuarioEntity usuarioEntity = null;
         String username = "";
         String password = "";

@@ -28,7 +28,7 @@ public class JwtUtils {
         return Jwts.builder()
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis())) //fecha cracion token
-                .expiration(new Date(System.currentTimeMillis() + Integer.parseInt(expiration)))
+                .expiration(new Date(System.currentTimeMillis() + Integer.parseInt(expiration))) //fecha expiracion token
                 .signWith(getSignatureKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
