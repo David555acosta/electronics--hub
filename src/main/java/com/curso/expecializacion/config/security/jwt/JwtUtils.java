@@ -1,4 +1,4 @@
-package com.curso.expecializacion.command.security.jwt;
+package com.curso.expecializacion.config.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -21,6 +21,9 @@ public class JwtUtils {
     private String secretKey;
     @Value("${spring.jwt.time.expiration}")
     private String expiration;
+
+
+    private String REFRESH_WINDOW = ""
 
 
     //Generar token de acceso
@@ -75,5 +78,21 @@ public class JwtUtils {
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
+    }
+
+
+    ///Metodos para consultar y actualizar tokens expirados
+
+    public Date getExpirationDateFromToken(String token) {
+        return getClaim(token, Claims::getExpiration);
+    }
+
+    public boolean isTokenExpired(String token) {
+        return getExpirationDateFromToken(token).before(new Date());
+    }
+
+
+    public boolean canBeTokenRenoved(String token) {
+        Claims getExpirationDateFromToken(token)
     }
 }

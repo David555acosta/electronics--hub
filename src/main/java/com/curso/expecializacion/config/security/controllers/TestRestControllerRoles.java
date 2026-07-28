@@ -1,4 +1,4 @@
-package com.curso.expecializacion.command.security.controllers;
+package com.curso.expecializacion.config.security.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

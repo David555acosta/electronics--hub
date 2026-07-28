@@ -1,4 +1,4 @@
-package com.curso.expecializacion.command.delete;
+package com.curso.expecializacion.product.command.delete;
 
 
 import com.curso.expecializacion.product.common.mediator.RequestHandler;

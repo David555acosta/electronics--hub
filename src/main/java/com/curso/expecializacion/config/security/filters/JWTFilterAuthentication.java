@@ -1,7 +1,7 @@
-package com.curso.expecializacion.command.security.filters;
+package com.curso.expecializacion.config.security.filters;
 
 
-import com.curso.expecializacion.command.security.jwt.JwtUtils;
+import com.curso.expecializacion.config.security.jwt.JwtUtils;
 import com.curso.expecializacion.user.infraestructure.database.UsuarioEntity;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -33,6 +33,8 @@ public class JWTFilterAuthentication extends UsernamePasswordAuthenticationFilte
     }
 
 
+    //Verificación y validaciones de seguridad en logueo
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
@@ -52,11 +54,15 @@ public class JWTFilterAuthentication extends UsernamePasswordAuthenticationFilte
             throw new RuntimeException(e);
         }
 
+
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(username, password);
 
         return getAuthenticationManager().authenticate(authenticationToken);
     }
+
+
+    //Una vez validado, configuramos la respuesta del servidor
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request,

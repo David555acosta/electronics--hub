@@ -1,9 +1,9 @@
-package com.curso.expecializacion.command.security;
+package com.curso.expecializacion.config.security;
 
-import com.curso.expecializacion.command.security.filters.JWTFilterAuthentication;
-import com.curso.expecializacion.command.security.filters.JwtAutorizathionFilter;
-import com.curso.expecializacion.command.security.jwt.JwtUtils;
-import com.curso.expecializacion.command.security.services.UserDetailServiceIMPL;
+import com.curso.expecializacion.config.security.filters.JWTFilterAuthentication;
+import com.curso.expecializacion.config.security.filters.JwtAutorizathionFilter;
+import com.curso.expecializacion.config.security.jwt.JwtUtils;
+import com.curso.expecializacion.config.security.services.UserDetailServiceIMPL;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,7 +16,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -31,16 +30,16 @@ public class SecuriryConfig {
 
     private JwtUtils jwtUtils;
 
-    private UserDetailsService userDetailsService;
+    private UserDetailServiceIMPL userDetailServiceIMPL;
 
     private JwtAutorizathionFilter jwtAutorizathionFilter;
 
 
     public SecuriryConfig(JwtUtils jwtUtils,
-                          UserDetailServiceIMPL userDetailsService,
+                          UserDetailServiceIMPL userDetailServiceIMPL,
                           JwtAutorizathionFilter jwtAutorizathionFilter) {
         this.jwtUtils = jwtUtils;
-        this.userDetailsService = userDetailsService;
+        this.userDetailServiceIMPL = userDetailServiceIMPL;
         this.jwtAutorizathionFilter = jwtAutorizathionFilter;
     }
 
@@ -64,7 +63,7 @@ public class SecuriryConfig {
                 httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
 
         authenticationManagerBuilder
-                .userDetailsService(userDetailsService)
+                .userDetailsService(userDetailServiceIMPL)
                 .passwordEncoder(passwordEncoder);
 
         return authenticationManagerBuilder.build();

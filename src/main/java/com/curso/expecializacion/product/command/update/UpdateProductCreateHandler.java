@@ -1,4 +1,4 @@
-package com.curso.expecializacion.command.update;
+package com.curso.expecializacion.product.command.update;
 
 
 import com.curso.expecializacion.category.domain.Category;

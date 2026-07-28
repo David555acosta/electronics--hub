@@ -1,4 +1,4 @@
-package com.curso.expecializacion.command.create;
+package com.curso.expecializacion.product.command.create;
 
 
 import com.curso.expecializacion.product.common.mediator.RequestHandler;

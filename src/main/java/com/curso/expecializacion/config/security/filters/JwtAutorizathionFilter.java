@@ -1,7 +1,7 @@
-package com.curso.expecializacion.command.security.filters;
+package com.curso.expecializacion.config.security.filters;
 
-import com.curso.expecializacion.command.security.jwt.JwtUtils;
-import com.curso.expecializacion.command.security.services.UserDetailServiceIMPL;
+import com.curso.expecializacion.config.security.jwt.JwtUtils;
+import com.curso.expecializacion.config.security.services.UserDetailServiceIMPL;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
