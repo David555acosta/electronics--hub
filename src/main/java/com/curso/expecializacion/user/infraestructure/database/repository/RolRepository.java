@@ -1,6 +1,6 @@
-package com.curso.expecializacion.user.domain;
+package com.curso.expecializacion.user.infraestructure.database.repository;
 
-import com.curso.expecializacion.user.infraestructure.database.RolEntity;
+import com.curso.expecializacion.user.infraestructure.database.entity.RolEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

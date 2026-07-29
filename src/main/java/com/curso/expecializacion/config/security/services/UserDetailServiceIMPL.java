@@ -1,7 +1,7 @@
 package com.curso.expecializacion.config.security.services;
 
-import com.curso.expecializacion.user.domain.UsuarioRepository;
-import com.curso.expecializacion.user.infraestructure.database.UsuarioEntity;
+import com.curso.expecializacion.user.infraestructure.database.repository.UsuarioRepository;
+import com.curso.expecializacion.user.infraestructure.database.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

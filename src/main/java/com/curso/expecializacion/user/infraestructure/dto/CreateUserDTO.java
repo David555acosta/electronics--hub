@@ -1,4 +1,4 @@
-package com.curso.expecializacion.user.infraestructure.api.dto;
+package com.curso.expecializacion.user.infraestructure.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

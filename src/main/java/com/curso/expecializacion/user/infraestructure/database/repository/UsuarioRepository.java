@@ -1,6 +1,6 @@
-package com.curso.expecializacion.user.domain;
+package com.curso.expecializacion.user.infraestructure.database.repository;
 
-import com.curso.expecializacion.user.infraestructure.database.UsuarioEntity;
+import com.curso.expecializacion.user.infraestructure.database.entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

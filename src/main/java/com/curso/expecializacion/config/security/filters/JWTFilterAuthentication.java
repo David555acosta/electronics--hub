@@ -2,7 +2,7 @@ package com.curso.expecializacion.config.security.filters;
 
 
 import com.curso.expecializacion.config.security.jwt.JwtUtils;
-import com.curso.expecializacion.user.infraestructure.database.UsuarioEntity;
+import com.curso.expecializacion.user.infraestructure.database.entity.UsuarioEntity;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;

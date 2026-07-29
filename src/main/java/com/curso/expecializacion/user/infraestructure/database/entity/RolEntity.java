@@ -1,7 +1,7 @@
-package com.curso.expecializacion.user.infraestructure.database;
+package com.curso.expecializacion.user.infraestructure.database.entity;
 
+import com.curso.expecializacion.user.domain.Erol;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,9 +1,9 @@
 package com.curso.expecializacion;
 
-import com.curso.expecializacion.user.domain.UsuarioRepository;
-import com.curso.expecializacion.user.infraestructure.database.Erol;
-import com.curso.expecializacion.user.infraestructure.database.RolEntity;
-import com.curso.expecializacion.user.infraestructure.database.UsuarioEntity;
+import com.curso.expecializacion.user.infraestructure.database.repository.UsuarioRepository;
+import com.curso.expecializacion.user.domain.Erol;
+import com.curso.expecializacion.user.infraestructure.database.entity.RolEntity;
+import com.curso.expecializacion.user.infraestructure.database.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
