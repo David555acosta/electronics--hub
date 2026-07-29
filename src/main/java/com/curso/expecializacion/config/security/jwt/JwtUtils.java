@@ -7,6 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -23,7 +24,7 @@ public class JwtUtils {
     private String expiration;
 
 
-    private String REFRESH_WINDOW = ""
+    private final Integer REFRESH_WINDOW = 1000 * 60 * 60 * 24 * 7;
 
 
     //Generar token de acceso
@@ -73,16 +74,23 @@ public class JwtUtils {
 
     //Obtener todos los claims del token
     public Claims getClaimsFromToken(String token) {
-        return Jwts.parser()
-                .verifyWith(getSignatureKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+        try {
+            return Jwts.parser()
+                    .verifyWith(getSignatureKey())
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+        } catch (io.jsonwebtoken.ExpiredJwtException e) {
+            return e.getClaims();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 
-    ///Metodos para consultar y actualizar tokens expirados
-
+    /// Metodos para consultar y actualizar tokens expirados
+    ///
+    ///
     public Date getExpirationDateFromToken(String token) {
         return getClaim(token, Claims::getExpiration);
     }
@@ -93,6 +101,18 @@ public class JwtUtils {
 
 
     public boolean canBeTokenRenoved(String token) {
-        Claims getExpirationDateFromToken(token)
+        Date expirationDate = getExpirationDateFromToken(token);
+        if (expirationDate == null) return false;
+
+        long maxRenewalTime = expirationDate.getTime() + REFRESH_WINDOW;
+        return new Date().before(new Date(maxRenewalTime));
+    }
+
+    public String renoveToken(String token, UserDetails userDetails) {
+        if (!canBeTokenRenoved(token)) {
+            throw new RuntimeException("Token invalido, error: ".concat(token));
+        }
+
+        return generateAccessToken(userDetails.getUsername());
     }
 }

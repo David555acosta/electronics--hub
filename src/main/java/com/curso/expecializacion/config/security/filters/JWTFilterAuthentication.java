@@ -42,6 +42,7 @@ public class JWTFilterAuthentication extends UsernamePasswordAuthenticationFilte
         String username = "";
         String password = "";
 
+
         try {
             usuarioEntity = new ObjectMapper().readValue(request.getInputStream(), UsuarioEntity.class);
             username = usuarioEntity.getUsername();
