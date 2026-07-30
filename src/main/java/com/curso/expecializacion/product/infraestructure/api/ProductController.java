@@ -8,8 +8,8 @@ import com.curso.expecializacion.product.application.query.getAll.AllGetProductR
 import com.curso.expecializacion.product.application.query.getAll.AllGetProductResponse;
 import com.curso.expecializacion.product.application.query.getById.GetProductByIdRequest;
 import com.curso.expecializacion.product.application.query.getById.GetProductByIdResponse;
-import com.curso.expecializacion.product.common.domain.PaginationQuery;
-import com.curso.expecializacion.product.common.domain.PaginationResult;
+import com.curso.expecializacion.config.domain.PaginationQuery;
+import com.curso.expecializacion.config.domain.PaginationResult;
 import com.curso.expecializacion.product.common.mediator.Mediator;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.ProductFilter;
@@ -18,12 +18,14 @@ import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.UpdateProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.mapper.ProductMapper;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.User;
@@ -39,6 +41,7 @@ import java.util.Map;
 @Tag(name = "Productos ", description = "Product API")
 @RequiredArgsConstructor
 @RequestMapping("/productos/v1")
+@SecurityRequirement(name = "Bearer Authentication")
 @Slf4j
 public class ProductController implements product_api {
 
@@ -49,6 +52,7 @@ public class ProductController implements product_api {
     private SessionRegistry sessionRegistry;
 
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     @Operation(summary = "Guardar producto", description = "Guardar producto")
     @PostMapping("")
@@ -59,6 +63,7 @@ public class ProductController implements product_api {
         return ResponseEntity.created(URI.create("/productos/v1".concat(productX.getCodigo().toString()))).build();
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     @Operation(summary = "Actualizar producto", description = "Actualizar producto")
     @PutMapping("")
@@ -80,7 +85,7 @@ public class ProductController implements product_api {
         return ResponseEntity.noContent().build();
     }
 
-
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN' , 'INVITED')")
     @Override
     @Operation(summary = "Filtrar por ID", description = "Filtrar por ID")
     @GetMapping("/{id}")
@@ -92,6 +97,8 @@ public class ProductController implements product_api {
         return ResponseEntity.ok(productDto);
     }
 
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN' , 'INVITED')")
     @Operation(summary = "Traer todos", description = "Traer todos")
     @GetMapping("")
     @Override

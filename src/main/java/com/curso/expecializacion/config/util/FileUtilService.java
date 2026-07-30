@@ -1,4 +1,4 @@
-package com.curso.expecializacion.product.common.util;
+package com.curso.expecializacion.config.util;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

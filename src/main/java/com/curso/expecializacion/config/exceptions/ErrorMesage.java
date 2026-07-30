@@ -1,4 +1,4 @@
-package com.curso.expecializacion.product.common.exceptions;
+package com.curso.expecializacion.config.exceptions;
 
 import lombok.Data;
 

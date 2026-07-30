@@ -1,6 +1,6 @@
 package com.curso.expecializacion.product.infraestructure.api;
 
-import com.curso.expecializacion.product.common.domain.PaginationResult;
+import com.curso.expecializacion.config.domain.PaginationResult;
 import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
 import com.curso.expecializacion.product.infraestructure.api.dto.UpdateProductDTO;

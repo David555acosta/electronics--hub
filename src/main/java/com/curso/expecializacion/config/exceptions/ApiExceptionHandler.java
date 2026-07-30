@@ -1,9 +1,10 @@
-package com.curso.expecializacion.product.common.exceptions;
+package com.curso.expecializacion.config.exceptions;
 
 
 import com.curso.expecializacion.product.domain.ProductNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +32,15 @@ public class ApiExceptionHandler {
     @ExceptionHandler({ProductNotFoundException.class})
     @ResponseBody
     public ErrorMesage notFund(HttpServletRequest request, Exception exception) {
+
+        return new ErrorMesage(exception.getMessage(), exception.getClass().getSimpleName(), request.getRequestURI());
+    }
+
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler({SecurityException.class, AuthenticationException.class})
+    @ResponseBody
+    public ErrorMesage forbidden(HttpServletRequest request, Exception exception) {
 
         return new ErrorMesage(exception.getMessage(), exception.getClass().getSimpleName(), request.getRequestURI());
     }

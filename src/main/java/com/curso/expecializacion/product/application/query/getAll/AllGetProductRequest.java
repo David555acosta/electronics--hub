@@ -1,6 +1,6 @@
 package com.curso.expecializacion.product.application.query.getAll;
 
-import com.curso.expecializacion.product.common.domain.PaginationQuery;
+import com.curso.expecializacion.config.domain.PaginationQuery;
 import com.curso.expecializacion.product.common.mediator.Request;
 import com.curso.expecializacion.product.domain.ProductFilter;
 import lombok.AllArgsConstructor;

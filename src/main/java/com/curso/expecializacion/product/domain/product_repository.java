@@ -1,8 +1,7 @@
 package com.curso.expecializacion.product.domain;
 
-import com.curso.expecializacion.product.common.domain.PaginationQuery;
-import com.curso.expecializacion.product.common.domain.PaginationResult;
-import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
+import com.curso.expecializacion.config.domain.PaginationQuery;
+import com.curso.expecializacion.config.domain.PaginationResult;
 
 
 import java.util.Optional;

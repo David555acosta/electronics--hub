@@ -1,5 +1,5 @@
 package com.curso.expecializacion.product.application.query.getAll;
-import com.curso.expecializacion.product.common.domain.PaginationResult;
+import com.curso.expecializacion.config.domain.PaginationResult;
 import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;

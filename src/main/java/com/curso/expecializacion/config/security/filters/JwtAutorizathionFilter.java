@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
 
@@ -25,6 +26,8 @@ public class JwtAutorizathionFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtils jwtUtils;
+    @Autowired
+    private HandlerExceptionResolver handlerExceptionResolver;
 
 
     @Override
@@ -66,6 +69,7 @@ public class JwtAutorizathionFilter extends OncePerRequestFilter {
                 }
             } catch (Exception e) {
                 log.error("Error procesando el token JWT: {}", e.getMessage());
+                handlerExceptionResolver.resolveException(request, response, null, e);
             }
         }
 
