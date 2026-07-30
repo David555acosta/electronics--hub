@@ -49,7 +49,7 @@ public class UserController {
         return "hello con seguridad";
     }
 
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     public ResponseEntity<TokenResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDto) {
 
         LoginUserRequest request = userMapper.mapToLoginUserRequest(loginRequestDto);
@@ -59,7 +59,7 @@ public class UserController {
         TokenResponseDTO tokenResponseDto = userMapper.mapToTokenResponseDto(response);
 
         return ResponseEntity.ok(tokenResponseDto);
-    }
+    }*/
 
     @PostMapping("/create")
     public ResponseEntity<TokenResponseDTO> register(@RequestBody RegisterRequestDTO registerRequestDto) {
