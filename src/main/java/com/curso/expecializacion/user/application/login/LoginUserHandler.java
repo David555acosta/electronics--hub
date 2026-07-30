@@ -16,6 +16,6 @@ public class LoginUserHandler implements RequestHandler<LoginUserRequest, LoginU
 
     @Override
     public Class<LoginUserRequest> getRequesType() {
-        return null;
+        return LoginUserRequest.class;
     }
 }

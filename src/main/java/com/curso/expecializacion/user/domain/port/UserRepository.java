@@ -9,5 +9,7 @@ public interface UserRepository {
 
     boolean existsByEmail(String email);
 
+    boolean existsByUsername(String username);
+
     Usuario upsert(Usuario user);
 }

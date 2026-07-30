@@ -61,7 +61,7 @@ public class UserController {
         return ResponseEntity.ok(tokenResponseDto);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/create")
     public ResponseEntity<TokenResponseDTO> register(@RequestBody RegisterRequestDTO registerRequestDto) {
 
         RegisterUserRequest request = userMapper.mapToRegisterUserRequest(registerRequestDto);
