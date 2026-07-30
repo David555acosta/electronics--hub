@@ -1,6 +1,5 @@
 package com.curso.expecializacion.config.security;
 
-import com.curso.expecializacion.config.security.filters.JWTFilterAuthentication;
 import com.curso.expecializacion.config.security.filters.JwtAutorizathionFilter;
 import com.curso.expecializacion.config.security.jwt.JwtUtils;
 import com.curso.expecializacion.config.security.services.UserDetailServiceIMPL;
@@ -73,11 +72,6 @@ public class SecuriryConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
                                                    AuthenticationManager authenticationManager) throws Exception {
-
-        JWTFilterAuthentication jwtFilterAuthentication = new JWTFilterAuthentication(jwtUtils);
-        jwtFilterAuthentication.setAuthenticationManager(authenticationManager);
-        jwtFilterAuthentication.setFilterProcessesUrl("/login");
-
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->
@@ -87,9 +81,10 @@ public class SecuriryConfig {
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/create").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilter(jwtFilterAuthentication)
+                //Antes se ejecuta la autenticación mediante el login handler
                 .addFilterBefore(jwtAutorizathionFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

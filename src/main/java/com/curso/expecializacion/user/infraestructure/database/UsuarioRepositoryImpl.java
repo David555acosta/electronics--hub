@@ -1,5 +1,4 @@
 package com.curso.expecializacion.user.infraestructure.database;
-
 import com.curso.expecializacion.user.domain.Usuario;
 import com.curso.expecializacion.user.domain.port.UserRepository;
 import com.curso.expecializacion.user.infraestructure.database.entity.UsuarioEntity;
@@ -18,11 +17,6 @@ public class UsuarioRepositoryImpl implements UserRepository {
     private final UsuarioEntityMapper usuarioEntityMapper;
 
     @Override
-    public Optional<Usuario> findByEmail(String email) {
-        return queryUserRepository.findByEmail(email).map(usuarioEntityMapper::mapToUser);
-    }
-
-    @Override
     public boolean existsByEmail(String email) {
         return queryUserRepository.findByEmail(email).isPresent();
     }
@@ -33,9 +27,19 @@ public class UsuarioRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public Optional<Usuario> findByEmail(String email) {
+        return queryUserRepository.findByEmail(email).map(usuarioEntityMapper::mapToUser);
+    }
+
+    @Override
     public Usuario upsert(Usuario usuario) {
         UsuarioEntity userEntity = usuarioEntityMapper.mapToUserEntity(usuario);
         UsuarioEntity saved = queryUserRepository.save(userEntity);
         return usuarioEntityMapper.mapToUser(saved);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        queryUserRepository.deleteById(id);
     }
 }

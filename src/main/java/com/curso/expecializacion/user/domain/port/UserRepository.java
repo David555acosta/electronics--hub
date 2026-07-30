@@ -12,4 +12,6 @@ public interface UserRepository {
     boolean existsByUsername(String username);
 
     Usuario upsert(Usuario user);
+
+    void deleteById(Integer id);
 }

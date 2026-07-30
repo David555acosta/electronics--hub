@@ -5,10 +5,12 @@ import com.curso.expecializacion.user.application.login.LoginUserRequest;
 import com.curso.expecializacion.user.application.login.LoginUserResponse;
 import com.curso.expecializacion.user.application.register.RegisterUserRequest;
 import com.curso.expecializacion.user.application.register.RegisterUserResponse;
+import com.curso.expecializacion.user.domain.port.UserRepository;
 import com.curso.expecializacion.user.infraestructure.api.dto.LoginRequestDTO;
 import com.curso.expecializacion.user.infraestructure.api.dto.RegisterRequestDTO;
 import com.curso.expecializacion.user.infraestructure.api.dto.TokenResponseDTO;
 import com.curso.expecializacion.user.infraestructure.api.mapper.UserMapper;
+import com.curso.expecializacion.user.infraestructure.database.UsuarioRepositoryImpl;
 import com.curso.expecializacion.user.infraestructure.database.repository.UsuarioRepository;
 import com.curso.expecializacion.user.domain.Erol;
 import com.curso.expecializacion.user.infraestructure.database.entity.RolEntity;
@@ -31,12 +33,9 @@ public class UserController {
 
     private final Mediator mediator;
     private final UserMapper userMapper;
+    private final UserRepository userRepository;
 
-    //@Autowired
-    //private PasswordEncoder passwordEncoder;
 
-    //@Autowired
-    //private UsuarioRepository usuarioRepository;
 
     @GetMapping("/hello")
     public String hello() {
@@ -49,7 +48,7 @@ public class UserController {
         return "hello con seguridad";
     }
 
-    /*@PostMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<TokenResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDto) {
 
         LoginUserRequest request = userMapper.mapToLoginUserRequest(loginRequestDto);
@@ -59,7 +58,7 @@ public class UserController {
         TokenResponseDTO tokenResponseDto = userMapper.mapToTokenResponseDto(response);
 
         return ResponseEntity.ok(tokenResponseDto);
-    }*/
+    }
 
     @PostMapping("/create")
     public ResponseEntity<TokenResponseDTO> register(@RequestBody RegisterRequestDTO registerRequestDto) {
@@ -75,10 +74,10 @@ public class UserController {
 
 
 
-   /* @DeleteMapping("/{id}")
-    public ResponseEntity<UsuarioEntity> deleteUser(@PathVariable Integer id) {
-        usuarioRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }*/
+   @DeleteMapping("/{id}")
+    public ResponseEntity<UsuarioEntity> deleteB(@PathVariable Integer id) {
+       userRepository.deleteById(id);
+       return ResponseEntity.ok().build();
+    }
 
 }

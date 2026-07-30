@@ -5,12 +5,11 @@ import com.curso.expecializacion.config.security.jwt.JwtUtils;
 import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.user.domain.Erol;
 import com.curso.expecializacion.user.domain.Usuario;
-import com.curso.expecializacion.user.infraestructure.database.UsuarioRepositoryImpl;
+import com.curso.expecializacion.user.domain.port.UserRepository;
 import com.curso.expecializacion.user.infraestructure.database.entity.RolEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,19 +20,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, RegisterUserResponse> {
 
-    private final UsuarioRepositoryImpl usuarioRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
     @Override
     public RegisterUserResponse handle(RegisterUserRequest request) {
 
-        boolean existById = usuarioRepository.existsByUsername(request.getUsername());
+        boolean existById = userRepository.existsByUsername(request.getUsername());
 
         if (existById) {
-            throw new RuntimeException("Usuario no encontrado");
+            throw new RuntimeException("El nombre de usuario ya se encuentra registrado");
         }
 
-        String password = passwordEncoder.encode(request.getPassword());
+
 
 
         Set<RolEntity> roles = request.getRole().stream()
@@ -42,14 +41,16 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
                         .build())
                 .collect(Collectors.toSet());
 
+        String password = passwordEncoder.encode(request.getPassword());
+
         Usuario usuario = Usuario.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
+                .password(password)
                 .rols(roles)
                 .build();
 
-        usuarioRepository.upsert(usuario);
+        userRepository.upsert(usuario);
 
         //Generamos momentaneamente un token luego de registrarnos aquí
 
