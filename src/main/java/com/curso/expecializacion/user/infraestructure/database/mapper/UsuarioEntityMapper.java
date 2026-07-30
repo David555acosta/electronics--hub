@@ -13,4 +13,5 @@ public interface UsuarioEntityMapper {
     UsuarioEntity mapToUserEntity(Usuario usuario);
 
     UsuarioEntity mapToUser(UsuarioEntity usuarioEntity);
+
 }

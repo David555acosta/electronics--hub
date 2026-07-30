@@ -1,4 +1,10 @@
 package com.curso.expecializacion.user.application.login;
 
-public class LoginUserRequest {
+import com.curso.expecializacion.product.common.mediator.Request;
+import lombok.Data;
+
+@Data
+public class LoginUserRequest implements Request<LoginUserResponse> {
+    private String username;
+    private String password;
 }

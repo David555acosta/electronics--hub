@@ -1,6 +1,5 @@
-package com.curso.expecializacion.user.application.register;
+package com.curso.expecializacion.user.infraestructure.api.dto;
 
-import com.curso.expecializacion.product.common.mediator.Request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -8,7 +7,8 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class RegisterUserRequest implements Request<RegisterUserResponse> {
+public class RegisterRequestDTO {
+
     @Email
     @NotBlank
     private String email;

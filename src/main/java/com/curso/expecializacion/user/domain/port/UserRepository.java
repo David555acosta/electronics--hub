@@ -1,0 +1,13 @@
+package com.curso.expecializacion.user.domain.port;
+import com.curso.expecializacion.user.domain.Usuario;
+import org.springframework.stereotype.Repository;
+import java.util.Optional;
+
+@Repository
+public interface UserRepository {
+    Optional<Usuario> findByEmail(String email);
+
+    boolean existsByEmail(String email);
+
+    Usuario upsert(Usuario user);
+}
