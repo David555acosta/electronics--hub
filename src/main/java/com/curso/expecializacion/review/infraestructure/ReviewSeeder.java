@@ -32,7 +32,8 @@ public class ReviewSeeder implements CommandLineRunner {
 
             List<ReviewEntity> reviewEntities = objectMapper.readValue(
                     resource.getInputStream(),
-                    new TypeReference<List<ReviewEntity>>() {}
+                    new TypeReference<>() {
+                    }
             );
 
             queryReviewRepository.saveAll(reviewEntities);

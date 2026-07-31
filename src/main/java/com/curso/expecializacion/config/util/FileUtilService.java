@@ -20,10 +20,10 @@ public class FileUtilService {
         //Flujo de bytes
         try (InputStream inputStream = file.getInputStream()) {
 
-            //Obtener el nombre del archivo , sacando las "/" y si es null lanzanod excepcion
+            //Obtener el nombre del archivo, sacando las "/" y si es null lanzando excepción
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
-            //Obtener un numero random y concatenandolo al nombre del archivo limpio
+            //Obtener un número random y concatenándolo al nombre del archivo limpio
             uniqueFileName = UUID.randomUUID().toString().concat("_").concat(fileName);
 
             Path path = Path.of("src/main/resources/products");

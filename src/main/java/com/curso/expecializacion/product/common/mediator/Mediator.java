@@ -1,6 +1,6 @@
 package com.curso.expecializacion.product.common.mediator;
 
-import jakarta.transaction.Transactional;
+
 import lombok.Data;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;

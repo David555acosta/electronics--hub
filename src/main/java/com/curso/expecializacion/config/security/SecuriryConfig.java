@@ -1,11 +1,9 @@
 package com.curso.expecializacion.config.security;
 
 import com.curso.expecializacion.config.security.filters.JwtAutorizathionFilter;
-import com.curso.expecializacion.config.security.jwt.JwtUtils;
 import com.curso.expecializacion.config.security.services.UserDetailServiceIMPL;
 import com.curso.expecializacion.user.domain.exception.CustomAccessDeniedHandler;
 import com.curso.expecializacion.user.domain.exception.CustomAuthenticationEntryPoint;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -30,8 +28,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecuriryConfig {
 
-    @Autowired
-    private JwtUtils jwtUtils;
     private final UserDetailServiceIMPL userDetailServiceIMPL;
     private final JwtAutorizathionFilter jwtAutorizathionFilter;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
@@ -77,8 +73,7 @@ public class SecuriryConfig {
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
-                                                   AuthenticationManager authenticationManager) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->

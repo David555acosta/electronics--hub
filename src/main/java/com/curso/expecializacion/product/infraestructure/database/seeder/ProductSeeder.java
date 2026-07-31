@@ -33,7 +33,8 @@ public class ProductSeeder implements CommandLineRunner {
 
             List<ProductEntity> products = objectMapper.readValue(
                     resource.getInputStream(),
-                    new TypeReference<List<ProductEntity>>() {}
+                    new TypeReference<>() {
+                    }
             );
 
             queryProductsRepository.saveAll(products);

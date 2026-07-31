@@ -48,8 +48,7 @@ public class ProductController implements product_api {
 
     private final Mediator mediator;
     private final ProductMapper productMapper;
-    @Autowired
-    private SessionRegistry sessionRegistry;
+    private final SessionRegistry sessionRegistry;
 
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")

@@ -33,7 +33,8 @@ public class ProductDetailSeeder implements CommandLineRunner {
 
             List<ProductDetailEntity> productDetailEntities = objectMapper.readValue(
                     resource.getInputStream(),
-                    new TypeReference<List<ProductDetailEntity>>() {}
+                    new TypeReference<>() {
+                    }
             );
 
             productDetailRepository.saveAll(productDetailEntities);
