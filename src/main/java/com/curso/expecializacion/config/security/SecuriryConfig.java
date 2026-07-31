@@ -87,6 +87,11 @@ public class SecuriryConfig {
                         .requestMatchers("/user/hello").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/create").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
+                        .requestMatchers("/user/hello").permitAll()
+                        .requestMatchers
+                                ("/swagger-ui/**",
+                                "/v3/api-docs/**")
+                        .permitAll()
                         .requestMatchers("/actuator").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 ).exceptionHandling(exception -> exception

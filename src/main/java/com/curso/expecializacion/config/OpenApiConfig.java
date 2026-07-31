@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Configuration;
         },
         tags = {
                 @Tag(name = "Products", description = "operaciones relational a products"),
-                @Tag(name = "Usurious", description = "operaciones relational a usurious")
+                @Tag(name = "Users", description = "Operaciones relacionadas a usuarios")
         }
 )
 

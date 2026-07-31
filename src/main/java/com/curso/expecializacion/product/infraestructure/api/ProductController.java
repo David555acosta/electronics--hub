@@ -131,11 +131,6 @@ public class ProductController implements product_api {
         return ResponseEntity.ok(productDTOPaginationResult);
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<String> login() {
-        return ResponseEntity.ok("login");
-    }
-
     @GetMapping("/session")
     ResponseEntity<?> getDetailSession() {
         String sessionID = "";
