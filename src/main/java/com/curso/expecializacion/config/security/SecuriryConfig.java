@@ -3,6 +3,9 @@ package com.curso.expecializacion.config.security;
 import com.curso.expecializacion.config.security.filters.JwtAutorizathionFilter;
 import com.curso.expecializacion.config.security.jwt.JwtUtils;
 import com.curso.expecializacion.config.security.services.UserDetailServiceIMPL;
+import com.curso.expecializacion.user.domain.exception.CustomAccessDeniedHandler;
+import com.curso.expecializacion.user.domain.exception.CustomAuthenticationEntryPoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -27,19 +30,23 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecuriryConfig {
 
+    @Autowired
     private JwtUtils jwtUtils;
+    private final UserDetailServiceIMPL userDetailServiceIMPL;
+    private final JwtAutorizathionFilter jwtAutorizathionFilter;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
-    private UserDetailServiceIMPL userDetailServiceIMPL;
 
-    private JwtAutorizathionFilter jwtAutorizathionFilter;
-
-
-    public SecuriryConfig(JwtUtils jwtUtils,
+    public SecuriryConfig(
                           UserDetailServiceIMPL userDetailServiceIMPL,
-                          JwtAutorizathionFilter jwtAutorizathionFilter) {
-        this.jwtUtils = jwtUtils;
+                          JwtAutorizathionFilter jwtAutorizathionFilter,
+                          CustomAuthenticationEntryPoint customAuthenticationEntryPoint,
+                          CustomAccessDeniedHandler customAccessDeniedHandler) {
         this.userDetailServiceIMPL = userDetailServiceIMPL;
         this.jwtAutorizathionFilter = jwtAutorizathionFilter;
+        this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
+        this.customAccessDeniedHandler = customAccessDeniedHandler;
     }
 
     @Bean
@@ -78,12 +85,14 @@ public class SecuriryConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/user/hello").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/create").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
+                        .requestMatchers("/actuator").hasRole("ADMIN")
                         .anyRequest().authenticated()
+                ).exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(customAuthenticationEntryPoint) // Para errores 401
+                        .accessDeniedHandler(customAccessDeniedHandler)           // Para errores 403
                 )
-                //Antes se ejecuta la autenticación mediante el login handler
                 .addFilterBefore(jwtAutorizathionFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

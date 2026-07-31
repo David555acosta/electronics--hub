@@ -76,6 +76,7 @@ public class ProductController implements product_api {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Operation(summary = "Eliminar producto", description = "Eliminar producto")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@RequestBody Integer id) {
@@ -85,7 +86,7 @@ public class ProductController implements product_api {
         return ResponseEntity.noContent().build();
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN' , 'INVITED')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Override
     @Operation(summary = "Filtrar por ID", description = "Filtrar por ID")
     @GetMapping("/{id}")

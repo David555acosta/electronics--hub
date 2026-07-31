@@ -1,12 +1,11 @@
 package com.curso.expecializacion.config.security.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -53,7 +52,7 @@ public class JwtUtils {
                     .parseSignedClaims(token)
                     .getPayload();
             return true;
-        } catch (Exception e) {
+        } catch (AuthenticationException e) {
             log.error("Token invalido, error: ".concat(e.getMessage()));
             return false;
         }
@@ -80,10 +79,10 @@ public class JwtUtils {
                     .build()
                     .parseSignedClaims(token)
                     .getPayload();
-        } catch (io.jsonwebtoken.ExpiredJwtException e) {
+        } catch (ExpiredJwtException e) {
             return e.getClaims();
-        } catch (Exception e) {
-            return null;
+        } catch (UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e) {
+            throw new RuntimeException("Invalid JWT token or mal formed", e);
         }
     }
 

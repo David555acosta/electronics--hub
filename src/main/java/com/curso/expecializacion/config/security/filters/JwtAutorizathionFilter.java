@@ -7,9 +7,11 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -20,14 +22,15 @@ import java.io.IOException;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class JwtAutorizathionFilter extends OncePerRequestFilter {
-    @Autowired
-    private UserDetailServiceIMPL userDetailServiceIMPL;
 
-    @Autowired
-    private JwtUtils jwtUtils;
-    @Autowired
-    private HandlerExceptionResolver handlerExceptionResolver;
+    private final UserDetailServiceIMPL userDetailServiceIMPL;
+
+
+    private final JwtUtils jwtUtils;
+
+    private final HandlerExceptionResolver handlerExceptionResolver;
 
 
     @Override
@@ -69,7 +72,7 @@ public class JwtAutorizathionFilter extends OncePerRequestFilter {
                 }
             } catch (Exception e) {
                 log.error("Error procesando el token JWT: {}", e.getMessage());
-                handlerExceptionResolver.resolveException(request, response, null, e);
+                request.setAttribute("jwt_error", e.getMessage());
             }
         }
 

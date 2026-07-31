@@ -4,6 +4,7 @@ package com.curso.expecializacion.config.exceptions;
 import com.curso.expecializacion.product.domain.ProductNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,10 +39,13 @@ public class ApiExceptionHandler {
 
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler({SecurityException.class, AuthenticationException.class})
+    @ExceptionHandler({AccessDeniedException.class, SecurityException.class, AuthenticationException.class})
     @ResponseBody
     public ErrorMesage forbidden(HttpServletRequest request, Exception exception) {
-
-        return new ErrorMesage(exception.getMessage(), exception.getClass().getSimpleName(), request.getRequestURI());
+        return new ErrorMesage(
+                "No tienes permisos suficientes para realizar esta acción",
+                exception.getClass().getSimpleName(),
+                request.getRequestURI()
+        );
     }
 }
