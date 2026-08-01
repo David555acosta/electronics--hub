@@ -13,10 +13,9 @@ spring:
       connection-timeout: 30000
       leak-detection-threshold: 2000
   jwt:
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkYXZpZF9kZXYiLCJpYXQiOjE3MTYwMDAwMDB9al
     secret:
       key: d361d69d7a07f080df82236885083386670454cf3e735b6bd8c0953dee0d8884
-    time:
-      expiration: 100000
   flyway:
     enabled: false
   jpa:

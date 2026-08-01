@@ -82,6 +82,7 @@ public class SecuriryConfig {
                         .requestMatchers("/user/hello").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/create").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/productos/v1/**").permitAll()
                         .requestMatchers("/user/hello").permitAll()
                         .requestMatchers
                                 ("/swagger-ui/**",

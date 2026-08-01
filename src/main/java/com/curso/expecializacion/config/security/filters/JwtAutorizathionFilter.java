@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -24,7 +25,7 @@ import java.io.IOException;
 @Slf4j
 public class JwtAutorizathionFilter extends OncePerRequestFilter {
 
-    private final UserDetailServiceIMPL userDetailServiceIMPL;
+    private final UserDetailsService userDetailsService;
     private final JwtUtils jwtUtils;
 
 
@@ -48,7 +49,7 @@ public class JwtAutorizathionFilter extends OncePerRequestFilter {
 
                     // Caso A: Token expirado pero dentro de la ventana de renovación (7 días)
                     if (expired && renewable) {
-                        UserDetails userDetails = userDetailServiceIMPL.loadUserByUsername(username);
+                        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                         String renewToken = jwtUtils.generateAccessToken(userDetails.getUsername());
 
                         // Espacio correcto entre Bearer y el token
@@ -60,7 +61,7 @@ public class JwtAutorizathionFilter extends OncePerRequestFilter {
                     }
                     // Caso B: Token activo y válido
                     else if (!expired) {
-                        UserDetails userDetails = userDetailServiceIMPL.loadUserByUsername(username);
+                        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                         UsernamePasswordAuthenticationToken authToken =
                                 new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                         SecurityContextHolder.getContext().setAuthentication(authToken);
