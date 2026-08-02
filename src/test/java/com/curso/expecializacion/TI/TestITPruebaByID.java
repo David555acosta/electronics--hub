@@ -22,15 +22,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @Slf4j
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class TestITPruebaByID {
     @Autowired
-    @Qualifier("getRestTemplate")
     private TestRestTemplate restTemplate;
 
     @Autowired
+    private JwtUtils jwtUtils;
+
+    @Autowired
     private MockMvc mockMvc;
+
+    @BeforeEach
+    void setUp() {
+        String tokenReal = jwtUtils.generateAccessToken("david_dev");
+
+        // Limpiamos interceptores para no duplicar en ejecuciones sucesivas
+        restTemplate.getRestTemplate().getInterceptors().clear();
+
+        restTemplate.getRestTemplate().getInterceptors().add((request, body, execution) -> {
+            // Usamos setBearerAuth para no causar UnsupportedOperationException
+            request.getHeaders().setBearerAuth(tokenReal);
+            return execution.execute(request, body);
+        });
+    }
 
 
     @Sql(value = "/TI/finByID/data.sql" , executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
