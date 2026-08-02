@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -22,31 +21,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @Slf4j
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class TestITPruebaByID {
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private JwtUtils jwtUtils;
-
-    @Autowired
     private MockMvc mockMvc;
-
-
-    @BeforeEach
-    void setUp() {
-        // 1. Generamos un token dinámico válido en tiempo de ejecución
-
-        String tokenReal = jwtUtils.generateAccessToken("david_dev");
-
-        // 2. Le agregamos un interceptor al cliente HTTP para que pegue el Token en cada request
-        restTemplate.getRestTemplate().getInterceptors().add((request, body, execution) -> {
-            request.getHeaders().add("Authorization", "Bearer " + tokenReal);
-            return execution.execute(request, body);
-        });
-    }
 
 
     @Sql(value = "/TI/finByID/data.sql" , executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)

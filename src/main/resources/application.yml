@@ -2,4 +2,4 @@ spring:
   application:
     name: spring-data-jpa-cero-a-experto
   profiles:
-    active: test
+    active: dev
