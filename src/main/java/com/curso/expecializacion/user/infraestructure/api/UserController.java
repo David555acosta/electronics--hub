@@ -65,7 +65,7 @@ public class UserController {
 
     @Operation(summary = "Eliminar un usuario por ID (Requiere ROL ADMIN)", security = @SecurityRequirement(name = "Bearer Authentication"))
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<UsuarioEntity> deleteB(@PathVariable Integer id) {
         userRepository.deleteById(id);
         return ResponseEntity.ok().build();

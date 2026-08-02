@@ -1,21 +1,23 @@
 package com.curso.expecializacion.TI;
 import com.curso.expecializacion.config.security.jwt.JwtUtils;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
+import com.curso.expecializacion.user.infraestructure.database.entity.UsuarioEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,10 +37,10 @@ public class TestITPruebaByID {
     private MockMvc mockMvc;
 
 
-    //Envio de una request simulando un logeo con las credenciales que se cargan en la db embebida
+    //Envío de una request simulando un logueo con las credenciales que se cargan en la db embebida
     @BeforeEach
     void setUp() {
-        String tokenReal = jwtUtils.generateAccessToken("david_dev");
+        String tokenReal = jwtUtils.generateAccessToken("david_admin");
 
 
         restTemplate.getRestTemplate().getInterceptors().clear();
@@ -53,8 +55,8 @@ public class TestITPruebaByID {
     @Sql(value = "/TI/finByID/data.sql" , executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = "/TI/clean.sql" , executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
-    void existGetProductByID() {
-        log.info("Iniciando Test ITPruebaByID");
+    void testProducto1() {
+        log.info("Iniciando Test testProducto1");
         ResponseEntity<ProductDTO> response = restTemplate.getForEntity("/productos/v1/1", ProductDTO.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertNotNull(response.getBody());
@@ -62,11 +64,23 @@ public class TestITPruebaByID {
         assertEquals("pc facha", response.getBody().getNombre());
         assertEquals("facherisima", response.getBody().getDescripcion());
         assertEquals(100.00, response.getBody().getPrecio());
-        log.info("Finalizando Test ITPruebaByID");
+        log.info("Finalizando Test testProducto1");
+    }
+
+    @Sql(value = "/TI/finByID/data.sql" , executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = "/TI/clean.sql" , executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    void eliminarProductoConLogeoAdmin() {
+        log.info("Iniciando Test eliminarProductoConLogeoAdmin");
+
+        ResponseEntity<UsuarioEntity> response = restTemplate.getForEntity("/user/delete/2", UsuarioEntity.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        log.info("Finalizando Test eliminarProductoConLogeoAdmin");
     }
 
 
     @Test
+    @WithMockUser(username = "david_dev", roles = {"USER", "ADMIN"})
     @Sql(value = "/TI/clean.sql" , executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void saveProduct() throws Exception {
         MockMultipartFile file = new MockMultipartFile(
