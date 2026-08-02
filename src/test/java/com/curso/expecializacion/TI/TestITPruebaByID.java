@@ -34,15 +34,16 @@ public class TestITPruebaByID {
     @Autowired
     private MockMvc mockMvc;
 
+
+    //Envio de una request simulando un logeo con las credenciales que se cargan en la db embebida
     @BeforeEach
     void setUp() {
         String tokenReal = jwtUtils.generateAccessToken("david_dev");
 
-        // Limpiamos interceptores para no duplicar en ejecuciones sucesivas
+
         restTemplate.getRestTemplate().getInterceptors().clear();
 
         restTemplate.getRestTemplate().getInterceptors().add((request, body, execution) -> {
-            // Usamos setBearerAuth para no causar UnsupportedOperationException
             request.getHeaders().setBearerAuth(tokenReal);
             return execution.execute(request, body);
         });
@@ -85,42 +86,4 @@ public class TestITPruebaByID {
                 )
                 .andExpect(status().isCreated());
     }
-
-
-
-    /*    @Autowired
-    @Qualifier("restTemplate")
-    private TestRestTemplate restTemplate;
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Sql(value = "/it/product/findById/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = "/it/clean.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    @Test
-    public void getProductByIdExits() {
-        ResponseEntity<ProductDto> response = restTemplate.getForEntity("/api/v1/products/1", ProductDto.class);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assertions.assertNotNull(response.getBody());
-        assertEquals("Product 1", response.getBody().getName());
-        assertEquals("Description 1", response.getBody().getDescription());
-        assertEquals(199.99, response.getBody().getPrice());
-    }
-
-    @Sql(value = "/it/clean.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    @Test
-    public void saveProduct() throws Exception {
-        MockMultipartFile file = new MockMultipartFile("file", "image.jpeg", "image/jpeg", "image".getBytes());
-
-        mockMvc.perform(
-                multipart(HttpMethod.POST, "/api/v1/products")
-                        .file(file)
-                        .param("id", "2")
-                        .param("name", "Name 2")
-                        .param("description", "Description 2")
-                        .param("price", "150.00")
-                        .contentType(MediaType.MULTIPART_FORM_DATA)
-        ).andExpect(status().isCreated());
-    }*/
 }
