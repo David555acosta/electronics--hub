@@ -26,6 +26,7 @@ import java.io.IOException;
 public class JwtAutorizathionFilter extends OncePerRequestFilter {
 
     private final UserDetailsService userDetailsService;
+
     private final JwtUtils jwtUtils;
 
 

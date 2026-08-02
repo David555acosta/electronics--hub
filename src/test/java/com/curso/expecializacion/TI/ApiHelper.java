@@ -7,8 +7,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApiHelper {
 
+    private String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkYXZpZF9kZXYiLCJlbWFpbCI6ImRhdml" +
+            "kQGV4YW1wbGUuY29tIiwiaWF0IjoxNzM1Njg2NDAwLCJleHAiOjI1MzQwMDIzMDAwMH0.36Z3R-Z_1J4E--8c5vA2_D";
 
-    private String token;
     @Bean
     public TestRestTemplate getRestTemplate() {
         return new TestRestTemplate(new RestTemplateBuilder()
