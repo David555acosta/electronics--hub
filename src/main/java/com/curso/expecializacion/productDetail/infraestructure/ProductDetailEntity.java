@@ -1,4 +1,4 @@
-package com.curso.expecializacion.producDetail.infraestructure;
+package com.curso.expecializacion.productDetail.infraestructure;
 
 import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import jakarta.persistence.*;

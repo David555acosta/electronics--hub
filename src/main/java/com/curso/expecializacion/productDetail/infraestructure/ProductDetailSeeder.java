@@ -1,4 +1,4 @@
-package com.curso.expecializacion.producDetail.infraestructure;
+package com.curso.expecializacion.productDetail.infraestructure;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

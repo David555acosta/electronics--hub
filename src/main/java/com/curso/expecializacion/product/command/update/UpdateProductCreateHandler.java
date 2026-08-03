@@ -4,7 +4,7 @@ package com.curso.expecializacion.product.command.update;
 import com.curso.expecializacion.category.domain.Category;
 import com.curso.expecializacion.category.infraestructure.CategoryEntityMapper;
 import com.curso.expecializacion.category.infraestructure.CategoryRepository;
-import com.curso.expecializacion.producDetail.domain.ProductDetail;
+import com.curso.expecializacion.productDetail.domain.ProductDetail;
 import com.curso.expecializacion.product.common.mediator.RequestHandler;
 import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.product.domain.product_repository;

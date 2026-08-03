@@ -1,7 +1,7 @@
 package com.curso.expecializacion.product.domain;
 
 import com.curso.expecializacion.category.domain.Category;
-import com.curso.expecializacion.producDetail.domain.ProductDetail;
+import com.curso.expecializacion.productDetail.domain.ProductDetail;
 import com.curso.expecializacion.review.domain.Review;
 import lombok.Builder;
 import lombok.Data;

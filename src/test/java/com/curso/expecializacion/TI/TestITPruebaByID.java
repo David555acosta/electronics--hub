@@ -1,6 +1,7 @@
 package com.curso.expecializacion.TI;
 import com.curso.expecializacion.config.security.jwt.JwtUtils;
 import com.curso.expecializacion.product.infraestructure.api.dto.ProductDTO;
+import com.curso.expecializacion.user.domain.port.UserRepository;
 import com.curso.expecializacion.user.infraestructure.database.entity.UsuarioEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -29,12 +30,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TestITPruebaByID {
     @Autowired
     private TestRestTemplate restTemplate;
-
     @Autowired
     private JwtUtils jwtUtils;
-
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     //Envío de una request simulando un logueo con las credenciales que se cargan en la db embebida
@@ -73,8 +75,14 @@ public class TestITPruebaByID {
     void eliminarProductoConLogeoAdmin() {
         log.info("Iniciando Test eliminarProductoConLogeoAdmin");
 
-        ResponseEntity<UsuarioEntity> response = restTemplate.getForEntity("/user/delete/2", UsuarioEntity.class);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        ResponseEntity<Void> response = restTemplate.exchange(
+                "/user/delete/2",
+                org.springframework.http.HttpMethod.DELETE,
+                null,
+                Void.class
+        );
+
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode().value() );
         log.info("Finalizando Test eliminarProductoConLogeoAdmin");
     }
 

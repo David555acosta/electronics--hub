@@ -1,6 +1,6 @@
 package com.curso.expecializacion.config.security;
 
-import com.curso.expecializacion.config.security.filters.JwtAutorizathionFilter;
+import com.curso.expecializacion.config.security.filters.JwtAuthorizationFilter;
 import com.curso.expecializacion.config.security.services.UserDetailServiceIMPL;
 import com.curso.expecializacion.user.domain.exception.CustomAccessDeniedHandler;
 import com.curso.expecializacion.user.domain.exception.CustomAuthenticationEntryPoint;
@@ -26,21 +26,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecuriryConfig {
+public class SecurityConfig {
 
     private final UserDetailServiceIMPL userDetailServiceIMPL;
-    private final JwtAutorizathionFilter jwtAutorizathionFilter;
+    private final JwtAuthorizationFilter jwtAuthorizationFilter;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
 
-    public SecuriryConfig(
+    public SecurityConfig(
                           UserDetailServiceIMPL userDetailServiceIMPL,
-                          JwtAutorizathionFilter jwtAutorizathionFilter,
+                          JwtAuthorizationFilter jwtAuthorizationFilter,
                           CustomAuthenticationEntryPoint customAuthenticationEntryPoint,
                           CustomAccessDeniedHandler customAccessDeniedHandler) {
         this.userDetailServiceIMPL = userDetailServiceIMPL;
-        this.jwtAutorizathionFilter = jwtAutorizathionFilter;
+        this.jwtAuthorizationFilter = jwtAuthorizationFilter;
         this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
         this.customAccessDeniedHandler = customAccessDeniedHandler;
     }
@@ -94,7 +94,7 @@ public class SecuriryConfig {
                         .authenticationEntryPoint(customAuthenticationEntryPoint) // Para errores 401
                         .accessDeniedHandler(customAccessDeniedHandler)           // Para errores 403
                 )
-                .addFilterBefore(jwtAutorizathionFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 

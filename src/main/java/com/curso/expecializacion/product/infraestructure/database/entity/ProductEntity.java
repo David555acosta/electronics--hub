@@ -1,7 +1,7 @@
 package com.curso.expecializacion.product.infraestructure.database.entity;
 
 import com.curso.expecializacion.category.infraestructure.CategoryEntity;
-import com.curso.expecializacion.producDetail.infraestructure.ProductDetailEntity;
+import com.curso.expecializacion.productDetail.infraestructure.ProductDetailEntity;
 import com.curso.expecializacion.review.infraestructure.ReviewEntity;
 import jakarta.persistence.*;
 
