@@ -48,7 +48,6 @@ public class ProductController implements product_api {
 
     private final Mediator mediator;
     private final ProductMapper productMapper;
-    private final SessionRegistry sessionRegistry;
 
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -130,30 +129,5 @@ public class ProductController implements product_api {
         return ResponseEntity.ok(productDTOPaginationResult);
     }
 
-    @GetMapping("/session")
-    ResponseEntity<?> getDetailSession() {
-        String sessionID = "";
-        User userObjet = null;
-
-        List<Object> sessions = sessionRegistry.getAllPrincipals();
-
-        for (Object session : sessions) {
-            if (session instanceof User) {
-                userObjet = (User) session;
-            }
-
-            List<SessionInformation> sessionInformations = sessionRegistry.
-                    getAllSessions(session, false);
-            for (SessionInformation sessionInformation : sessionInformations) {
-                sessionID = sessionInformation.getSessionId();
-            }
-        }
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("sessionID", sessionID);
-        response.put("userObjet", userObjet);
-
-        return ResponseEntity.ok(response);
-    }
 
 }

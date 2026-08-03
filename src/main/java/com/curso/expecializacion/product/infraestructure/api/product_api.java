@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 public interface product_api {
-    //ResponseEntity<List<Product>> todos(@RequestParam(required = false) Integer limit);
 
     ResponseEntity<ProductDTO> filtrarPorId(@PathVariable Integer id);
 

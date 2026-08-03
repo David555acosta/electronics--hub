@@ -2,6 +2,7 @@ package com.curso.expecializacion.product.common.mediator;
 
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Data
 @Component
-
+@Slf4j
 public class Mediator {
 
     Map<? extends Class<?>, RequestHandler<?, ?>> requestHandlerMap;
@@ -28,17 +29,22 @@ public class Mediator {
 
     public <R, T extends Request<R>> R dispacth(T request) {
 
+        log.info("dispacth , 1 : {}", request.toString());
+
+
         RequestHandler<T, R> handler = (RequestHandler<T, R>) requestHandlerMap.get(request.getClass());
         if (handler == null) {
             throw new RuntimeException("No handler for request " + request.getClass());
         }
+
+        log.info("dispacth , 2 : {}", request.toString());
 
         return handler.handle(request);
     }
 
     @Async
     public <R, T extends Request<R>> void dispacthAsync(T request) {
+        log.info("dispacthAsync , 0 : {}", request.toString());
         this.dispacth(request);
-        
     }
 }

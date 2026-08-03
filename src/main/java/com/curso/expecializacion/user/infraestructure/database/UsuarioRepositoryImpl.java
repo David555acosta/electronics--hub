@@ -40,6 +40,6 @@ public class UsuarioRepositoryImpl implements UserRepository {
 
     @Override
     public void deleteById(Integer id) {
-        queryUserRepository.deleteById(id);
+       queryUserRepository.deleteById(id);
     }
 }
