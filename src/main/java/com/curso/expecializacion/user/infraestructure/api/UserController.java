@@ -1,15 +1,18 @@
 package com.curso.expecializacion.user.infraestructure.api;
-
 import com.curso.expecializacion.product.common.mediator.Mediator;
-import com.curso.expecializacion.user.application.delete.DeleteUserRequest;
+import com.curso.expecializacion.user.application.query.delete.DeleteUserRequest;
 import com.curso.expecializacion.user.application.login.LoginUserRequest;
 import com.curso.expecializacion.user.application.login.LoginUserResponse;
+import com.curso.expecializacion.user.application.query.finByUserName.FindByUserNameRequest;
+import com.curso.expecializacion.user.application.query.finByUserName.FindByUserNameResponse;
 import com.curso.expecializacion.user.application.register.RegisterUserRequest;
 import com.curso.expecializacion.user.application.register.RegisterUserResponse;
 import com.curso.expecializacion.user.infraestructure.api.dto.LoginRequestDTO;
 import com.curso.expecializacion.user.infraestructure.api.dto.RegisterRequestDTO;
 import com.curso.expecializacion.user.infraestructure.api.dto.TokenResponseDTO;
+import com.curso.expecializacion.user.infraestructure.api.dto.UsuarioDTO;
 import com.curso.expecializacion.user.infraestructure.api.mapper.UserMapper;
+import com.curso.expecializacion.user.infraestructure.database.mapper.UsuarioEntityMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 
 
 @Slf4j
@@ -29,6 +33,7 @@ public class UserController implements User_Api {
 
     private final Mediator mediator;
     private final UserMapper userMapper;
+    private final UsuarioEntityMapper usuarioEntityMapper;
 
 
 
@@ -56,6 +61,7 @@ public class UserController implements User_Api {
 
     @Override
     @Operation(summary = "Registrar un nuevo usuario")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/create")
     public ResponseEntity<TokenResponseDTO> register(@RequestBody RegisterRequestDTO registerRequestDto) {
         RegisterUserRequest request = userMapper.mapToRegisterUserRequest(registerRequestDto);
@@ -74,4 +80,15 @@ public class UserController implements User_Api {
         return ResponseEntity.noContent().build();
     }
 
+    @Override
+    @Operation(summary = "Buscar un usuario por su EMAIL (Permitido por todos los roles)", security = @SecurityRequirement(name = "Bearer Authentication"))
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN', 'INVITED')")
+    @DeleteMapping("/filtrar/{email}")
+    public ResponseEntity<UsuarioDTO> findByUserName(@PathVariable String email) {
+        log.info("Capa Controller , obteniendo producto  con EMAIl:{}", email);
+        FindByUserNameResponse response = mediator.dispacth(new FindByUserNameRequest(email));
+        UsuarioDTO usuarioDTO = usuarioEntityMapper.mapToUserDTO(response.getUsuario());
+        log.info("Capa Controller , OBTENIDO producto con EMAIl:{}", email);
+        return ResponseEntity.ok(usuarioDTO);
+    }
 }

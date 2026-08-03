@@ -14,4 +14,6 @@ public interface UserRepository {
     Usuario upsert(Usuario user);
 
     void deleteById(Integer id);
+
+    Optional<Usuario> findByUserName(String username);
 }

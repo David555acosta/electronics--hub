@@ -42,4 +42,9 @@ public class UsuarioRepositoryImpl implements UserRepository {
     public void deleteById(Integer id) {
        queryUserRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Usuario> findByUserName(String username) {
+        return queryUserRepository.findByUsername(username).map(usuarioEntityMapper::mapToUser);
+    }
 }
