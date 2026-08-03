@@ -7,144 +7,71 @@ Este proyecto es un microservicio modular desarrollado en **Java 21** y **Spring
 ## 📂 Estructura del Proyecto (Árbol de Directorios)
 
 ```text
-electronics--hub [expecializacion]
-├── .idea/
-├── .mvn/
-.
-├── docker-config/                  # Configuraciones externas de Docker (ej. scripts de BD)
+electronics-hub [especializacion]
+├── docker-config/                  # Scripts de inicialización de BD
 ├── src/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── com/curso/especializacion/
 │   │   │       ├── category/               # Módulo de Categorías
-│   │   │       │   ├── application/
 │   │   │       │   ├── domain/
-│   │   │       │   │   └── Category.java
-│   │   │       │   └── infraestructure/
+│   │   │       │   └── infrastructure/
 │   │   │       │       ├── CategoryEntity.java
 │   │   │       │       ├── CategoryEntityMapper.java
 │   │   │       │       ├── CategoryRepository.java
 │   │   │       │       └── CategorySeeder.java
-│   │   │       ├── producDetail/           # Módulo de Detalle de Productos
+│   │   │       ├── config/                 # Configuración Global, Excepciones y Seguridad
+│   │   │       │   ├── domain/             # DTOs de Paginación genéricos
+│   │   │       │   │   ├── PaginationQuery.java
+│   │   │       │   │   └── PaginationResult.java
+│   │   │       │   ├── exceptions/         # Global Exception Handler
+│   │   │       │   │   ├── ApiExceptionHandler.java
+│   │   │       │   │   └── ErrorMessage.java
+│   │   │       │   ├── security/           # Núcleo de Seguridad Spring Security + JWT
+│   │   │       │   │   ├── controllers/    # Test Rest Controllers para Roles
+│   │   │       │   │   ├── filters/        # JwtAuthorizationFilter (Refresh Token Window)
+│   │   │       │   │   ├── jwt/            # JwtUtils (Generación, firma y validación de tokens)
+│   │   │       │   │   ├── services/       # UserDetailServiceImpl
+│   │   │       │   │   └── SecurityConfig.java
+│   │   │       │   ├── ApplicationConfig.java
+│   │   │       │   └── OpenApiConfig.java  # Configuración Swagger UI + Bearer Auth
+│   │   │       ├── productDetail/          # Módulo de Detalle de Productos
 │   │   │       │   ├── domain/
-│   │   │       │   │   └── ProductDetail.java
-│   │   │       │   └── infraestructure/
-│   │   │       │       ├── ProductDetailEntity.java
-│   │   │       │       ├── ProductDetailRepository.java
-│   │   │       │       └── ProductDetailSeeder.java
+│   │   │       │   └── infrastructure/
 │   │   │       ├── product/                # Módulo Principal de Productos (CQRS + Mediator)
 │   │   │       │   ├── application/
-│   │   │       │   │   ├── command/
-│   │   │       │   │   │   ├── config/
-│   │   │       │   │   │   │   ├── AplicationConfig.java
-│   │   │       │   │   │   │   └── OpenApiConfig.java
-│   │   │       │   │   │   ├── create/
-│   │   │       │   │   │   │   ├── ProductCreateHandler.java
-│   │   │       │   │   │   │   ├── ProductCreateRequest.java
-│   │   │       │   │   │   │   └── ProductCreateResponse.java
-│   │   │       │   │   │   ├── delete/
-│   │   │       │   │   │   │   ├── DeleteCreateHandler.java
-│   │   │       │   │   │   │   └── DeleteProductRequest.java
-│   │   │       │   │   │   └── update/
-│   │   │       │   │   │       ├── UpdateProductCreateHandler.java
-│   │   │       │   │   │       └── UpdateProductCreateRequest.java
-│   │   │       │   │   └── query/
-│   │   │       │   │       ├── getAll/
-│   │   │       │   │       │   ├── AllGetProductHandler.java
-│   │   │       │   │       │   ├── AllGetProductRequest.java
-│   │   │       │   │       │   └── AllGetProductResponse.java
-│   │   │       │   │       └── getById/
-│   │   │       │   │           ├── GetProductByIdHandler.java
-│   │   │       │   │           ├── GetProductByIdRequest.java
-│   │   │       │   │           └── GetProductByIdResponse.java
+│   │   │       │   │   ├── command/        # Handlers y Requests de Escritura (Create, Update, Delete)
+│   │   │       │   │   └── query/          # Handlers y Requests de Lectura (GetById, GetAll)
 │   │   │       │   ├── common/
-│   │   │       │   │   ├── domain/
-│   │   │       │   │   │   ├── PaginationQuery.java
-│   │   │       │   │   │   └── PaginationResult.java
-│   │   │       │   │   ├── exceptions/
-│   │   │       │   │   │   ├── ApiExceptionHandler.java
-│   │   │       │   │   │   └── ErrorMesage.java
-│   │   │       │   │   ├── mediator/
-│   │   │       │   │   │   ├── Mediator.java
-│   │   │       │   │   │   ├── Request.java
-│   │   │       │   │   │   └── RequestHandler.java
+│   │   │       │   │   ├── mediator/       # Mediator y Handlers desacoplados
 │   │   │       │   │   └── util/
-│   │   │       │   │       └── FileUtilService.java
-│   │   │       │   ├── domain/
-│   │   │       │   │   ├── Product.java
-│   │   │       │   │   ├── product_repository.java
-│   │   │       │   │   ├── ProductFilter.java
-│   │   │       │   │   └── ProductNotFoundException.java
-│   │   │       │   └── infraestructure/
-│   │   │       │       ├── api/
-│   │   │       │       │   ├── dto/
-│   │   │       │       │   │   ├── CreateProductDTO.java
-│   │   │       │       │   │   ├── ProductDTO.java
-│   │   │       │       │   │   ├── ReviewDTO.java
-│   │   │       │       │   │   └── UpdateProductDTO.java
-│   │   │       │       │   ├── mapper/
-│   │   │       │       │   │   ├── ProductMapper.java
-│   │   │       │       │   │   └── product_api.java
-│   │   │       │       │   └── ProductController.java
-│   │   │       │       └── database/
-│   │   │       │           ├── entity/
-│   │   │       │           │   ├── ProductEntity.java
-│   │   │       │           │   ├── ProductEntityRepository.java
-│   │   │       │           │   └── ProductsSpecificationEntity.java
-│   │   │       │           ├── mapper/
-│   │   │       │           │   └── ProductoEntityMapper.java
-│   │   │       │           ├── repositoryDBProducts/
-│   │   │       │           │   └── QueryProductsRepository.java
-│   │   │       │           ├── seeder/
-│   │   │       │           │   └── ProductSeeder.java
-│   │   │       │           └── ProductoRepository.java
+│   │   │       │   ├── domain/             # Dominio Puro, Excepciones e Interfaz de Repositorio
+│   │   │       │   └── infrastructure/
+│   │   │       │       ├── api/            # Controller, DTOs y Mappers
+│   │   │       │       └── database/       # JPA Entities, Specifications, Cache y Repositorio
 │   │   │       ├── review/                 # Módulo de Reseñas / Reviews
-│   │   │       │   ├── application/
 │   │   │       │   ├── domain/
-│   │   │       │   │   └── Review.java
-│   │   │       │   └── infraestructure/
-│   │   │       │       ├── QueryReviewRepository.java
-│   │   │       │       ├── ReviewEntity.java
-│   │   │       │       └── ReviewSeeder.java
+│   │   │       │   └── infrastructure/
+│   │   │       ├── user/                   # Módulo de Usuarios y Autenticación
+│   │   │       │   ├── domain/             # Excepciones personalizadas (401/403 Handlers)
+│   │   │       │   └── infrastructure/     # Entidades de Usuario/Rol y Repositorios
 │   │   │       └── EspecializacionApplication.java  # Clase principal
 │   │   │
 │   │   └── resources/
-│   │       ├── META-INF/
-│   │       ├── products/
 │   │       ├── application.yml             # Configuración base
 │   │       ├── application-dev.yml         # Perfil desarrollo
 │   │       ├── application-prod.yml        # Perfil producción
-│   │       ├── application-test.yml        # Perfil pruebas
-│   │       ├── category.json               # Seeders JSON
-│   │       ├── data.sql
-│   │       ├── products.json
-│   │       ├── products_details.json
-│   │       └── review.json
+│   │       ├── application-test.yml        # Perfil pruebas (H2 / Test IT)
+│   │       └── *.json                      # Seeders iniciales (categories, products, details)
 │   │
 │   └── test/
-│       ├── java/
-│       │   └── com/curso/especializacion/
-│       │       ├── product.infraestructure.database/
-│       │       │   ├── ProductoRepositoryJPATest.java
-│       │       │   └── ProductoRepositoryTest.java
-│       │       └── TI/                     # Tests de Integración
-│       │           ├── ApiHelper.java
-│       │           └── TestITPruebaByID.java
-│       │
-│       └── resources/
-│           └── TI/
-│               └── finByID/
-│                   ├── data.sql
-│                   └── clean.sql
+│       └── java/
+│           └── com/curso/especializacion/
+│               ├── product/                # Tests Unitarios de Repositorios y JPA Slices
+│               └── TI/                     # Tests de Integración End-to-End con Security y JWT
 │
-├── .dockerignore
-├── .gitattributes
-├── .gitignore
 ├── Dockerfile                              # Imagen Docker multi-stage
-├── docker-compose.yml                      # Orquestación de Spring + Postgres
-├── especializacion.iml
-├── mvnw
-├── mvnw.cmd
+├── docker-compose.yml                      # Orquestación de Spring Boot + Postgres
 ├── pom.xml                                 # Dependencias Maven
 └── README.md
 
