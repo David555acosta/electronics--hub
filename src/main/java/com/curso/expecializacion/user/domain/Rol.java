@@ -10,9 +10,4 @@ public class Rol {
 
     private Integer id;
     private String rol;
-
-
-    public String getRol() {
-        return rol;
-    }
 }

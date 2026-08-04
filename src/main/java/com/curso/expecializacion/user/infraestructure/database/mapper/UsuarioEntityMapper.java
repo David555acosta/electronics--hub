@@ -22,7 +22,8 @@ public interface UsuarioEntityMapper {
 
     /////////////////////////////////////////
 
-    @Mapping(target = "rols", ignore = true)
+
+    @Mapping(target = "password", ignore = true)
     UsuarioDTO mapToUserDTO(Usuario usuario);
 
     @Mapping(target = "rols", ignore = true)
@@ -30,8 +31,10 @@ public interface UsuarioEntityMapper {
 
     ////////////////////////////////////////////
 
+    @Mapping(target = "id", ignore = true)
     Rol mapToRol(RolEntity rolEntity);
 
+    @Mapping(target = "id", ignore = true)
     RolEntity mapToRolEntity(Rol rol);
 
 
@@ -39,14 +42,14 @@ public interface UsuarioEntityMapper {
 
     RolDTO mapToRolDTO(Rol rol);
 
-    Rol mapToRol(RolDTO rolDTO);
+    Rol mapToRol(RolDTO rol);
 
 
     /////////////////////////////
 
 
-    default String mapErolToString(Erol erol) {
-        return erol != null ? erol.name() : null;
+    default String mapRolToString(RolDTO rolDTO) {
+        return rolDTO != null ? rolDTO.getRol() : null;
     }
 
     default Erol mapStringToErol(String rol) {

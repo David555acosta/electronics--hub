@@ -1,6 +1,4 @@
 package com.curso.expecializacion.user.domain;
-
-import com.curso.expecializacion.user.infraestructure.database.entity.RolEntity;
 import lombok.Builder;
 import lombok.Data;
 
