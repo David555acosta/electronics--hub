@@ -1,10 +1,9 @@
 package com.curso.expecializacion.user.infraestructure.api;
 
+import com.curso.expecializacion.product.infraestructure.api.dto.UpdateProductDTO;
 import com.curso.expecializacion.user.domain.Usuario;
-import com.curso.expecializacion.user.infraestructure.api.dto.LoginRequestDTO;
-import com.curso.expecializacion.user.infraestructure.api.dto.RegisterRequestDTO;
-import com.curso.expecializacion.user.infraestructure.api.dto.TokenResponseDTO;
-import com.curso.expecializacion.user.infraestructure.api.dto.UsuarioDTO;
+import com.curso.expecializacion.user.infraestructure.api.dto.*;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,5 +22,8 @@ public interface User_Api {
 
 
     ResponseEntity<UsuarioDTO> findByUserName(@PathVariable String email);
+
+
+    ResponseEntity<Void> update(@RequestBody @Valid UpdateUsuarioDTO updateUsuarioDTO);
 
 }

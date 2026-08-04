@@ -1,4 +1,5 @@
 package com.curso.expecializacion.user.domain.port;
+import com.curso.expecializacion.product.domain.Product;
 import com.curso.expecializacion.user.domain.Usuario;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
@@ -16,4 +17,6 @@ public interface UserRepository {
     void deleteById(Integer id);
 
     Optional<Usuario> findByUserName(String username);
+
+    Usuario update(Usuario usuario);
 }

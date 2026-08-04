@@ -1,16 +1,15 @@
 package com.curso.expecializacion.user.infraestructure.api;
+import com.curso.expecializacion.product.command.update.UpdateProductCreateRequest;
 import com.curso.expecializacion.product.common.mediator.Mediator;
 import com.curso.expecializacion.user.application.query.delete.DeleteUserRequest;
 import com.curso.expecializacion.user.application.login.LoginUserRequest;
 import com.curso.expecializacion.user.application.login.LoginUserResponse;
 import com.curso.expecializacion.user.application.query.finByUserName.FindByUserNameRequest;
 import com.curso.expecializacion.user.application.query.finByUserName.FindByUserNameResponse;
+import com.curso.expecializacion.user.application.query.update.UpdateUserRequest;
 import com.curso.expecializacion.user.application.register.RegisterUserRequest;
 import com.curso.expecializacion.user.application.register.RegisterUserResponse;
-import com.curso.expecializacion.user.infraestructure.api.dto.LoginRequestDTO;
-import com.curso.expecializacion.user.infraestructure.api.dto.RegisterRequestDTO;
-import com.curso.expecializacion.user.infraestructure.api.dto.TokenResponseDTO;
-import com.curso.expecializacion.user.infraestructure.api.dto.UsuarioDTO;
+import com.curso.expecializacion.user.infraestructure.api.dto.*;
 import com.curso.expecializacion.user.infraestructure.api.mapper.UserMapper;
 import com.curso.expecializacion.user.infraestructure.database.mapper.UsuarioEntityMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -89,5 +88,18 @@ public class UserController implements User_Api {
         UsuarioDTO usuarioDTO = usuarioEntityMapper.mapToUserDTO(response.getUsuario());
         log.info("Capa Controller , OBTENIDO producto con EMAIl:{}", username);
         return ResponseEntity.ok(usuarioDTO);
+    }
+
+
+    @Override
+    @Operation(summary = "Actualizar Usuario , (Permitido por USER y ADMIN)", security = @SecurityRequirement(name = "Bearer Authentication"))
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @GetMapping("/update")
+    public ResponseEntity<Void> update(UpdateUsuarioDTO updateUsuarioDTO) {
+        log.info("Capa Controller , actualizando usuario");
+        UpdateUserRequest request = usuarioEntityMapper.mapToCreateUserRequest(updateUsuarioDTO);
+        mediator.dispacth(request);
+        log.info("Capa Controller , ACTUALIZADO usuario con Nombre:{}", updateUsuarioDTO.getUsername());
+        return ResponseEntity.noContent().build();
     }
 }

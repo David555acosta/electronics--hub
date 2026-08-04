@@ -1,9 +1,16 @@
 package com.curso.expecializacion.user.infraestructure.database.mapper;
 
+import com.curso.expecializacion.product.command.create.ProductCreateRequest;
+import com.curso.expecializacion.product.command.update.UpdateProductCreateRequest;
+import com.curso.expecializacion.product.infraestructure.api.dto.CreateProductDTO;
+import com.curso.expecializacion.product.infraestructure.api.dto.UpdateProductDTO;
+import com.curso.expecializacion.user.application.query.update.UpdateUserRequest;
 import com.curso.expecializacion.user.domain.Erol;
 import com.curso.expecializacion.user.domain.Rol;
 import com.curso.expecializacion.user.domain.Usuario;
+import com.curso.expecializacion.user.infraestructure.api.dto.CreateUserDTO;
 import com.curso.expecializacion.user.infraestructure.api.dto.RolDTO;
+import com.curso.expecializacion.user.infraestructure.api.dto.UpdateUsuarioDTO;
 import com.curso.expecializacion.user.infraestructure.api.dto.UsuarioDTO;
 import com.curso.expecializacion.user.infraestructure.database.entity.RolEntity;
 import com.curso.expecializacion.user.infraestructure.database.entity.UsuarioEntity;
@@ -14,6 +21,14 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface UsuarioEntityMapper {
+
+
+    UpdateUserRequest mapToCreateUserRequest(UpdateUsuarioDTO updateUsuarioDTO);
+
+
+    //////////////////////////////////////////
+
+
 
     UsuarioEntity mapToUserEntity(Usuario usuario);
 

@@ -1,4 +1,5 @@
 package com.curso.expecializacion.user.infraestructure.database;
+import com.curso.expecializacion.product.infraestructure.database.entity.ProductEntity;
 import com.curso.expecializacion.user.domain.Usuario;
 import com.curso.expecializacion.user.domain.port.UserRepository;
 import com.curso.expecializacion.user.infraestructure.database.entity.UsuarioEntity;
@@ -46,5 +47,12 @@ public class UsuarioRepositoryImpl implements UserRepository {
     @Override
     public Optional<Usuario> findByUserName(String username) {
         return queryUserRepository.findByUsername(username).map(usuarioEntityMapper::mapToUser);
+    }
+
+    @Override
+    public Usuario update(Usuario usuario) {
+        UsuarioEntity userEntity = usuarioEntityMapper.mapToUserEntity(usuario);
+        UsuarioEntity saved = queryUserRepository.save(userEntity);
+        return usuarioEntityMapper.mapToUser(saved);
     }
 }
