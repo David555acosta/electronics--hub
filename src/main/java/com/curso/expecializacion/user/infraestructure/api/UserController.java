@@ -61,7 +61,6 @@ public class UserController implements User_Api {
 
     @Override
     @Operation(summary = "Registrar un nuevo usuario")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/create")
     public ResponseEntity<TokenResponseDTO> register(@RequestBody RegisterRequestDTO registerRequestDto) {
         RegisterUserRequest request = userMapper.mapToRegisterUserRequest(registerRequestDto);
@@ -83,12 +82,12 @@ public class UserController implements User_Api {
     @Override
     @Operation(summary = "Buscar un usuario por su EMAIL (Permitido por todos los roles)", security = @SecurityRequirement(name = "Bearer Authentication"))
     @PreAuthorize("hasAnyRole('USER', 'ADMIN', 'INVITED')")
-    @DeleteMapping("/filtrar/{email}")
-    public ResponseEntity<UsuarioDTO> findByUserName(@PathVariable String email) {
-        log.info("Capa Controller , obteniendo producto  con EMAIl:{}", email);
-        FindByUserNameResponse response = mediator.dispacth(new FindByUserNameRequest(email));
+    @GetMapping("/filtrar/{username}")
+    public ResponseEntity<UsuarioDTO> findByUserName(@PathVariable String username) {
+        log.info("Capa Controller , obteniendo producto  con EMAIl:{}", username);
+        FindByUserNameResponse response = mediator.dispacth(new FindByUserNameRequest(username));
         UsuarioDTO usuarioDTO = usuarioEntityMapper.mapToUserDTO(response.getUsuario());
-        log.info("Capa Controller , OBTENIDO producto con EMAIl:{}", email);
+        log.info("Capa Controller , OBTENIDO producto con EMAIl:{}", username);
         return ResponseEntity.ok(usuarioDTO);
     }
 }

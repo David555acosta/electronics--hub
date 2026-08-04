@@ -9,5 +9,10 @@ import lombok.Data;
 public class Rol {
 
     private Integer id;
-    private Erol rol;
+    private String rol;
+
+
+    public String getRol() {
+        return rol;
+    }
 }

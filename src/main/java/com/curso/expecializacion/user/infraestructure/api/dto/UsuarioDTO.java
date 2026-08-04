@@ -1,5 +1,5 @@
 package com.curso.expecializacion.user.infraestructure.api.dto;
-import com.curso.expecializacion.user.infraestructure.database.entity.RolEntity;
+
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -13,4 +13,5 @@ public class UsuarioDTO {
     private String username;
     private String password;
     private String email;
+    private Set<RolDTO> rols;
 }
