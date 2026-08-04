@@ -94,7 +94,7 @@ public class UserController implements User_Api {
     @Override
     @Operation(summary = "Actualizar Usuario , (Permitido por USER y ADMIN)", security = @SecurityRequirement(name = "Bearer Authentication"))
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    @GetMapping("/update")
+    @PutMapping("")
     public ResponseEntity<Void> update(UpdateUsuarioDTO updateUsuarioDTO) {
         log.info("Capa Controller , actualizando usuario");
         UpdateUserRequest request = usuarioEntityMapper.mapToCreateUserRequest(updateUsuarioDTO);
