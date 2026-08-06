@@ -97,7 +97,7 @@ public class UserController implements User_Api {
     public ResponseEntity<Void> update(UpdateUsuarioDTO updateUsuarioDTO) {
         log.info("Capa Controller , actualizando usuario");
         UpdateUserRequest request = usuarioEntityMapper.mapToCreateUserRequest(updateUsuarioDTO);
-        mediator.dispacth(request);
+        mediator.dispacthAsync(request);
         log.info("Capa Controller , ACTUALIZADO usuario con Nombre:{}", updateUsuarioDTO.getNickname());
         return ResponseEntity.noContent().build();
     }

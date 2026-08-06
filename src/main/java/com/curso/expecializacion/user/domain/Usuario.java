@@ -14,4 +14,10 @@ public class Usuario {
     private String email;
     private String password;
     private Set<Rol> rols;
+
+
+    public void actualizUsuario(String nickname, String email) {
+        this.nickname = nickname;
+        this.email = email;
+    }
 }
