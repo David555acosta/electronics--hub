@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface UserRepository {
     Optional<Usuario> findByEmail(String email);
 
+    Optional<Usuario> findById(Integer id);
+
     boolean existsByEmail(String email);
 
     boolean existsByUsername(String username);

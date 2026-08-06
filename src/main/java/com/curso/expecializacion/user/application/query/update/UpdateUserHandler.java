@@ -6,7 +6,9 @@ import com.curso.expecializacion.user.domain.Usuario;
 import com.curso.expecializacion.user.domain.port.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 
 @Service
@@ -18,10 +20,10 @@ public class UpdateUserHandler implements RequestHandler<UpdateUserRequest, Void
 
     @Override
     public Void handle(UpdateUserRequest request) {
-        Usuario usuario = userRepository.findByEmail(request.getEmail())
+
+        Usuario usuario = userRepository.findById(request.getId())
                 .orElseThrow(() ->
-                        new RuntimeException("No se encontró el Usuario con el nombre." +
-                                request.getEmail()));
+                        new RuntimeException("Usuario no encontrado"));
 
 
         usuario.setUsername(request.getUsername());

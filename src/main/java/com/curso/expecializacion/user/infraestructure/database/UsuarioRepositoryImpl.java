@@ -18,6 +18,21 @@ public class UsuarioRepositoryImpl implements UserRepository {
     private final UsuarioEntityMapper usuarioEntityMapper;
 
     @Override
+    public Optional<Usuario> findById(Integer id) {
+        return queryUserRepository.findById(id).map(usuarioEntityMapper::mapToUser);
+    }
+
+    @Override
+    public Optional<Usuario> findByEmail(String email) {
+        return queryUserRepository.findByEmail(email).map(usuarioEntityMapper::mapToUser);
+    }
+
+    @Override
+    public Optional<Usuario> findByUserName(String username) {
+        return queryUserRepository.findByUsername(username).map(usuarioEntityMapper::mapToUser);
+    }
+
+    @Override
     public boolean existsByEmail(String email) {
         return queryUserRepository.findByEmail(email).isPresent();
     }
@@ -27,10 +42,6 @@ public class UsuarioRepositoryImpl implements UserRepository {
         return queryUserRepository.findByUsername(username).isPresent();
     }
 
-    @Override
-    public Optional<Usuario> findByEmail(String email) {
-        return queryUserRepository.findByEmail(email).map(usuarioEntityMapper::mapToUser);
-    }
 
     @Override
     public Usuario upsert(Usuario usuario) {
@@ -44,10 +55,6 @@ public class UsuarioRepositoryImpl implements UserRepository {
        queryUserRepository.deleteById(id);
     }
 
-    @Override
-    public Optional<Usuario> findByUserName(String username) {
-        return queryUserRepository.findByUsername(username).map(usuarioEntityMapper::mapToUser);
-    }
 
     @Override
     public Usuario update(Usuario usuario) {
