@@ -50,6 +50,7 @@ public class RegisterUserHandler implements RequestHandler<RegisterUserRequest, 
 
         Usuario usuario = Usuario.builder()
                 .username(request.getUsername())
+                .nickname(request.getNickname())
                 .email(request.getEmail())
                 .password(password)
                 .rols(rolsDomain)

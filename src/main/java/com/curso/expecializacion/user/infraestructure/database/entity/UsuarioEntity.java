@@ -26,6 +26,12 @@ public class UsuarioEntity {
     @Size(max = 50)
     private String username;
 
+    @NotBlank
+    @Size(max = 50)
+    @Column(unique = true)
+    private String nickname;
+
+
     @Column(unique = true)
     @Email
     @Size(min = 7, max = 50)

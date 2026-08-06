@@ -25,12 +25,11 @@ public class UpdateUserHandler implements RequestHandler<UpdateUserRequest, Void
                 .orElseThrow(() ->
                         new RuntimeException("Usuario no encontrado"));
 
-
-        usuario.setUsername(request.getUsername());
+        usuario.setNickname(request.getNickname());
         usuario.setEmail(request.getEmail());
 
         userRepository.update(usuario) ;
-        log.info("Usuario , PRODUCT UPDATE HANDLER , Username:{}", request.getUsername());
+        log.info("Usuario , PRODUCT UPDATE HANDLER , Username:{}", request.getNickname());
         return null;
     }
 

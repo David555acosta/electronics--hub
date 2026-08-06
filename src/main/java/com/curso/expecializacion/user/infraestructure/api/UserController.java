@@ -1,5 +1,4 @@
 package com.curso.expecializacion.user.infraestructure.api;
-import com.curso.expecializacion.product.command.update.UpdateProductCreateRequest;
 import com.curso.expecializacion.product.common.mediator.Mediator;
 import com.curso.expecializacion.user.application.query.delete.DeleteUserRequest;
 import com.curso.expecializacion.user.application.login.LoginUserRequest;
@@ -99,7 +98,7 @@ public class UserController implements User_Api {
         log.info("Capa Controller , actualizando usuario");
         UpdateUserRequest request = usuarioEntityMapper.mapToCreateUserRequest(updateUsuarioDTO);
         mediator.dispacth(request);
-        log.info("Capa Controller , ACTUALIZADO usuario con Nombre:{}", updateUsuarioDTO.getUsername());
+        log.info("Capa Controller , ACTUALIZADO usuario con Nombre:{}", updateUsuarioDTO.getNickname());
         return ResponseEntity.noContent().build();
     }
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 public class UpdateUserRequest implements Request<Void> {
 
     private Integer id;
-    private String username;
+    private String nickname;
     private String email;
 
 }

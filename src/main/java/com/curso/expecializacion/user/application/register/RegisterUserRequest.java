@@ -17,6 +17,9 @@ public class RegisterUserRequest implements Request<RegisterUserResponse> {
     private String username;
 
     @NotBlank
+    private String nickname;
+
+    @NotBlank
     private String password;
     private Set<String> role;
 }

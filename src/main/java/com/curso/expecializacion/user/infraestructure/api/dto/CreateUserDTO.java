@@ -17,6 +17,9 @@ public class CreateUserDTO {
     private String email;
 
     @NotBlank
+    private String nickname;
+
+    @NotBlank
     private String username;
 
     @NotBlank

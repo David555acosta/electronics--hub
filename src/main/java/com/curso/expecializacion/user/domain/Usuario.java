@@ -10,6 +10,7 @@ public class Usuario {
 
     private Integer id;
     private String username;
+    private String nickname;
     private String email;
     private String password;
     private Set<Rol> rols;
