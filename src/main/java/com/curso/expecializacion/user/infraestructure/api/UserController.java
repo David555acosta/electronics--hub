@@ -94,10 +94,10 @@ public class UserController implements User_Api {
     @Operation(summary = "Actualizar Usuario , (Permitido por USER y ADMIN)", security = @SecurityRequirement(name = "Bearer Authentication"))
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PutMapping("")
-    public ResponseEntity<Void> update(UpdateUsuarioDTO updateUsuarioDTO) {
+    public ResponseEntity<Void> update(@RequestBody UpdateUsuarioDTO updateUsuarioDTO) {
         log.info("Capa Controller , actualizando usuario");
         UpdateUserRequest request = usuarioEntityMapper.mapToCreateUserRequest(updateUsuarioDTO);
-        mediator.dispacthAsync(request);
+        mediator.dispacth(request);
         log.info("Capa Controller , ACTUALIZADO usuario con Nombre:{}", updateUsuarioDTO.getNickname());
         return ResponseEntity.noContent().build();
     }
