@@ -26,8 +26,7 @@ public interface UsuarioEntityMapper {
     UpdateUserRequest mapToCreateUserRequest(UpdateUsuarioDTO updateUsuarioDTO);
 
 
-    //////////////////////////////////////////
-
+    /// ///////////////////////////////////////
 
 
     UsuarioEntity mapToUserEntity(Usuario usuario);
@@ -35,7 +34,7 @@ public interface UsuarioEntityMapper {
     Usuario mapToUser(UsuarioEntity usuarioEntity);
 
 
-    /////////////////////////////////////////
+    /// //////////////////////////////////////
 
 
     @Mapping(target = "password", ignore = true)
@@ -44,23 +43,23 @@ public interface UsuarioEntityMapper {
     @Mapping(target = "rols", ignore = true)
     Usuario mapToUser(UsuarioDTO usuarioDTO);
 
-    ////////////////////////////////////////////
+    /// /////////////////////////////////////////
 
-    @Mapping(target = "id", ignore = true)
+
     Rol mapToRol(RolEntity rolEntity);
 
-    @Mapping(target = "id", ignore = true)
+
     RolEntity mapToRolEntity(Rol rol);
 
 
-    ////////////////////////////////////////////
+    /// /////////////////////////////////////////
 
     RolDTO mapToRolDTO(Rol rol);
 
     Rol mapToRol(RolDTO rol);
 
 
-    /////////////////////////////
+    /// //////////////////////////
 
 
     default String mapRolToString(RolDTO rolDTO) {

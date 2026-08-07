@@ -28,6 +28,8 @@ public class UpdateUserHandler implements RequestHandler<UpdateUserRequest, Void
     @Override
     public Void handle(UpdateUserRequest request) {
 
+        log.info("Iniciando updateUserHandler");
+
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 
@@ -55,7 +57,12 @@ public class UpdateUserHandler implements RequestHandler<UpdateUserRequest, Void
             throw new AccessDeniedException("No tienes permisos para modificar este usuario.");
         }
 
+        log.info(usuarioAEditar.getRols().toString());
+
         usuarioAEditar.actualizUsuario(request.getNickname(), request.getEmail());
+
+        log.info(usuarioAEditar.getRols().toString());
+
         userRepository.upsert(usuarioAEditar);
         return null;
     }
